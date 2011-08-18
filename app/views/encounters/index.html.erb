@@ -1,0 +1,6 @@
+<% @encounters.group_by{|encounter| encounter.id.even? }.each do |group_name, values| %>
+	<h2><%= group_name %></h2>
+	<% content_tag :div, :class => (group_name ? 'even' : 'odd') do %>
+		<%= render values %>
+	<% end %>
+<% end %>

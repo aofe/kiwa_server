@@ -1,0 +1,2 @@
+class MediaItemsController < ApplicationController
+end

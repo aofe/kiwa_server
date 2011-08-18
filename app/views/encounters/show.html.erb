@@ -1,0 +1,5 @@
+<% desired_order = ['id','part_count'] %>
+
+<% @encounter.attributes.sort_by{|attribute,value| desired_order.index(attribute) || desired_order.length}.each do |attribute, value| %>
+	<%= content_tag :p, "#{attribute}: #{value}", :class => 'awesome', :id => "attribute_#{attribute}", 'data-cost-in-dollars' => rand  unless value.blank? %>
+<% end %>

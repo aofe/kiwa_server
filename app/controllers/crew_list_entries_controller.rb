@@ -1,0 +1,2 @@
+class CrewListEntriesController < ApplicationController
+end
