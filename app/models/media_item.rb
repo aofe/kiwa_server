@@ -1,3 +1,3 @@
 class MediaItem < ActiveRecord::Base
-  belongs_to :encounter
+  belongs_to :attachable, :polymorphic => true
 end

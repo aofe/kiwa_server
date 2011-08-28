@@ -1,4 +1,6 @@
 KIWA::Application.routes.draw do
+  root :to => "encounters#index"
+  
   resources :crew_list_entries
 
   resources :voyages

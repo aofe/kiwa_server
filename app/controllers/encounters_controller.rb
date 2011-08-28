@@ -1,12 +1,9 @@
-class EncountersController < ApplicationController
-  
+class EncountersController < ApplicationController  
   def index
-    @encounters = Encounter.limit(20)
+    @encounters = Encounter.page(params[:page]).per(25)
   end
   
   def show
     @encounter = Encounter.find(params[:id])
   end
-    
-  
 end

@@ -1,2 +1,2 @@
-class ArtefactsController < ApplicationController
+class ArtefactsController < ApplicationController  
 end

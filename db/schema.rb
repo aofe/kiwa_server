@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -19,12 +20,12 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
   end
 
   create_table "cards", :force => true do |t|
+    t.integer  "institution_id", :null => false
     t.string   "id_tag"
     t.text     "inscription"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "institution_id"
   end
 
   create_table "crew_list_entries", :force => true do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.string   "direction"
     t.string   "associated_person"
     t.string   "associated_institution"
-    t.datetime "event_date"
+    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,9 +88,9 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.string   "short_title"
     t.string   "long_title"
     t.text     "description"
+    t.string   "source_reference", :limit => 25, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "source_reference"
   end
 
   create_table "inventory_list_entries", :force => true do |t|
@@ -104,14 +105,14 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
   end
 
   create_table "labels", :force => true do |t|
+    t.integer  "institution_id",      :null => false
     t.string   "id_tag"
     t.text     "inscription"
+    t.string   "dimensions"
     t.string   "attachment_method"
     t.string   "attachment_location"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "institution_id"
-    t.string   "dimensions"
   end
 
   create_table "media_items", :force => true do |t|
@@ -125,11 +126,11 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
   end
 
   create_table "notes", :force => true do |t|
-    t.integer  "notable_id"
     t.string   "notable_type"
+    t.integer  "notable_id"
     t.integer  "note_order"
     t.string   "note_type"
-    t.text     "note_text"
+    t.text     "note_text",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,13 +145,7 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.text     "education"
     t.text     "character_reference"
     t.text     "career"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "person_expeditions", :force => true do |t|
-    t.integer  "persons_id"
-    t.integer  "expeditions_id"
+    t.text     "network"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -165,6 +160,22 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.datetime "updated_at"
   end
 
+  create_table "relationships", :force => true do |t|
+    t.integer  "relator_id"
+    t.string   "relator_type"
+    t.integer  "related_id"
+    t.string   "related_type"
+    t.string   "strength"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["related_id"], :name => "index_relationships_on_related_id"
+  add_index "relationships", ["related_type"], :name => "index_relationships_on_related_type"
+  add_index "relationships", ["relator_id"], :name => "index_relationships_on_relator_id"
+  add_index "relationships", ["relator_type"], :name => "index_relationships_on_relator_type"
+  add_index "relationships", ["strength"], :name => "index_relationships_on_strength"
+
   create_table "researchers", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -173,7 +184,7 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
   end
 
   create_table "voyages", :force => true do |t|
-    t.integer  "expedtion_id"
+    t.integer  "expedition_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "place_departed"

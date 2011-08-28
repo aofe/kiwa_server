@@ -1,3 +1,7 @@
 class Card < ActiveRecord::Base
-#  acts_as_relatable :artefacts
+  belongs_to :institution
+
+  has_many :media_items
+
+  acts_as_relatable :artefact
 end

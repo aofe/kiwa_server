@@ -1,1 +1,3 @@
-<%= content_tag :p, link_to(encounter.name, encounter), :id => dom_id(encounter) %>
+<%= content_tag :div, :id => dom_id(encounter) do %>
+  <%= link_to(encounter.display_name, encounter) %>
+<% end %>

@@ -1,5 +1,17 @@
-<% desired_order = ['id','part_count'] %>
-
-<% @encounter.attributes.sort_by{|attribute,value| desired_order.index(attribute) || desired_order.length}.each do |attribute, value| %>
-	<%= content_tag :p, "#{attribute}: #{value}", :class => 'awesome', :id => "attribute_#{attribute}", 'data-cost-in-dollars' => rand  unless value.blank? %>
+<% content_for :nav do %>
+  <%= link_to 'Back', encounters_path %>
 <% end %>
+
+<h1><%= @encounter.display_name %></h1>
+
+<%= render @encounter.media_items %>
+<%= list_attributes(@encounter, :place_of_origin) %>
+
+<h2>Expeditions</h2>
+<%= render @encounter.related_expeditions %>
+
+<h2>Voyages</h2>
+<%= render @encounter.related_voyages %>
+
+<h2>Other encounters with this artefact</h2>
+<%= render @encounter.other_encounters %>
