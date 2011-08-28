@@ -150,6 +150,16 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.datetime "updated_at"
   end
 
+  create_table "person_expeditions", :force => true do |t|
+    t.integer  "person_id",     :limit => 2, :default => 0, :null => false
+    t.integer  "expedition_id", :limit => 2, :default => 0, :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "person_expeditions", ["expedition_id"], :name => "v_id"
+  add_index "person_expeditions", ["person_id"], :name => "bio_id"
+
   create_table "relations", :force => true do |t|
     t.integer  "target_id"
     t.string   "target_type"
