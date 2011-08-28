@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729120507) do
+ActiveRecord::Schema.define(:version => 20110827212546) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -20,10 +20,11 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
 
   create_table "cards", :force => true do |t|
     t.string   "id_tag"
-    t.string   "inscription"
+    t.text     "inscription"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "institution_id"
   end
 
   create_table "crew_list_entries", :force => true do |t|
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
     t.string   "direction"
     t.string   "associated_person"
     t.string   "associated_institution"
-    t.datetime "date"
+    t.datetime "event_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,13 +84,12 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
   end
 
   create_table "inventories", :force => true do |t|
-    t.integer  "institution_id"
-    t.string   "id_tag"
     t.string   "short_title"
     t.string   "long_title"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "source_reference"
   end
 
   create_table "inventory_list_entries", :force => true do |t|
@@ -104,13 +104,14 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
   end
 
   create_table "labels", :force => true do |t|
-    t.integer  "encounter_id"
     t.string   "id_tag"
-    t.string   "inscription"
+    t.text     "inscription"
     t.string   "attachment_method"
     t.string   "attachment_location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "institution_id"
+    t.string   "dimensions"
   end
 
   create_table "media_items", :force => true do |t|
@@ -123,6 +124,16 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
     t.datetime "updated_at"
   end
 
+  create_table "notes", :force => true do |t|
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.integer  "note_order"
+    t.string   "note_type"
+    t.text     "note_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -131,8 +142,15 @@ ActiveRecord::Schema.define(:version => 20110729120507) do
     t.datetime "death_date"
     t.text     "background"
     t.text     "education"
-    t.text     "character"
+    t.text     "character_reference"
     t.text     "career"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "person_expeditions", :force => true do |t|
+    t.integer  "persons_id"
+    t.integer  "expeditions_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
