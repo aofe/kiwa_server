@@ -8,9 +8,14 @@ class Relation < ActiveRecord::Base
 
   validates_presence_of :source_id, :source_type, :target_id, :target_type
   after_save :relate_endpoints
+  after_destroy :unrelate_endpoints
     
   # Uses the acts_as_relatable gem to relate the source and target together
   def relate_endpoints
     source.relates_to! target, true, self.rating
-  end  
+  end 
+  
+  def unrelate_endpoints
+    source.destroy_relation_with target
+  end
 end
