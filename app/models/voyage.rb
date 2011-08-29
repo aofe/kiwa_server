@@ -4,4 +4,8 @@ class Voyage < ActiveRecord::Base
   has_many :people, :through => :crew_list_entries
 
   acts_as_relatable :encounter
+  
+  def display_name
+    "#{expedition.name} - #{self.ship_name}"
+  end
 end

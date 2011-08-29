@@ -1,6 +1,8 @@
 KIWA::Application.routes.draw do
-  root :to => "encounters#index"
+  root :to => "pages#home"
   
+  match 'pages/:action', :controller => :pages
+    
   resources :crew_list_entries
 
   resources :voyages
@@ -30,6 +32,7 @@ KIWA::Application.routes.draw do
   resources :institutions
   
   resources :encounters
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

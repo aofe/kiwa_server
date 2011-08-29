@@ -1,0 +1,11 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', voyages_path %>
+<% end %>
+
+<h1><%= @voyage.display_name %></h1>
+
+<h2>Crew</h2>
+<%= render @voyage.people.sort_by(&:display_name) %>
+
+<h2>Encounters</h2>
+<%= render @voyage.related_encounters %>
