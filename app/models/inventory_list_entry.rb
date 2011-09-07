@@ -1,5 +1,11 @@
 class InventoryListEntry < ActiveRecord::Base
-  acts_as_relatable :artefact, :inventory_list_entry
 
-  belongs_to :inventory
+  belongs_to :inventory  
+
+  acts_as_relatable :artefact, :inventory_list_entry
+  has_many :related_encounters, :through => :related_artefacts
+  
+  def display_name
+    self.id_tag || self.description
+  end
 end

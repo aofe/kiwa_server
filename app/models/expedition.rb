@@ -11,4 +11,8 @@ class Expedition < ActiveRecord::Base
   def name
     self.title
   end
+  
+  def display_name
+    name
+  end
 end
