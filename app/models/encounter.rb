@@ -7,6 +7,8 @@ class Encounter < ActiveRecord::Base
   
   validates_presence_of :accession_number, :encounter_type
   
+  scope :search, lambda {|query| where('LOWER(name) LIKE ?', "%#{query}%") }
+  
   # Other enounters with the same artefact
   def other_encounters
     artefact.encounters.where('encounters.id != ?', self.id)

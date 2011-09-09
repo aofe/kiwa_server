@@ -1,3 +1,5 @@
-<%= render @encounters %>
+<% content_for :page_title, "Encounters" %>
+<% content_for :search, record_search(Encounter) %>
+<% content_for :pagination, paginate(@encounters) %>
 
-<%= paginate @encounters %>
+<%= render @encounters %>
