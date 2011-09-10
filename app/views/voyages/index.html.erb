@@ -1,3 +1,5 @@
-<%= render @voyages %>
+<% content_for :page_title, "Voyages" %>
+<% content_for :search, record_search(Voyage) %>
+<% content_for :pagination, paginate(@voyages) %>
 
-<%= paginate @voyages %>
+<%= render @voyages %>

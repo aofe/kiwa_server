@@ -8,6 +8,8 @@ class Expedition < ActiveRecord::Base
   has_many :crew_list_entries, :through => :voyages
   has_many :people, :through => :crew_list_entries
   
+  scope :search, lambda {|query| where('LOWER(title) LIKE ?', "%#{query}%") if query }
+  
   def name
     self.title
   end

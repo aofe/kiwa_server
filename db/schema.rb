@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110827212546) do
+ActiveRecord::Schema.define(:version => 20110910003615) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.string   "direction"
     t.string   "associated_person"
     t.string   "associated_institution"
-    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "day"
   end
 
   create_table "expeditions", :force => true do |t|
@@ -139,8 +141,6 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "other_name"
-    t.datetime "birth_date"
-    t.datetime "death_date"
     t.text     "background"
     t.text     "education"
     t.text     "character_reference"
@@ -148,17 +148,13 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.text     "network"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "birth_year"
+    t.integer  "birth_month"
+    t.integer  "birth_day"
+    t.integer  "death_year"
+    t.integer  "death_month"
+    t.integer  "death_day"
   end
-
-  create_table "person_expeditions", :force => true do |t|
-    t.integer  "person_id",     :limit => 2, :default => 0, :null => false
-    t.integer  "expedition_id", :limit => 2, :default => 0, :null => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-  end
-
-  add_index "person_expeditions", ["expedition_id"], :name => "v_id"
-  add_index "person_expeditions", ["person_id"], :name => "bio_id"
 
   create_table "relations", :force => true do |t|
     t.integer  "target_id"
@@ -195,8 +191,6 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
 
   create_table "voyages", :force => true do |t|
     t.integer  "expedition_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
     t.string   "place_departed"
     t.string   "place_returned"
     t.string   "ship_name"
@@ -208,6 +202,12 @@ ActiveRecord::Schema.define(:version => 20110827212546) do
     t.string   "ship_cargo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "start_year"
+    t.integer  "start_month"
+    t.integer  "start_day"
+    t.integer  "end_year"
+    t.integer  "end_month"
+    t.integer  "end_day"
   end
 
 end

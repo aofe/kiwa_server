@@ -1,0 +1,19 @@
+html{
+    font-family: Helvetica, Arial, 'sans serif';
+}
+p{
+    font-family: 'Times New Roman', Times, 'serif';
+}
+
+.attribute_list{
+    list-style: none;
+}
+.attribute_name{
+    font-weight: bold;
+}
+
+.record_list{
+    -moz-column-width: 300px;
+    -webkit-column-width: 300px;
+    column-width: 300px;
+}

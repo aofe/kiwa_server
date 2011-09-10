@@ -1,0 +1,12 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', encounters_path %>
+<% end %>
+
+<h1>Expedition: <%= @expedition.display_name %></h1>
+<%= list_attributes(@expedition, :commissioned)%>
+
+<h2>Voyages</h2>
+<%= render @expedition.voyages %>
+
+<h2>People Involved</h2>
+<%= record_list @expedition.people.sort_by(&:display_name) %>

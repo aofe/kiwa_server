@@ -1,3 +1,5 @@
-<%= render @people %>
+<% content_for :page_title, "People" %>
+<% content_for :search, record_search(Person) %>
+<% content_for :pagination, paginate(@people) %>
 
-<%= paginate @people %>
+<%= render @people %>

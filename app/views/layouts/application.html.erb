@@ -7,14 +7,13 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<%= yield :nav %>
+<%= render 'shared/site_header'  %>
 <h1>
   <%= yield :page_title %>
   <%= yield :search %>
 </h1>
 <%= yield %>
-<div class='pagination'>
-  <%= yield :pagination %>
-</div>
+<%= render 'shared/pagination' %>
+<%= yield :nav %>
 </body>
 </html>

@@ -8,4 +8,14 @@ module RecordHelper
       end.join('').html_safe
     end
   end
+  
+  def record_list(records)
+    content_tag :ul, :class => 'record_list' do
+      "".html_safe.tap do |output|
+        for record in records
+          output << content_tag(:li, link_to(record.display_name, record))
+        end
+      end
+    end
+  end
 end
