@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110910003615) do
+ActiveRecord::Schema.define(:version => 20110912000947) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20110910003615) do
 
   create_table "inventory_list_entries", :force => true do |t|
     t.integer  "inventory_id"
-    t.string   "list_order"
+    t.integer  "list_order"
     t.string   "id_tag"
     t.string   "item_count"
     t.text     "description"

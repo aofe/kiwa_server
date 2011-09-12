@@ -3,9 +3,13 @@ class InventoryListEntry < ActiveRecord::Base
   belongs_to :inventory  
 
   acts_as_relatable :artefact, :inventory_list_entry
-  has_many :related_encounters, :through => :related_artefacts
   
   def display_name
-    self.id_tag || self.description
+    self.id_tag.presence || "Unidentified Entry from #{inventory.display_name}"
+  end
+  
+  # FIXME: Has many through isn't working through related_artefacts so do it manually
+  def related_encounters
+    related_artefacts.includes(:encounters).collect(&:encounters).flatten
   end
 end

@@ -1,0 +1,20 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', @inventory_list_entry.inventory %>
+<% end %>
+
+<h1>Inventory List Entry from <%= @inventory_list_entry.inventory.display_name %></h1>
+<%= list_attributes(@inventory_list_entry, :id_tag, :item_count, :page, :description, :list_order)%>
+
+<h2>Related List Entries</h2>
+<ul>
+  <% for @inventory_list_entry in @inventory_list_entry.related_inventory_list_entries %>
+  <li><%= link_to @inventory_list_entry.display_name, @inventory_list_entry %></li>
+  <% end %>
+</ul>
+
+<h2>Related Encounters</h2>
+<ul>
+  <% for encounter in @inventory_list_entry.related_encounters %>
+  <li><%= link_to encounter.display_name, encounter %></li>
+  <% end %>
+</ul>

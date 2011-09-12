@@ -5,6 +5,7 @@ p{
     font-family: 'Times New Roman', Times, 'serif';
 }
 
+/* LISTS */
 .attribute_list{
     list-style: none;
 }
@@ -16,4 +17,22 @@ p{
     -moz-column-width: 300px;
     -webkit-column-width: 300px;
     column-width: 300px;
+}
+
+/* TABLES */
+table{
+    border: 1px solid #F5F5F5;
+    border-collapse: collapse;
+}
+th{
+    text-align:left;
+    padding: 0.25em;
+    background-color: #EEE;
+    border-color: #EEE;
+}
+tr:nth-child(odd){
+    background-color: #F5F5F5;
+}
+td{
+    padding: 0.25em;
 }

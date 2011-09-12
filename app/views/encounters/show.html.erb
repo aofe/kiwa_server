@@ -2,10 +2,12 @@
   <%= link_to 'Back', encounters_path %>
 <% end %>
 
-<h1><%= @encounter.display_name %></h1>
+<h1>Encounter</h1>
 
 <%= render @encounter.media_items %>
-<%= list_attributes(@encounter, :place_of_origin) %>
+<%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indegenous_name, :place_of_origin, :dimensions, :material) %>
+<h3>Description</h3>
+<%= content_tag :p, @encounter.description %>
 
 <h2>Expeditions</h2>
 <%= render @encounter.related_expeditions %>

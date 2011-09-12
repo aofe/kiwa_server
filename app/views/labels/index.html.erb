@@ -1,0 +1,13 @@
+<% content_for :page_title, "Labels" %>
+<% content_for :search, record_search(Label) %>
+<% content_for :pagination, paginate(@labels) %>
+
+<%= table_for @labels.includes(:media_items) do |t| %>
+  <% t.column :title => 'ID Tag' do |label| %>
+    <% link_to label.id_tag, label %>
+  <% end %>
+  <% t.column :inscription %>
+  <% t.column :title => 'Photos' do |label| %>
+    <% label.media_items.length %>
+  <% end %>
+<% end %>

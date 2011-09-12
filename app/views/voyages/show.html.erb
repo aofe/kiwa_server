@@ -2,7 +2,7 @@
   <%= link_to 'Back', voyages_path %>
 <% end %>
 
-<h1>Voyage: <%= @voyage.display_name %></h1>
+<h1>Voyage</h1>
 <%= list_attributes(@voyage, :ship_name, :ship_other_name, :place_departed, :place_returned, :ship_tonnage, :ship_length, :ship_beam, :ship_type, :ship_cargo, :start_date, :end_date) %>
 
 <h2>Crew</h2>

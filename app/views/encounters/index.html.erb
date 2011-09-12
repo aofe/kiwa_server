@@ -2,4 +2,12 @@
 <% content_for :search, record_search(Encounter) %>
 <% content_for :pagination, paginate(@encounters) %>
 
-<%= render @encounters %>
+<%= table_for @encounters.includes(:media_items) do |t| %>
+  <% t.column :title => 'Accession Number' do |encounter| %>
+    <% link_to encounter.accession_number, encounter %>
+  <% end %>
+  <% t.columns :name, :description %>
+  <% t.column :title => 'Photos' do |label| %>
+    <% label.media_items.length %>
+  <% end %>  
+<% end %>

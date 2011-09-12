@@ -1,0 +1,8 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', labels_path %>
+<% end %>
+
+<h1>Label</h1>
+<%= render @label.media_items %>
+
+<%= list_attributes(@label, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>

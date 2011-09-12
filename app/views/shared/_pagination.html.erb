@@ -1,7 +1,6 @@
-<% pagination = yield(:pagination) %>
-<% if pagination.present? %>
+<% if content_for? :pagination %>
 <div class='pagination'>
   <hr>
-  <%= pagination %>
+  <%= yield(:pagination) %>
 </div>
 <% end %>

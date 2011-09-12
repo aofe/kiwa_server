@@ -1,0 +1,8 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', cards_path %>
+<% end %>
+
+<h1>card</h1>
+<%= render @card.media_items %>
+
+<%= list_attributes(@card, :id_tag, :inscription, :location) %>

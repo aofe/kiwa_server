@@ -1,3 +1,13 @@
-<%= render @inventories %>
+<% content_for :page_title, "Inventories" %>
+<% content_for :search, record_search(Inventory) %>
+<% content_for :pagination, paginate(@inventories) %>
 
-<%= paginate @inventories %>
+<%= table_for @inventories.includes(:inventory_list_entries) do |t| %>
+  <% t.column :title => 'Title' do |inventory| %>
+    <% link_to inventory.short_title, inventory %>
+  <% end %>
+  <% t.column :description %>
+  <% t.column :title => 'Entries' do |card| %>
+    <% card.inventory_list_entries.length %>
+  <% end %>
+<% end %>

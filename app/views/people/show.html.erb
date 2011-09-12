@@ -2,16 +2,11 @@
   <%= link_to 'Back', people_path %>
 <% end %>
 
+<h1>Person: <%= @person.display_name %></h1>
 
-<h1><%= @person.display_name %></h1>
-
-<table>
-  <thead>
-    <tr><th>Expedition</th><th>Rank</th>
-    </thead>
-    <tbody>
-    <% for crew_list_entry in @person.crew_list_entries.includes(:expedition) %>
-    <tr><td><%= crew_list_entry.expedition.name %></td><td><%= crew_list_entry.rank %></td>
-    <% end %>
-  </tbody>
-</table>
+<%= table_for @person.crew_list_entries do |t| %>
+  <% t.column :title => "Expedition Name" do |crew_list_entries| %>
+    <% crew_list_entries.expedition.name %>
+  <% end %>
+  <% t.column :rank %>
+<% end %>
