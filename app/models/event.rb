@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
-  belongs_to :artefacts
-  belongs_to :people
+  include UncertainDate
+  belongs_to :artefact
+  belongs_to :person  
 end

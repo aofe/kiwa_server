@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912000947) do
+ActiveRecord::Schema.define(:version => 20110912012155) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -155,6 +155,16 @@ ActiveRecord::Schema.define(:version => 20110912000947) do
     t.integer  "death_month"
     t.integer  "death_day"
   end
+
+  create_table "person_expeditions", :force => true do |t|
+    t.integer  "person_id",     :limit => 2, :default => 0, :null => false
+    t.integer  "expedition_id", :limit => 2, :default => 0, :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "person_expeditions", ["expedition_id"], :name => "v_id"
+  add_index "person_expeditions", ["person_id"], :name => "bio_id"
 
   create_table "relations", :force => true do |t|
     t.integer  "target_id"

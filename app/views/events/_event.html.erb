@@ -1,0 +1,2 @@
+<strong><%= event.date.to_formatted_s(:long_ordinal) if event.date %></strong> <%= event.event_type %> <%= event.direction %> <%= event.person.try(:display_name) %>
+<%= list_attributes(event, :associated_person, :associated_institution)%>

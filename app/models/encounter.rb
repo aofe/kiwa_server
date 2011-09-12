@@ -17,4 +17,8 @@ class Encounter < ActiveRecord::Base
   def display_name
     "#{self.name} - #{self.accession_number}"
   end
+  
+  def events
+    artefact.events
+  end
 end

@@ -9,6 +9,9 @@
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
 
+<h3>Artefact History</h3>
+<%= render @encounter.events %>
+
 <h2>Expeditions</h2>
 <%= render @encounter.related_expeditions %>
 

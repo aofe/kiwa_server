@@ -16,6 +16,6 @@ class Relation < ActiveRecord::Base
   end 
   
   def unrelate_endpoints
-    source.destroy_relation_with target
+    source.destroy_relation_with target if source && target
   end
 end
