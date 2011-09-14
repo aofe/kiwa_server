@@ -1,10 +1,8 @@
 <% content_for :nav do %>
   <%= link_to 'Back', encounters_path %>
 <% end %>
+<% content_for :page_title, 'Encounter' %>
 
-<h1>Encounter</h1>
-
-<%= render @encounter.media_items %>
 <%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indegenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
@@ -12,14 +10,13 @@
 <h3>Artefact History</h3>
 <%= render @encounter.events %>
 
-<h2>Expeditions</h2>
-<%= render @encounter.related_expeditions %>
-
-<h2>Voyages</h2>
-<%= render @encounter.related_voyages %>
-
-<h2>Other encounters with this artefact</h2>
-<%= render @encounter.other_encounters %>
-
-<h2>Labels</h2>
-<%= render @encounter.artefact.related_labels %>
+<% content_for :sidebar do %>
+  <h2>Media</h2>
+  <%= record_media(@encounter.media_items)%>
+  <hr/>
+  <h2>Related</h2>
+  <%= record_relation('Expedition', @encounter.related_expeditions) %>
+  <%= record_relation('Voyage', @encounter.related_voyages) %>
+  <%= record_relation('Encounter', @encounter.other_encounters) %>
+  <%= record_relation('Label', @encounter.artefact.related_labels) %>
+<% end %>

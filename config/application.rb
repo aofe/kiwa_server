@@ -38,7 +38,7 @@ module KIWA
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    config.autoload_paths += Dir["#{config.root}/lib/**/"] # include all subdirectories
+    config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/models/data_mapper)    
   end
 end

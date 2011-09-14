@@ -1,22 +1,18 @@
 html{
     font-family: Helvetica, Arial, 'sans serif';
+    height: 100%; /* Make the scrollbar start to the left of the sidebar */
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Make the scrollbar start to the left of the sidebar */
 }
 p{
     font-family: 'Times New Roman', Times, 'serif';
 }
-
-/* LISTS */
-.attribute_list{
-    list-style: none;
-}
-.attribute_name{
-    font-weight: bold;
-}
-
-.record_list{
-    -moz-column-width: 300px;
-    -webkit-column-width: 300px;
-    column-width: 300px;
+a:link{
+    text-decoration: none;
 }
 
 /* TABLES */
@@ -35,4 +31,49 @@ tr:nth-child(odd){
 }
 td{
     padding: 0.25em;
+}
+
+/* LAYOUT */
+#page{
+    position: relative;
+    height: 100%; /* Make the scrollbar start to the left of the sidebar */
+}
+#content{
+    margin-right: 405px;
+    padding: 1em;
+    /* Make the scrollbar start to the left of the sidebar */
+    overflow: auto;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;    
+}
+#sidebar{
+    direction:rtl;  /* Right To left */ 
+    text-align:left; /* Override direction */
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background: #EEE;
+    border: 1px solid #E0E0E0;
+    font-weight: bold;
+    box-shadow: 0px 0 4px rgba(0,0,0,0.2);
+}
+#sidebar a:link, #sidebar a:visited{
+    color: #333;
+}
+#sidebar hr{
+    height: 0px;
+    width: 100%;
+    border-width: 1px 0;
+    border-bottom: 1px solid white;
+    border-top: 1px solid #DDD;
+    margin: 0;
+}
+#sidebar h2{
+    color: #888;
+    margin-left: 1em;
 }

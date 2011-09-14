@@ -8,4 +8,9 @@ class Label < ActiveRecord::Base
   def display_name
     self.id_tag.presence || self.inscription
   end
+  
+  # FIXME: Has many through isn't working through related_artefacts so do it manually
+  def related_encounters
+    related_artefacts.includes(:encounters).collect(&:encounters).flatten
+  end  
 end

@@ -8,5 +8,7 @@
 <h2>Crew</h2>
 <%= render @voyage.people.sort_by(&:display_name) %>
 
-<h2>Encounters</h2>
-<%= render @voyage.related_encounters %>
+<% content_for :sidebar do %>
+  <h2>Related</h2>
+  <%= record_relation('Encounter', @voyage.related_encounters) %>
+<% end %>

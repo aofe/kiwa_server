@@ -1,0 +1,10 @@
+.media_thumbnail{
+    margin: 0.5em;
+    background: white;
+    display: inline-block;
+    padding: 4px;
+    border: 1px solid #E0E0E0;
+}
+.media_thumbnail img{
+    vertical-align: top;
+}

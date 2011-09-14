@@ -7,13 +7,20 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<%= render 'shared/site_header'  %>
-<h1>
-  <%= yield :page_title %>
-  <%= yield :search %>
-</h1>
-<%= yield %>
-<%= render 'shared/pagination' %>
-<%= yield :nav %>
+  <div id='page'>
+    <div id='sidebar'>
+      <%= yield(:sidebar) %>
+    </div>
+    <div id='content'>
+      <%= render 'shared/site_header'  %>
+      <h1>
+        <%= yield :page_title %>
+        <%= yield :search %>
+      </h1>
+      <%= yield %>
+      <%= render 'shared/pagination' %>
+      <%= yield :nav %>
+    </div>
+  </div>
 </body>
 </html>

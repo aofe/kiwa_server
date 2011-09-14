@@ -18,4 +18,13 @@ module RecordHelper
       end
     end
   end
+  
+  def record_relation(name, related_records)
+    link_to pluralize(related_records.count, name), '', :class => 'record_relation'
+  end
+  
+  def record_media(media_items)
+    output = media_items.collect{|media_item| media_thumbnail(media_item)}
+    content_tag :div, output.join.html_safe, :id => 'record_media'
+  end  
 end

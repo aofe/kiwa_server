@@ -1,0 +1,27 @@
+.attribute_list{
+    list-style: none;
+}
+.attribute_name{
+    font-weight: bold;
+}
+
+.record_list{
+    -moz-column-width: 300px;
+    -webkit-column-width: 300px;
+    column-width: 300px;
+}
+
+.record_relation{
+    line-height: 2em;
+    display: block;
+    padding: .5em 1em;
+}
+.record_relation:hover{
+    background: white;
+}
+.record_relation + .record_relation{
+    border-top: 1px solid #E0E0E0;
+}
+#record_media{
+    text-align: center;
+}

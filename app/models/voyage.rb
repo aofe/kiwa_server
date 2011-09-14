@@ -1,5 +1,5 @@
 class Voyage < ActiveRecord::Base
-  include UncertainDate
+#  include UncertainDate
   
   belongs_to :expedition
   has_many :crew_list_entries
@@ -13,5 +13,13 @@ class Voyage < ActiveRecord::Base
     output = self.ship_name
     output << " (#{start_date})" if start_date
     return output
+  end
+  
+  def start_date
+    ""
+  end
+  
+  def end_date
+    ""
   end
 end
