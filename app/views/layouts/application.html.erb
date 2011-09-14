@@ -19,7 +19,10 @@
       </h1>
       <%= yield %>
       <%= render 'shared/pagination' %>
+      <% if content_for? :nav %>
+      <hr/>
       <%= yield :nav %>
+      <% end %>
     </div>
   </div>
 </body>

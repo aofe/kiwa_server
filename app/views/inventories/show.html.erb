@@ -7,7 +7,6 @@
 
 <h2>Entries</h2>
 <%= table_for @inventory.inventory_list_entries do |t| %>
-  <% t.column :list_order %>
   <% t.column :title => 'ID Tag' do |entry| %>
     <% link_to entry.id_tag.presence || '<em>blank</em>'.html_safe, entry %>
   <% end %>

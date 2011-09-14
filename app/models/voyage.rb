@@ -1,5 +1,5 @@
 class Voyage < ActiveRecord::Base
-#  include UncertainDate
+  include UncertainDate
   
   belongs_to :expedition
   has_many :crew_list_entries
@@ -10,16 +10,8 @@ class Voyage < ActiveRecord::Base
   scope :search, lambda {|query| joins(:expedition).where('LOWER(expeditions.title) LIKE ? OR LOWER(ship_name) LIKE ?', "%#{query}%", "%#{query}%") if query }
   
   def display_name
-    output = self.ship_name
-    output << " (#{start_date})" if start_date
+    output = self.ship_name.dup
+    output << " (#{start_date.to_formatted_s(:long_ordinal)})" if start_date
     return output
-  end
-  
-  def start_date
-    ""
-  end
-  
-  def end_date
-    ""
   end
 end

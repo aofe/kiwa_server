@@ -1,10 +1,14 @@
 module UncertainDate
-  def method_missing(method, *args, &block)
-    if method.to_s.ends_with? 'date'
-      name = method.to_s.gsub('date', '')
-      parse_date(send("#{name}year"), send("#{name}month"), send("#{name}day"))
-    else
-      super
+  def self.included(base)
+    base.class_eval do
+      def method_missing(method, *args, &block)
+        if method.to_s.ends_with? 'date'
+          name = method.to_s.gsub('date', '')
+          parse_date(send("#{name}year"), send("#{name}month"), send("#{name}day"))
+        else
+          super
+        end
+      end      
     end
   end
 

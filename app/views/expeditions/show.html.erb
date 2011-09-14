@@ -3,10 +3,15 @@
 <% end %>
 
 <h1>Expedition: <%= @expedition.display_name %></h1>
-<%= list_attributes(@expedition, :commissioned)%>
+<%= list_attributes(@expedition, :principle_explorer, :commissioned) %>
 
 <h2>Voyages</h2>
-<%= render @expedition.voyages %>
+<%= record_list @expedition.voyages.sort_by(&:display_name) %>
 
-<h2>People Involved</h2>
+<h2>Crew</h2>
 <%= record_list @expedition.people.sort_by(&:display_name) %>
+
+<% content_for :sidebar do %>
+  <h2>Related</h2>
+  <%= record_relation('Encounter', @expedition.related_encounters) %>
+<% end %>
