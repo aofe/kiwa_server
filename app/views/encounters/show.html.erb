@@ -15,8 +15,8 @@
   <%= record_media(@encounter.media_items)%>
   <hr/>
   <h2>Related</h2>
-  <%= record_relation('Expedition', @encounter.related_expeditions) %>
-  <%= record_relation('Voyage', @encounter.related_voyages) %>
-  <%= record_relation('Encounter', @encounter.other_encounters) %>
-  <%= record_relation('Label', @encounter.artefact.related_labels) %>
+  <%= record_relation('Expedition', @encounter, @encounter.related_expeditions) %>
+  <%= record_relation('Voyage', @encounter, @encounter.related_voyages) %>
+  <%= record_relation('Encounter', @encounter, @encounter.other_encounters) %>
+  <%= record_relation('Label', @encounter, @encounter.artefact.related_labels) %>
 <% end %>

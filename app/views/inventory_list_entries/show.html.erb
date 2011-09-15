@@ -7,6 +7,6 @@
 
 <% content_for :sidebar do %>
   <h2>Related</h2>
-  <%= record_relation('Other List Entry', @inventory_list_entry.related_inventory_list_entries) %>
-  <%= record_relation('Encounter', @inventory_list_entry.related_encounters) %>
+  <%= record_relation('Other List Entry', @inventory_list_entry, @inventory_list_entry.related_inventory_list_entries) %>
+  <%= record_relation('Encounter', @inventory_list_entry, @inventory_list_entry.related_encounters) %>
 <% end %>

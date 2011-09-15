@@ -7,7 +7,7 @@ class Voyage < ActiveRecord::Base
 
   acts_as_relatable :encounter
 
-  scope :search, lambda {|query| joins(:expedition).where('LOWER(expeditions.title) LIKE ? OR LOWER(ship_name) LIKE ?', "%#{query}%", "%#{query}%") if query }
+  scope :search, lambda {|query| where('LOWER(ship_name) LIKE ?', "%#{query}%") if query }
   
   def display_name
     output = self.ship_name.dup

@@ -71,7 +71,10 @@ td{
     font-weight: bold;
     box-shadow: 0px 0 4px rgba(0,0,0,0.2);
 }
-#sidebar a:link, #sidebar a:visited{
+#sidebar a:link,
+#sidebar a:visited,
+#sidebar_popup a:link,
+#sidebar_popup a:visited{
     color: #333;
 }
 #sidebar hr{
@@ -85,6 +88,44 @@ td{
 #sidebar h2{
     color: #888;
     margin-left: 1em;
+}
+#sidebar_popup{        
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;    
+    box-shadow: 0px 0 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+    position: fixed;
+    top: 0;  
+    right: 400px;
+    width: 400px;
+    height: 95%;
+    margin: 2.5% 0;
+    background: #EEE;
+    border: 1px solid #E0E0E0;
+    
+}
+.sidebar_option{
+    line-height: 2em;
+    display: block;
+    padding: .5em 1em;
+    cursor: pointer;
+}
+
+.sidebar_option:hover, .sidebar_option.selected{
+    background: white;
+}
+.sidebar_option.inactive{
+    cursor: default;
+    background: transparent;    
+}
+
+.sidebar_option + .sidebar_option{
+    border-top: 1px solid #E0E0E0;
+}
+
+.clear_search{
+    font-size: 14px;
 }
 .pagination{
     text-align: center;

@@ -44,17 +44,9 @@
     font-size: 0.8em;
 }
 
-.record_relation{
-    line-height: 2em;
-    display: block;
-    padding: .5em 1em;
-}
-.record_relation:hover{
-    background: white;
-}
-.record_relation + .record_relation{
-    border-top: 1px solid #E0E0E0;
-}
 #record_media{
     text-align: center;
+}
+#record_media .media_thumbnail{
+    margin: 0.5em;
 }

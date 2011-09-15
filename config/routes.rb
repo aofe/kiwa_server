@@ -33,7 +33,8 @@ KIWA::Application.routes.draw do
   
   resources :encounters
 
-  
+  resources :relations
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -10,5 +10,5 @@
 
 <% content_for :sidebar do %>
   <h2>Related</h2>
-  <%= record_relation('Encounter', @voyage.related_encounters) %>
+  <%= record_relation('Encounter', @voyage, @voyage.related_encounters) %>
 <% end %>

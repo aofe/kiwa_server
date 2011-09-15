@@ -7,6 +7,8 @@ module MediaItemsHelper
     # Set up default options, this allows us the options of specifying a size and/or a different object to link to than the larger image
     options.reverse_merge! :size => 100, :link_to => media_item.source_url
     
-    link_to image_tag(media_item.thumbnail_url(options[:size])), options[:link_to], :class => 'media_thumbnail' 
+    link_to_if options[:link_to], image_tag(media_item.thumbnail_url(options[:size])), options[:link_to], :class => 'media_thumbnail' do
+      content_tag :span, image_tag(media_item.thumbnail_url(options[:size])), :class => 'media_thumbnail'
+    end
   end  
 end
