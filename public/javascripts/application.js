@@ -1,11 +1,19 @@
 $(function() {
     
     var sidebarPopup = $('#sidebar_popup');
-    $('#sidebar .record_relation:not(.inactive)').click(function(){
+    var unselectSidebarOptions = function(){
         $('#sidebar .record_relation.selected').removeClass('selected');
+    }
+    var closeSidebarPopup = function(){
+        unselectSidebarOptions();
+        sidebarPopup.hide();  
+    }
+    
+    $('#sidebar .record_relation:not(.inactive)').click(function(event){
         if ($(this).hasClass('selected')){
-            sidebarPopup.hide()
+            closeSidebarPopup();
         } else {
+            unselectSidebarOptions();
             $(this).addClass('selected')
             sidebarPopup.html($(this).attr('related_records'))
             sidebarPopup.show();
@@ -16,7 +24,7 @@ $(function() {
     // Hide the sidebar popup when the document is clicked
     $('body').click(function(event){
         if (event.target != sidebarPopup[0]){
-            sidebarPopup.hide();            
+            closeSidebarPopup();
         }
     });
     
