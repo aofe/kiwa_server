@@ -2,12 +2,4 @@
 <% content_for :search, record_search(Card) %>
 <% content_for :pagination, paginate(@cards) %>
 
-<%= table_for @cards.includes(:media_items) do |t| %>
-  <% t.column :title => 'ID Tag' do |card| %>
-    <% link_to card.id_tag, card %>
-  <% end %>
-  <% t.column :inscription %>
-  <% t.column :title => 'Photos' do |card| %>
-    <% card.media_items.length %>
-  <% end %>
-<% end %>
+<%= render @cards.includes(:primary_media_item) %>

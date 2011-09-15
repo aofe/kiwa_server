@@ -2,4 +2,4 @@
 <% content_for :search, record_search(Encounter) %>
 <% content_for :pagination, paginate(@encounters) %>
 
-<%= render @encounters %>
+<%= render @encounters.includes(:primary_media_item) %>
