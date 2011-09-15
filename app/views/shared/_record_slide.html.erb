@@ -1,0 +1,4 @@
+<%= link_to record, :class => 'record_slide' do %>
+  <%= image_tag('blank.gif', :style => ("background-image: url('#{record.primary_media_item.thumbnail_url(100)}')" if record.primary_media_item)) %>
+  <%= content_tag :span, record.display_name, :class => 'title' %>
+<% end %>

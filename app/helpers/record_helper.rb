@@ -22,6 +22,10 @@ module RecordHelper
     end
   end
   
+  def record_slide(record)
+    render 'shared/record_slide', :record => record
+  end
+  
   def record_relation(name, related_records)
     link_to(pluralize(related_records.count, name), '', :class => 'record_relation', :onclick => 'alert("under construction"); return false')
   end
