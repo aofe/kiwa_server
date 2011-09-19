@@ -1,8 +1,8 @@
 <% content_for :nav do %>
-  <%= link_to 'Back', encounters_path %>
+  <%= link_to 'Back', inventories_path %>
 <% end %>
 
-<h1>Inventory: <%= @inventory.short_title %></h1>
+<% content_for :page_title, "#{link_to 'Inventories', inventories_path} / #{@inventory.display_name}".html_safe %>
 <%= list_attributes(@inventory, :long_title, :source_reference, :description)%>
 
 <h2>Entries</h2>

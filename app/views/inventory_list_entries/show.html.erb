@@ -1,12 +1,12 @@
 <% content_for :nav do %>
   <%= link_to 'Back', @inventory_list_entry.inventory %>
 <% end %>
+<% content_for :page_title, "#{link_to @inventory_list_entry.inventory.display_name, inventory_path(@inventory_list_entry.inventory)} / #{@inventory_list_entry.display_name}".html_safe %>
 
-<h1>Inventory List Entry from <%= @inventory_list_entry.inventory.display_name %></h1>
 <%= list_attributes(@inventory_list_entry, :id_tag, :item_count, :page, :description, :list_order)%>
 
 <% content_for :sidebar do %>
   <h2>Related</h2>
-  <%= record_relation('Other List Entry', @inventory_list_entry, @inventory_list_entry.related_inventory_list_entries) %>
-  <%= record_relation('Encounter', @inventory_list_entry, @inventory_list_entry.related_encounters) %>
+  <%= record_relation('Other List Entry', @inventory_list_entry.related_inventory_list_entries) %>
+  <%= record_relation('Encounter', @inventory_list_entry.related_encounters) %>
 <% end %>

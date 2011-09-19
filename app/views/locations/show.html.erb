@@ -1,0 +1,16 @@
+<% content_for :nav do %>
+  <%= link_to 'Back', locations_path %>
+<% end %>
+<% content_for :page_title, location_nav_links(@location) %>
+<%= record_list @locations, :local_name %>
+
+<% content_for :sidebar do %>
+  <h2>Map</h2>
+  <div id='record_media'>
+   <%= location_map(@location, :class => 'media_thumbnail') %>
+  </div>
+  <hr/>
+  <h2>Related</h2>
+  <%= record_relation('Encounter', @location.related_with_descendants(:encounter).includes(:primary_media_item)) %>
+  <%= record_relation('Voyage', @location.related_with_descendants(:voyage)) %>
+<% end %>

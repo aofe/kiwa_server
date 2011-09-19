@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912012155) do
+ActiveRecord::Schema.define(:version => 20110918230444) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -117,6 +117,26 @@ ActiveRecord::Schema.define(:version => 20110912012155) do
     t.datetime "updated_at"
   end
 
+  create_table "location_descendants", :force => true do |t|
+    t.integer "ancestor_id"
+    t.integer "descendant_id"
+    t.integer "distance"
+  end
+
+  create_table "location_links", :force => true do |t|
+    t.integer "parent_id"
+    t.integer "child_id"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "local_name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "media_items", :force => true do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
@@ -186,11 +206,7 @@ ActiveRecord::Schema.define(:version => 20110912012155) do
     t.datetime "updated_at"
   end
 
-  add_index "relationships", ["related_id"], :name => "index_relationships_on_related_id"
-  add_index "relationships", ["related_type"], :name => "index_relationships_on_related_type"
-  add_index "relationships", ["relator_id"], :name => "index_relationships_on_relator_id"
-  add_index "relationships", ["relator_type"], :name => "index_relationships_on_relator_type"
-  add_index "relationships", ["strength"], :name => "index_relationships_on_strength"
+  add_index "relationships", ["relator_id", "relator_type", "related_type"], :name => "triple_index"
 
   create_table "researchers", :force => true do |t|
     t.string   "first_name"

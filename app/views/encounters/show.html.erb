@@ -1,22 +1,23 @@
 <% content_for :nav do %>
   <%= link_to 'Back', encounters_path %>
 <% end %>
-<% content_for :page_title, 'Encounter' %>
+<% content_for :page_title, "#{link_to 'Encounters', encounters_path} / #{@encounter.display_name}".html_safe %>
 
 <%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indegenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
 
 <h3>Artefact History</h3>
-<%= render @encounter.events %>
+<%= render @encounter.events.includes(:person) %>
 
 <% content_for :sidebar do %>
   <h2>Media</h2>
   <%= record_media(@encounter.media_items)%>
   <hr/>
   <h2>Related</h2>
-  <%= record_relation('Expedition', @encounter, @encounter.related_expeditions) %>
-  <%= record_relation('Voyage', @encounter, @encounter.related_voyages) %>
-  <%= record_relation('Encounter', @encounter, @encounter.other_encounters) %>
-  <%= record_relation('Label', @encounter, @encounter.artefact.related_labels) %>
+  <%= record_relation('Expedition', @encounter.related_expeditions) %>
+  <%= record_relation('Voyage', @encounter.related_voyages) %>
+  <%= record_relation('Encounter', @encounter.other_encounters.includes(:primary_media_item)) %>
+  <%= record_relation('Label', @encounter.artefact.related_labels.includes(:primary_media_item)) %>
+  <%= record_relation('Location', @encounter.related_locations) %>
 <% end %>

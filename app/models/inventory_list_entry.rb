@@ -5,7 +5,7 @@ class InventoryListEntry < ActiveRecord::Base
   acts_as_relatable :artefact, :inventory_list_entry
   
   def display_name
-    self.id_tag.presence || "Unidentified Entry from #{inventory.display_name}"
+    self.id_tag.presence || "Unidentified Entry"
   end
   
   # FIXME: Has many through isn't working through related_artefacts so do it manually

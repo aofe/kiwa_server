@@ -2,7 +2,8 @@
   <%= link_to 'Back', labels_path %>
 <% end %>
 
-<h1>Label</h1>
+<% content_for :page_title, "#{link_to 'Labels', labels_path} / #{@label.display_name}".html_safe %>
+
 <%= list_attributes(@label, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
 
 <% content_for :sidebar do %>
@@ -10,5 +11,5 @@
   <%= record_media(@label.media_items)%>
   <hr/>
   <h2>Related</h2>
-  <%= record_relation('Encounter', @label, @label.related_encounters) %>
+  <%= record_relation('Encounter', @label.related_encounters) %>
 <% end %>

@@ -4,7 +4,7 @@ class Label < ActiveRecord::Base
 
   acts_as_relatable :artefact
   
-  scope :search, lambda {|query| where('LOWER(id_tag) LIKE ? OR LOWER(inscription) LIKE ?', "%#{query}%", "%#{query}%") if query }
+  scope :search, lambda {|query| where('LOWER(id_tag) LIKE ? OR LOWER(inscription) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") if query }
   
   def display_name
     self.id_tag.presence || self.inscription

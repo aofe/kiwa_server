@@ -1,7 +1,7 @@
 class Note < ActiveRecord::Base
   belongs_to :noteable, :polymorphic => true
 
-  before_validation_on_create :set_note_order
+  before_validation :set_note_order, :on => :create
   validates_presence_of :note_text, :note_order
   
   private

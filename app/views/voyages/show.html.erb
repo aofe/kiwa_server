@@ -2,7 +2,8 @@
   <%= link_to 'Back', voyages_path %>
 <% end %>
 
-<h1>Voyage</h1>
+<% content_for :page_title, "#{link_to 'Voyages', voyages_path} / #{@voyage.display_name}".html_safe %>
+
 <%= list_attributes(@voyage, :ship_name, :ship_other_name, :place_departed, :place_returned, :ship_tonnage, :ship_length, :ship_beam, :ship_type, :ship_cargo, :start_date, :end_date) %>
 
 <h2>Crew</h2>
@@ -10,5 +11,5 @@
 
 <% content_for :sidebar do %>
   <h2>Related</h2>
-  <%= record_relation('Encounter', @voyage, @voyage.related_encounters) %>
+  <%= record_relation('Encounter', @voyage.related_encounters) %>
 <% end %>

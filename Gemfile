@@ -6,6 +6,8 @@ gem 'acts_as_relatable', :git => 'git://github.com/culturecode/acts_as_relatable
 gem 'kaminari'
 gem 'nested_has_many_through'
 gem 'jquery-rails'
+gem "geocoder"
+gem "acts_as_dag", :git => 'git://github.com/rrn/acts_as_dag.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

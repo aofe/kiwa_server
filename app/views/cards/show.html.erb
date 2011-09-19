@@ -2,7 +2,7 @@
   <%= link_to 'Back', cards_path %>
 <% end %>
 
-<h1>card</h1>
+<% content_for :page_title, "#{link_to 'Catalogue Cards', cards_path} / #{@card.display_name}".html_safe %>
 <%= render @card.media_items %>
 
 <%= list_attributes(@card, :id_tag, :inscription, :location) %>

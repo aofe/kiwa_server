@@ -1,0 +1,5 @@
+<% content_for :page_title, "Locations" %>
+<% content_for :search, record_search(Location) %>
+<% content_for :pagination, paginate(@locations) %>
+
+<%= render @locations %>

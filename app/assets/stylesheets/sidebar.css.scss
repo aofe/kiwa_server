@@ -26,10 +26,10 @@ $sidebar-link-color: #333;
         border-bottom: 1px solid white;
         border-top: 1px solid #DDD;
         margin: 0;
-    }        
-    
+    }            
 }
-#sidebar_popup{        
+#sidebar_popup{
+    overflow: auto;      
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;    

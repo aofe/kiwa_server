@@ -2,7 +2,7 @@
   <%= link_to 'Back', people_path %>
 <% end %>
 
-<h1>Person: <%= @person.display_name %></h1>
+<% content_for :page_title, "#{link_to 'People', people_path} / #{@person.display_name}".html_safe %>
 
 <%= table_for @person.crew_list_entries do |t| %>
   <% t.column :title => "Expedition Name" do |crew_list_entries| %>
