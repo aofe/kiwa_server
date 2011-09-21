@@ -1,10 +1,8 @@
 class GeocodeLocations < ActiveRecord::Migration
   def up
-    Encounter.find_each(&:geocode_locations)
-    Voyage.find_each(&:geocode_locations)
+    Rake::Task['kiwa:geocode_locations'].invoke
   end
 
   def down
-    Location.destroy_all
   end
 end
