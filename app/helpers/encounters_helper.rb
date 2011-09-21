@@ -2,7 +2,7 @@ module EncountersHelper
   def encounter_show_menu_bar
     MenuBar.new(self) do |menu|
       for encounter in @encounter.other_encounters
-        menu.add_menu_bar_item(link_to "See #{encounter.encounter_type}'s Encounter", encounter, :class => 'arrow-right')
+        menu.add_menu_bar_item(link_to image_tag('flip.png') + " #{encounter.encounter_type.titleize}'s Encounter", encounter)
       end
     end
   end

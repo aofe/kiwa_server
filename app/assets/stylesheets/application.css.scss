@@ -82,3 +82,13 @@ $sidebar-width: 400px;
 .pagination{
     text-align: center;
 }
+
+// Put menus in the header on the right
+h1{
+    .menu_bar{
+        float: right;        
+    }
+    .menu_bar_item{
+        border-radius: 14px 2px 2px 14px !important;
+    }    
+}
