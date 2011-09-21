@@ -75,9 +75,11 @@ $menu-bar-item-spacing: 5px;
 }
 .menu_bar.toggle_menu{
     .menu_bar_item_wrapper:first-child .menu_bar_item{
-        border-radius: 14px 2px 2px 14px;
+        border-top-left-radius: 14px;
+        border-bottom-left-radius: 14px;
     }
     .menu_bar_item_wrapper:last-child .menu_bar_item{
-        border-radius: 2px 14px 14px 2px;
+        border-top-right-radius: 14px;
+        border-bottom-right-radius: 14px;
     }    
 }

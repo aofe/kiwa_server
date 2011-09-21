@@ -5,14 +5,15 @@ module KIWAGeocodable
     return if location_string.blank?
     
     puts "\nparsing #{location_string}"
-    for location_name in location_string.split(/,/).uniq.select(&:present?)
-      last_location = nil # Parent location to this location
-      
-      # Clear out anything in braces {} (Some references seem to use these)
-      location_names = location_name.gsub!(/\{.+?\}/,'')
 
-      # Clear out any non name characters
-      location_names = location_name.gsub!(/[^a-zA-Z\s;]/,'')
+    # Clear out anything in {} () (Some references seem to use these)
+    location_string.gsub!(/[{(].+?[})]/,'')
+
+    # Clear out any non-name characters
+    location_string.gsub!(/[?]/,'')
+    
+    for location_name in location_string.split(/,/).uniq.select(&:present?)
+      last_location = nil # Parent location to this location      
       
       # Split on ;
       location_names = location_name.split(/\s*;\s*/)
@@ -21,8 +22,10 @@ module KIWAGeocodable
         name = location_names[0..index].reverse.join(', ')
         location = Location.find_or_initialize_by_name_and_local_name(:name => name, :local_name => local_name)
         if location.new_record?
+
           puts "Geocoding #{name}"
           results = Geocoder.search(name)
+
           if result = results.first
             location.latitude = result.latitude
             location.longitude = result.longitude

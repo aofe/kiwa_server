@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   
   def index
-    @locations = Location.roots.order('name ASC').search(params[:query]).page(params[:page]).per(25)
+    @locations = Location.roots.search(params[:query]).default_order.page(params[:page]).per(25)
   end
   
   def show

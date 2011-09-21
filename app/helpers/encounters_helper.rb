@@ -3,7 +3,7 @@ module EncountersHelper
     MenuBar.new(self, :toggle => true) do |menu|
       menu.group do |group|
         for encounter in @encounter.artefact.encounters
-          group.menu_bar_item(link_to encounter.encounter_type.titleize, encounter).selected(@encounter == encounter)
+          group.menu_bar_item(link_to encounter.encounter_type.titleize, encounter, :title => "View the #{encounter.encounter_type.titleize} Encounter").selected(@encounter == encounter)
         end        
       end
     end

@@ -9,6 +9,7 @@ class Voyage < ActiveRecord::Base
   acts_as_relatable :encounter
 
   scope :search, lambda {|query| where('LOWER(ship_name) LIKE ?', "%#{query.downcase}%") if query }
+  scope :default_order, order(:ship_name)
 
   after_save :geocode_locations
   

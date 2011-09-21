@@ -3,6 +3,9 @@ class Card < ActiveRecord::Base
 
   has_many :media_items
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
+  
+  scope :default_order, order(:id)
+  
 
   acts_as_relatable :artefact
   

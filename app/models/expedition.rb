@@ -9,6 +9,7 @@ class Expedition < ActiveRecord::Base
   has_many :people, :through => :crew_list_entries
   
   scope :search, lambda {|query| where('LOWER(title) LIKE ?', "%#{query.downcase}%") if query }
+  scope :default_order, order(:title)
   
   def name
     self.title

@@ -12,6 +12,7 @@ class Encounter < ActiveRecord::Base
   
   scope :search, lambda {|query| where('LOWER(name) LIKE ? OR LOWER(description) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") if query }
   scope :with_images, joins(:media_items).where(:media_items => {:display_order => 1})
+  scope :default_order, order(:name)
   
   after_save :geocode_locations
   

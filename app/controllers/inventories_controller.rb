@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.page(params[:page]).per(25)
+    @inventories = Inventory.default_order.page(params[:page]).per(25)
   end
   
   def show

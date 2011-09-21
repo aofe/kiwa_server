@@ -1,6 +1,6 @@
 class LabelsController < ApplicationController
   def index
-    @labels = Label.search(params[:query]).order(:id).page(params[:page]).per(25)
+    @labels = Label.search(params[:query]).default_order.page(params[:page]).per(25)
   end
   
   def show

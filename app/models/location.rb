@@ -3,6 +3,7 @@ class Location < ActiveRecord::Base
   acts_as_relatable :encounter, :voyage
 
   scope :search, lambda {|query| where('LOWER(name) LIKE ?', "%#{query.downcase}%") if query }
+  scope :default_order, order(:name)
 
   geocoded_by :name
   after_validation :geocode

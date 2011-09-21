@@ -1,7 +1,7 @@
 class ExpeditionsController < ApplicationController
   
   def index
-    @expeditions = Expedition.includes(:voyages).search(params[:query]).order(:title).page(params[:page]).per(25)
+    @expeditions = Expedition.includes(:voyages).search(params[:query]).default_order.page(params[:page]).per(25)
   end
   
   def show

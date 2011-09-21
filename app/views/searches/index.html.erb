@@ -1,0 +1,14 @@
+<% content_for :page_title, "Search" %>
+<% content_for :search, any_record_search %>
+<% if params[:query]%>
+<h2>Voyages</h2>
+<%= record_list @voyages %>
+<h2>People</h2>
+<%= record_list @people %>
+<h2>Encounters</h2>
+<%= render @encounters.includes(:primary_media_item) %>
+<h2>Inventories</h2>
+<%= record_list @inventories %>
+<h2>Inventory List Entries</h2>
+<%= record_list @inventory_list_entries %>
+<% end %>
