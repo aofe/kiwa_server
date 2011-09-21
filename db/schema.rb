@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.string   "direction"
     t.string   "associated_person"
     t.string   "associated_institution"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "year"
     t.integer  "month"
     t.integer  "day"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "expeditions", :force => true do |t|
@@ -161,6 +161,12 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "other_name"
+    t.integer  "birth_year"
+    t.integer  "birth_month"
+    t.integer  "birth_day"
+    t.integer  "death_year"
+    t.integer  "death_month"
+    t.integer  "death_day"
     t.text     "background"
     t.text     "education"
     t.text     "character_reference"
@@ -168,23 +174,14 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.text     "network"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "birth_year"
-    t.integer  "birth_month"
-    t.integer  "birth_day"
-    t.integer  "death_year"
-    t.integer  "death_month"
-    t.integer  "death_day"
   end
 
   create_table "person_expeditions", :force => true do |t|
-    t.integer  "person_id",     :limit => 2, :default => 0, :null => false
-    t.integer  "expedition_id", :limit => 2, :default => 0, :null => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.integer  "person_id"
+    t.integer  "expedition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "person_expeditions", ["expedition_id"], :name => "v_id"
-  add_index "person_expeditions", ["person_id"], :name => "bio_id"
 
   create_table "relations", :force => true do |t|
     t.integer  "target_id"
@@ -206,7 +203,11 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.datetime "updated_at"
   end
 
-  add_index "relationships", ["relator_id", "relator_type", "related_type"], :name => "triple_index"
+  add_index "relationships", ["related_id"], :name => "index_relationships_on_related_id"
+  add_index "relationships", ["related_type"], :name => "index_relationships_on_related_type"
+  add_index "relationships", ["relator_id"], :name => "index_relationships_on_relator_id"
+  add_index "relationships", ["relator_type"], :name => "index_relationships_on_relator_type"
+  add_index "relationships", ["strength"], :name => "index_relationships_on_strength"
 
   create_table "researchers", :force => true do |t|
     t.string   "first_name"
@@ -217,10 +218,16 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
 
   create_table "voyages", :force => true do |t|
     t.integer  "expedition_id"
-    t.string   "place_departed"
-    t.string   "place_returned"
     t.string   "ship_name"
     t.string   "ship_other_name"
+    t.integer  "start_year"
+    t.integer  "start_month"
+    t.integer  "start_day"
+    t.integer  "end_year"
+    t.integer  "end_month"
+    t.integer  "end_day"
+    t.string   "place_departed"
+    t.string   "place_returned"
     t.string   "ship_tonnage"
     t.string   "ship_length"
     t.string   "ship_beam"
@@ -228,12 +235,6 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.string   "ship_cargo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "start_year"
-    t.integer  "start_month"
-    t.integer  "start_day"
-    t.integer  "end_year"
-    t.integer  "end_month"
-    t.integer  "end_day"
   end
 
 end

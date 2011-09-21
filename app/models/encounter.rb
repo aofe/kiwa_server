@@ -10,7 +10,7 @@ class Encounter < ActiveRecord::Base
   
   validates_presence_of :accession_number, :encounter_type
   
-  scope :search, lambda {|query| where('LOWER(name) LIKE ?', "%#{query.downcase}%") if query }
+  scope :search, lambda {|query| where('LOWER(name) LIKE ? OR LOWER(description) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") if query }
   scope :with_images, joins(:media_items).where(:media_items => {:display_order => 1})
   
   after_save :geocode_locations
