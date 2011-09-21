@@ -1,7 +1,10 @@
 <% content_for :nav do %>
   <%= link_to 'Back', encounters_path %>
 <% end %>
-<% content_for :page_title, "#{link_to 'Encounters', encounters_path} / #{@encounter.display_name}".html_safe %>
+<% content_for :page_title do %>
+   <%= "#{link_to 'Encounters', encounters_path} / #{@encounter.display_name}".html_safe %>
+   <%= encounter_show_menu_bar %>
+<% end %>
 
 <%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indegenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>
