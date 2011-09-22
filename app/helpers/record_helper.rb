@@ -22,8 +22,8 @@ module RecordHelper
     end
   end
   
-  def record_slide(record)
-    render 'shared/record_slide', :record => record
+  def record_slide(record, caption = :default)
+    render 'shared/record_slide', :record => record, :caption => caption
   end
   
   def record_relation(name, related_records)

@@ -4,4 +4,4 @@ log/*.log
 tmp/
 database.yml
 .sass-cache/
-.DS_store
+.DS_Store

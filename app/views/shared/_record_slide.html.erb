@@ -1,4 +1,4 @@
 <%= link_to record, :class => 'record_slide' do %>
   <%= content_tag :span, '', :class => 'image', :style => ("background-image:url('#{record.primary_media_item.thumbnail_url(200)}')" if record.primary_media_item) %>
-  <%= content_tag :span, record.display_name, :class => 'title' %>
+  <%= content_tag :span, (caption == :default ? record.display_name : caption), :class => 'title' %>
 <% end %>
