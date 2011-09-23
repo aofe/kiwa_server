@@ -4,9 +4,23 @@
 
 <% content_for :page_title, "#{link_to 'People', people_path} / #{@person.display_name}".html_safe %>
 
+<%= list_attributes(@person, :birth_date, :death_date, :network) %>
+<h3>Background</h3>
+<%= simple_format @person.background %>
+<h3>Education</h3>
+<%= simple_format @person.education %>
+<h3>Character Reference</h3>
+<%= simple_format @person.character_reference %>
+<h3>Career</h3>
+<%= simple_format @person.career %>
+
 <%= table_for @person.crew_list_entries do |t| %>
   <% t.column :title => "Expedition Name" do |crew_list_entries| %>
     <% crew_list_entries.expedition.name %>
   <% end %>
   <% t.column :rank %>
+<% end %>
+
+<% content_for :sidebar do %>
+<span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
 <% end %>

@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  include UncertainDate
+  
   has_many :events
   
   has_many :person_expeditions
