@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110918230444) do
+ActiveRecord::Schema.define(:version => 20110923011021) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20110918230444) do
     t.string   "part_count"
     t.string   "name"
     t.string   "place_of_origin"
-    t.string   "indegenous_name"
+    t.string   "indigenous_name"
     t.string   "material"
     t.text     "description"
     t.string   "dimensions"

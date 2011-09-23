@@ -6,7 +6,7 @@
    <%= encounter_show_menu_bar %>
 <% end %>
 
-<%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indegenous_name, :place_of_origin, :dimensions, :material) %>
+<%= list_attributes(@encounter, :accession_number, :encounter_type, :part_count, :indigenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
 
