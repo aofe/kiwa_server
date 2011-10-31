@@ -14,7 +14,7 @@
 <h3>Career</h3>
 <%= simple_format @person.career %>
 
-<%= table_for @person.crew_list_entries do |t| %>
+<%= table_for @person.crew_list_entries.includes(:expedition) do |t| %>
   <% t.column :title => "Expedition Name" do |crew_list_entries| %>
     <% crew_list_entries.expedition.name %>
   <% end %>

@@ -1,14 +1,22 @@
 module RecordHelper
   def list_attributes(record, *attributes)
+    options = attributes.last.is_a?(Hash) ? attributes.pop : {}
+    
     content_tag :ul, :class => 'attribute_list' do
       attributes.collect do |attribute|
-        # If the value is actually another record, get that record's display name
-        value = record.send(attribute)
-        value = value.display_name if value.is_a? ActiveRecord::Base
-        content_tag :li do
-          content_tag(:span, record.class.human_attribute_name(attribute) + ":", :class => 'attribute_name') + " " + content_tag(:span, value, :class => 'value')
+         # If the value is actually another record or records, get that record's display name
+        if reflection = record.class.reflect_on_association(attribute)
+          value = Array(record.send(attribute)).collect(&:display_name).join(', ')
+        else
+          value = record.send(attribute)
         end
-      end.join('').html_safe
+
+        unless options[:hide_blank] && value.blank?
+          content_tag :li do
+            content_tag(:span, record.class.human_attribute_name(attribute) + ":", :class => 'attribute_name') + " " + content_tag(:span, value, :class => 'value')
+          end
+        end
+      end.join.html_safe
     end
   end
   

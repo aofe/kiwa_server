@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/culturecode/acts_as_relatable.git
-  revision: 85e9ec4ae409200b7d1c77efa1e2836380a1ab52
+  revision: 2e56c69cd66b532d2f1dfe0d3887efae6107cf48
   specs:
     acts_as_relatable (0.0.5)
       activesupport (~> 3.0)
