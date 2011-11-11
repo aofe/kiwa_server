@@ -5,8 +5,4 @@
 
 <%= list_attributes(@inventory_list_entry, :id_tag, :item_count, :page, :description, :list_order)%>
 
-<% content_for :sidebar do %>
-  <h2>Related</h2>
-  <%= record_relation('Other List Entry', @inventory_list_entry.related_inventory_list_entries) %>
-  <%= record_relation('Encounter', @inventory_list_entry.related_encounters) %>
-<% end %>
+<% content_for :sidebar, inventory_list_entry_sidebar(@inventory_list_entry) %>

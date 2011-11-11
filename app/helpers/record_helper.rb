@@ -33,24 +33,21 @@ module RecordHelper
   def record_slide(record, caption = :default)
     render 'shared/record_slide', :record => record, :caption => caption
   end
-  
-  def record_relation(name, related_records)
-    classNames = ['sidebar_option', 'record_relation']
-    classNames << 'inactive' if related_records.empty?
-    content_tag :span, pluralize(related_records.count, name), :related_records => related_records_popup_content(related_records), :class => classNames.join(' ')
-  end
-  
-  def related_records_popup_content(related_records)
-    related_records.sort_by(&:display_name).collect do |record|
-      output = ''
-      output = media_thumbnail(record.primary_media_item, :size => 50, :link_to => nil) if record.respond_to? :primary_media_item
-      output << " " + record.display_name
-      link_to output, record, :class => 'sidebar_option'
-    end.join('')
-  end
-  
+    
   def record_media(media_items)
     output = media_items.collect{|media_item| media_thumbnail(media_item)}
     content_tag :div, output.join.html_safe, :id => 'record_media'
+  end  
+  
+  # Creates entries for the sidebar using a the MenuBar class
+  def sidebar_record_relation(sidebar, association_name, related_records)
+    
+    sidebar.menu pluralize(related_records.count, association_name), :wrapper_options => {:class => 'sidebar_submenu inactive'} do |menu|
+      for record in related_records
+        text = record.display_name.html_safe
+        text << ' ' + media_thumbnail(record.primary_media_item, :size => 50, :link_to => nil) if record.respond_to? :primary_media_item
+        menu.menu_item(link_to(text, record), :html_options =>{:class => 'sidebar_suboption'})
+      end
+    end    
   end  
 end

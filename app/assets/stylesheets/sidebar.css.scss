@@ -26,32 +26,19 @@ $sidebar-link-color: #333;
         border-bottom: 1px solid white;
         border-top: 1px solid #DDD;
         margin: 0;
-    }            
-}
-#sidebar_popup{
-    overflow: auto;      
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;    
-    box-shadow: 0px 0 4px rgba(0,0,0,0.2);
-    font-weight: bold;
-    position: fixed;
-    top: 0;  
-    right: 400px;
-    width: 400px;
-    height: 100%;
-    background: #EEE;
-    border: 1px solid #E0E0E0;
-
-    a:link, a:visited{
-        color: $sidebar-link-color;
     }    
 }
-.sidebar_option{
+
+@mixin sidebar-list-item{
     line-height: 2em;
     display: block;
     padding: .5em 1em;
     cursor: pointer;
+    border-top: 1px solid #E0E0E0;
+    
+    &:first-child{
+        border-top:none;
+    }
     
     &:hover, &.selected{
         background: white;
@@ -62,6 +49,23 @@ $sidebar-link-color: #333;
         background: transparent;    
     }
 }
-.sidebar_option + .sidebar_option{
-    border-top: 1px solid #E0E0E0;
+.sidebar_option{
+    @include sidebar-list-item;
+}
+
+.sidebar_submenu{
+    @include sidebar-list-item;
+    padding: 0;
+    > div{
+        padding: .5em 1em;
+    }
+    > ul{
+        list-style: none;
+        padding: 0;
+    }
+}
+.sidebar_suboption a{
+    @include sidebar-list-item;
+    padding: 0 1em 0 2em;
+    border-top: none;
 }

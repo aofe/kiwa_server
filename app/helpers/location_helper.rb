@@ -22,6 +22,20 @@ module LocationHelper
     
     image_tag("http://maps.google.com/maps/api/staticmap?size=250x250&maptype=hybrid#{marker}&sensor=false", html_options)
   end  
+  
+  def location_sidebar(location)
+    MenuBar.new(self, :class => "sidebar_menu") do |menu|
+      menu.group do |group|
+        group.menu_bar_content(content_tag :h2, 'Map')
+        group.menu_bar_content(content_tag :div, location_map(location, :class => 'media_thumbnail'), :id => 'record_media')
+      end
+      menu.group do |group|
+        group.menu_bar_content(content_tag :h2, 'Related')
+        sidebar_record_relation(group, 'Encounter', location.related_with_descendants(:encounter).includes(:primary_media_item))
+        sidebar_record_relation(group, 'Voyage', location.related_with_descendants(:voyage))
+      end
+    end
+  end
 end
 
 

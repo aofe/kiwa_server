@@ -11,6 +11,12 @@ GIT
   specs:
     acts_as_dag (1.0.2)
 
+GIT
+  remote: git@github.com:culturecode/easy_menu.git
+  revision: 2844888054fe7abd25e2c1a820f89b360dd00f70
+  specs:
+    easy_menu (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -128,6 +134,7 @@ DEPENDENCIES
   acts_as_dag!
   acts_as_relatable!
   coffee-rails (~> 3.1.0)
+  easy_menu!
   geocoder
   jquery-rails
   kaminari
