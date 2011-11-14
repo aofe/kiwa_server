@@ -1,0 +1,2 @@
+class MAAEncounter < Encounter
+end

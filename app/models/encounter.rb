@@ -8,7 +8,7 @@ class Encounter < ActiveRecord::Base
 
   acts_as_relatable :voyage, :expedition, :location
   
-  validates_presence_of :accession_number, :encounter_type
+#  validates_presence_of :accession_number, :encounter_type
   
   scope :search, lambda {|query| where('LOWER(name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(accession_number) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%") if query }
   scope :with_images, joins(:media_items).where(:media_items => {:display_order => 1})

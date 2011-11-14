@@ -27,11 +27,30 @@ module EncountersHelper
   end
 
   def encounter_source_name(encounter)
-    case encounter.encounter_type
-    when 'source'
+    case encounter
+    when MAAEncounter
       "Museum of Archaeology and Anthropology, University of Cambridge"
-    when 'aofe'
+    when AOEEncounter
       "Artefacts of Encounter"
     end
+  end
+
+  def encounters_page_title
+    encounter_type.model_name.human.pluralize
+  end
+
+  def encounter_page_title(encounter)
+    link_to(encounter.class.model_name.human.pluralize, encounter.class) + " / #{@encounter.display_name}"
+  end
+  
+  def encounter_type
+    case params[:type].to_s
+    when 'MAA'
+      MAAEncounter
+    when 'AOE'
+      AOEEncounter
+    else
+      Encounter
+    end    
   end
 end

@@ -1,14 +1,16 @@
 <% content_for :page_title, "Search" %>
 <% content_for :search, any_record_search %>
 <% if params[:query]%>
-<h2>Voyages</h2>
+<h2><%= MAAEncounter.model_name.human.pluralize %></h2>
+<%= render @maa_encounters.includes(:primary_media_item) %>
+<h2><%= AOEEncounter.model_name.human.pluralize %></h2>
+<%= render @aoe_encounters.includes(:primary_media_item) %>
+<h2><%= Voyage.model_name.human.pluralize %></h2>
 <%= record_list @voyages %>
-<h2>People</h2>
+<h2><%= Person.model_name.human.pluralize %></h2>
 <%= record_list @people %>
-<h2>Encounters</h2>
-<%= render @encounters.includes(:primary_media_item) %>
-<h2>Inventories</h2>
+<h2><%= Inventory.model_name.human.pluralize %></h2>
 <%= record_list @inventories %>
-<h2>Inventory List Entries</h2>
+<h2><%= InventoryListEntry.model_name.human.pluralize %></h2>
 <%= record_list @inventory_list_entries %>
 <% end %>

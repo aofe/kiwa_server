@@ -1,4 +1,6 @@
 KIWA::Application.routes.draw do
+  devise_for :users
+
   root :to => "pages#home"
   
   resources :searches
@@ -33,6 +35,8 @@ KIWA::Application.routes.draw do
   resources :institutions
   
   resources :encounters
+  resources :maa_encounters, :controller => :encounters, :defaults => {:type => 'MAA'}
+  resources :aoe_encounters, :controller => :encounters, :defaults => {:type => 'AOE'}
 
   resources :relations
   

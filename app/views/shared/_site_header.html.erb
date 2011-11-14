@@ -1,1 +1,2 @@
 <%= link_to 'Artefacts of Encounter', root_path, :id => 'site_title' %>
+<%= link_to('Sign Out', destroy_user_session_path, :method => :delete, :id => 'sign_out') if user_signed_in? %>        

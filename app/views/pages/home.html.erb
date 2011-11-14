@@ -1,10 +1,11 @@
 <% content_for :search, any_record_search %>
 
-<%= link_to 'Voyages', voyages_path %> |
-<%= link_to 'People', people_path %> |
-<%= link_to 'Encounters', encounters_path %> |
-<%= link_to 'Labels', labels_path %> |
-<%= link_to 'Catalogue Cards', cards_path %> |
-<%= link_to 'Inventories', inventories_path %> |
-<%= link_to 'Expeditions', expeditions_path %> |
-<%= link_to 'Locations', locations_path %>
+<%= section_link(MAAEncounter) %> |
+<%= section_link(AOEEncounter) %> |
+<%= section_link(Voyage) %> |
+<%= section_link(Person) %> |
+<%= section_link(Label) %> |
+<%= section_link(Card) %> |
+<%= section_link(Inventory) %> |
+<%= section_link(Expedition) %> |
+<%= section_link(Location) %>

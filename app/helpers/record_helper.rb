@@ -44,8 +44,10 @@ module RecordHelper
     
     sidebar.menu pluralize(related_records.count, association_name), :wrapper_options => {:class => 'sidebar_submenu inactive'} do |menu|
       for record in related_records
-        text = record.display_name.html_safe
-        text << ' ' + media_thumbnail(record.primary_media_item, :size => 50, :link_to => nil) if record.respond_to? :primary_media_item
+        text = ''.html_safe
+        text << media_thumbnail(record.primary_media_item, :size => 28, :link_to => nil) if record.respond_to? :primary_media_item
+        text << record.display_name
+        
         menu.menu_item(link_to(text, record), :html_options =>{:class => 'sidebar_suboption'})
       end
     end    
