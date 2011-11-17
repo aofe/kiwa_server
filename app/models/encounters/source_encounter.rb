@@ -1,0 +1,2 @@
+class SourceEncounter < Encounter
+end

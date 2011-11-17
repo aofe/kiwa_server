@@ -19,7 +19,8 @@ module EncountersHelper
         group.menu_bar_content(content_tag :h2, 'Related')
         sidebar_record_relation(group, 'Expedition', encounter.related_expeditions)
         sidebar_record_relation(group, 'Voyage', encounter.related_voyages)
-        sidebar_record_relation(group, 'Encounter', encounter.other_encounters.includes(:primary_media_item))
+        sidebar_record_relation(group, SourceEncounter, encounter.other_source_encounters.includes(:primary_media_item))
+        sidebar_record_relation(group, AOFEEncounter, encounter.other_aofe_encounters.includes(:primary_media_item))
         sidebar_record_relation(group, 'Label', encounter.artefact.related_labels.includes(:primary_media_item))
         sidebar_record_relation(group, 'Location', encounter.related_locations)
       end
@@ -27,12 +28,7 @@ module EncountersHelper
   end
 
   def encounter_source_name(encounter)
-    case encounter
-    when MAAEncounter
-      "Museum of Archaeology and Anthropology, University of Cambridge"
-    when AOEEncounter
-      "Artefacts of Encounter"
-    end
+    encounter.institution.try(:long_name)
   end
 
   def encounters_page_title
@@ -45,10 +41,10 @@ module EncountersHelper
   
   def encounter_type
     case params[:type].to_s
-    when 'MAA'
-      MAAEncounter
-    when 'AOE'
-      AOEEncounter
+    when 'Source'
+      SourceEncounter
+    when 'AOFE'
+      AOFEEncounter
     else
       Encounter
     end    

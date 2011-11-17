@@ -35,8 +35,8 @@ KIWA::Application.routes.draw do
   resources :institutions
   
   resources :encounters
-  resources :maa_encounters, :controller => :encounters, :defaults => {:type => 'MAA'}
-  resources :aoe_encounters, :controller => :encounters, :defaults => {:type => 'AOE'}
+  resources :source_encounters, :controller => :encounters, :defaults => {:type => 'Source'}
+  resources :aofe_encounters, :controller => :encounters, :defaults => {:type => 'AOFE'}
 
   resources :relations
   

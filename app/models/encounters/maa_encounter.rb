@@ -1,2 +1,0 @@
-class MAAEncounter < Encounter
-end

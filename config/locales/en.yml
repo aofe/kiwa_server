@@ -4,6 +4,6 @@
 en:
   activerecord:
     models:
-      maa_encounter: 'Collection Record'
-      aoe_encounter: 'Encounter'
+      source_encounter: 'Collection Record'
+      aofe_encounter: 'Encounter'
       card: 'Catalogue Card'

@@ -4,6 +4,6 @@
 
 <% content_for :page_title, "#{link_to 'Labels', labels_path} / #{@label.display_name}".html_safe %>
 
-<%= list_attributes(@label, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
+<%= list_attributes(@label, {'Institution' => label_source_name(@label)}, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
 
 <% content_for :sidebar, label_sidebar(@label) %>

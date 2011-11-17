@@ -10,5 +10,9 @@ module LabelsHelper
         sidebar_record_relation(group, 'Encounter', label.related_encounters)
       end
     end
+  end
+  
+  def label_source_name(label)
+    label.institution.try(:long_name)
   end  
 end

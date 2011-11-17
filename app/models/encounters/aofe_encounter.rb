@@ -1,0 +1,2 @@
+class AOFEEncounter < Encounter
+end

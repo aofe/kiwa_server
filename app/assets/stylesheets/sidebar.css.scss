@@ -72,9 +72,9 @@ $sidebar-link-color: #333;
     
     .media_thumbnail{
         float: right;
-        height: 28px;
         margin-top: -0.5em;
-        padding: 0;
-        width: 28px;
+        padding: 2px;
+        max-width: 28px;
+        max-height: 28px;
     }
 }

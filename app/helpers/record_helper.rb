@@ -4,16 +4,21 @@ module RecordHelper
     
     content_tag :ul, :class => 'attribute_list' do
       attributes.collect do |attribute|
-         # If the value is actually another record or records, get that record's display name
-        if reflection = record.class.reflect_on_association(attribute)
+        if attribute.is_a? Hash
+          value = attribute.values.first
+          attribute_name = attribute.keys.first
+        elsif reflection = record.class.reflect_on_association(attribute)
+          # If the value is actually another record or records, get that record's display name
           value = Array(record.send(attribute)).collect(&:display_name).join(', ')
+          attribute_name = record.class.human_attribute_name(attribute)
         else
           value = record.send(attribute)
+          attribute_name = record.class.human_attribute_name(attribute)
         end
 
         unless options[:hide_blank] && value.blank?
           content_tag :li do
-            content_tag(:span, record.class.human_attribute_name(attribute) + ":", :class => 'attribute_name') + " " + content_tag(:span, value, :class => 'value')
+            content_tag(:span, "#{attribute_name}:", :class => 'attribute_name') + " " + content_tag(:span, value, :class => 'value')
           end
         end
       end.join.html_safe
@@ -41,6 +46,12 @@ module RecordHelper
   
   # Creates entries for the sidebar using a the MenuBar class
   def sidebar_record_relation(sidebar, association_name, related_records)
+    case association_name
+    when Class
+      association_name = association_name.model_name.human
+    when String
+      association_name = association_name.titleize
+    end
     
     sidebar.menu pluralize(related_records.count, association_name), :wrapper_options => {:class => 'sidebar_submenu inactive'} do |menu|
       for record in related_records

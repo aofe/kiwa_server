@@ -1,4 +1,6 @@
 class Label < ActiveRecord::Base
+  belongs_to :institution
+
   has_many :media_items, :as => :attachable
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
 

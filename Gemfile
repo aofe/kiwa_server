@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '~> 3.1.0'
 gem 'mysql2', '>=0.3'
 gem 'acts_as_relatable', :git => 'git://github.com/culturecode/acts_as_relatable.git'
 gem 'kaminari'
