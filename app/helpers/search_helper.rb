@@ -1,10 +1,11 @@
 module SearchHelper
-  def record_search(klass)
-    render 'shared/record_search', :path => polymorphic_path(klass)
-  end
-  
-  def any_record_search
-    render 'shared/record_search', :path => searches_path
-  end
-  
+	def search_menu
+		MenuBar.new(self) do |mb|
+			menu_bar_search(mb, searches_path)
+		end
+	end
+	
+	def record_search(klass)
+		render 'shared/record_search', :path => polymorphic_path(klass)
+	end
 end

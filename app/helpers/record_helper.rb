@@ -28,19 +28,46 @@ module RecordHelper
       end.join.html_safe
     end
   end
-  
-  def record_list(records, name_method = :display_name)
-    content_tag :ul, :class => 'record_list' do
-      "".html_safe.tap do |output|
-        for record in records
-          output << content_tag(:li, link_to(record.send(name_method), record))
+
+  def record_list(records, options = {}, &block)
+    ''.html_safe.tap do |output|
+      records.each do |record|
+        output << record_list_entry(record, options, &block)
+      end
+    end
+  end
+
+  def record_list_entry(record, options = {}, &block)
+    if block_given?
+      link_to record, :id => dom_id(record), :class => "record_list_entry #{record.class.model_name.underscore}" do
+        yield record
+      end
+    else
+      options.reverse_merge! :name => :display_name
+      link_to record, :id => dom_id(record), :class => "record_list_entry #{record.class.model_name.underscore}"  do
+        content_tag(:span, record.send(options[:name]), :class => 'name')
+      end
+    end
+  end
+
+  def record_slide_table(records, options = {})
+    content_tag :div, :class => 'record_slide_table' do
+      ''.html_safe.tap do |output|
+        records.each do |record|
+          output << record_slide(record, options)
         end
       end
     end
   end
   
-  def record_slide(record, caption = :default)
-    render 'shared/record_slide', :record => record, :caption => caption
+  def record_slide(record, options = {})
+    record_list_entry record, options do |record|
+      if record.respond_to?(:primary_media_item) && record.primary_media_item
+        image_tag record.primary_media_item.thumbnail_url(300), :class => 'thumbnail', :title => record.display_name
+      else
+        record.display_name
+      end
+    end
   end
     
   def record_media(media_items)

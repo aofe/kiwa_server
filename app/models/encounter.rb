@@ -12,7 +12,6 @@ class Encounter < ActiveRecord::Base
 #  validates_presence_of :accession_number, :encounter_type
   
   scope :with_images, joins(:media_items).where(:media_items => {:display_order => 1})
-  scope :default_order, order(:name)
   scope :type, lambda {|type| where(:type => "#{type}_encounter".classify)}
   
   after_save :geocode_locations

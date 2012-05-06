@@ -10,8 +10,6 @@ class Person < ActiveRecord::Base
   has_many :voyages, :through => :crew_list_entries
   has_many :expeditions, :through => :voyages
   
-  scope :default_order, order(:last_name, :first_name)
-  
   def name
     output = []
     output << first_name

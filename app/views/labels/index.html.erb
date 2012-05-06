@@ -1,5 +1,5 @@
 <% content_for :page_title, "Labels" %>
-<% content_for :search, record_search(Label) %>
+<% content_for :page_menu, labels_menu %>
 <% content_for :pagination, paginate(@labels) %>
 
-<%= render @labels.includes(:primary_media_item) %>
+<%= record_slide_table @labels %>

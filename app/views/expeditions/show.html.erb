@@ -1,8 +1,8 @@
 <% content_for :nav do %>
-  <%= link_to 'Back', encounters_path %>
+  <%= link_to 'Back', expeditions_path %>
 <% end %>
 
-<% content_for :page_title, "#{link_to 'Expeditions', expeditions_path} / #{@expedition.display_name}".html_safe %>
+<% content_for :page_title, page_title(@expedition) %>
 
 <%= list_attributes(@expedition, :principle_explorer, :commissioned) %>
 
@@ -10,6 +10,6 @@
 <%= record_list @expedition.voyages.sort_by(&:display_name) %>
 
 <h2>Crew</h2>
-<%= record_list @expedition.people.sort_by(&:display_name) %>
+<div class='crew_list'><%= record_list @expedition.people.sort_by(&:display_name) %></div>
 
 <% content_for :sidebar, expedition_sidebar(@expedition) %>

@@ -1,5 +1,10 @@
+@import 'mixins';
 @import 'entity_mixin';
 
-.person{
-	@include entity_list;
+.people{
+	@include columns(400px);
+}
+
+.crew_list{
+	@include columns;	
 }

@@ -1,20 +1,11 @@
-class PeopleController < ApplicationController
-
-  def index
-    @people = collection.results(:page => params[:page], :per_page => 12, :order => :sort_name)
-  end
-  
-  def show
-    @person = Person.find(params[:id])
-  end  
-
-  def autocomplete
-    render :json => collection.autocomplete_tags(:limit => 10, :except => :name)
-  end
-
+class PeopleController <  GlintSearchController
   protected
 
-  def collection
-    PersonSearch.new(params[:q])
+  def klass
+    Person
+  end
+
+  def search_options
+  	super.merge(:order => :sort_name, :per_page => 36)
   end
 end

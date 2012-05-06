@@ -7,6 +7,6 @@
 <%= list_attributes(@voyage, :ship_name, :ship_other_name, :place_departed, :place_returned, :ship_tonnage, :ship_length, :ship_beam, :ship_type, :ship_cargo, :start_date, :end_date) %>
 
 <h2>Crew</h2>
-<div class='voyage_crew_list'><%= entity_list @voyage.people.sort_by(&:sort_name), :name => :sort_name %></div>
+<div class='crew_list'><%= record_list @voyage.people.sort_by(&:sort_name), :name => :sort_name %></div>
 
 <% content_for :sidebar, voyage_sidebar(@voyage) %>

@@ -1,10 +1,11 @@
-class ExpeditionsController < ApplicationController
-  
-  def index
-    @expeditions = Expedition.includes(:voyages).search(params[:query]).default_order.page(params[:page]).per(25)
+class ExpeditionsController <  GlintSearchController
+  protected
+
+  def klass
+    Expedition
   end
-  
-  def show
-    @expedition = Expedition.find(params[:id])
-  end  
+
+  def order
+    :title
+  end
 end

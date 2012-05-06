@@ -8,9 +8,6 @@ class Expedition < ActiveRecord::Base
   has_many :crew_list_entries, :through => :voyages
   has_many :people, :through => :crew_list_entries
   
-  scope :search, lambda {|query| where('LOWER(title) LIKE ?', "%#{query.downcase}%") if query }
-  scope :default_order, order(:title)
-  
   def name
     self.title
   end
@@ -18,4 +15,12 @@ class Expedition < ActiveRecord::Base
   def display_name
     name
   end
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:title => 2}
+
+  has_facet :title
+  has_facet :commissioned
 end

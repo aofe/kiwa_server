@@ -5,10 +5,7 @@ class Label < ActiveRecord::Base
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
 
   acts_as_relatable :artefact
-  
-  scope :search, lambda {|query| where('LOWER(id_tag) LIKE ? OR LOWER(inscription) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") if query }
-  scope :default_order, order(:id)
-  
+    
   def display_name
     self.id_tag.presence || self.inscription
   end
@@ -16,5 +13,17 @@ class Label < ActiveRecord::Base
   # FIXME: Has many through isn't working through related_artefacts so do it manually
   def related_encounters
     related_artefacts.includes(:encounters).collect(&:encounters).flatten
-  end  
+  end
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:id_tag => 2}
+
+  has_facet :id_tag
+  has_facet :institution, :accessor_method => :long_name
+  has_facet :inscription
+  has_facet :attachment_method
+  has_facet :attachment_location
+  has_facet :related_encounters, :accessor_method => :display_name, :multiple => true, :attribute_type => :string, :param => :encounter
 end

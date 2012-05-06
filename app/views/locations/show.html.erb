@@ -2,6 +2,6 @@
   <%= link_to 'Back', locations_path %>
 <% end %>
 <% content_for :page_title, location_nav_links(@location) %>
-<%= record_list @locations, :local_name %>
+<%= record_list @locations, :name => :local_name %>
 
 <% content_for :sidebar, location_sidebar(@location) %>

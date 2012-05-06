@@ -36,6 +36,12 @@ module LocationHelper
       end
     end
   end
+
+  def locations_menu
+    MenuBar.new(self) do |mb|
+      menu_bar_search(mb, url_for, :autocomplete_url => autocomplete_locations_path)
+    end
+  end  
 end
 
 

@@ -1,3 +1,6 @@
+@import 'mixins';
+@import 'entity_mixin';
+
 .attribute_list{
     list-style: none;
 }
@@ -5,52 +8,16 @@
     font-weight: bold;
 }
 
-.record_list{
-    -moz-column-width: 300px;
-    -webkit-column-width: 300px;
-    column-width: 300px;
-}
-$slide-height: 200px;
-$slide-width: 200px;
-.record_slide{
-    background: none repeat scroll 0 0 #F0F0F0;
-    border: 1px solid #E0E0E0;
-    display: inline-block;
-    margin: 4px;
-    overflow: hidden;
-    padding: 4px;
-    position: relative;
-    text-align: center;
-    vertical-align: bottom;
-    height: $slide-height;
-    width: $slide-width;
-    
-    .image{
-        background: #F0F0F0 center center no-repeat;
-        height: $slide-height - 22px;
-        width: $slide-width;
-        display: inline-block;
-        box-shadow: 0 0 30px rgba(0,0,0,.2) inset;
-    }
-    
-    .title{
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;    
-        padding: 4px;    
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        display: block;
-        width: 100%;
-        line-height: 1.5em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: #F0F0F0;
-        font-family: Futura, Helvetica, Arial, 'Sans Serif';
-        font-size: 0.8em;
-    }    
+.record_slide_table{
+    @include columns;
+
+    .record_list_entry{
+        text-align: center;
+
+        .thumbnail{
+            width: 100%;
+        }
+    }   
 }
 
 #record_media{
@@ -58,4 +25,8 @@ $slide-width: 200px;
 }
 #record_media .media_thumbnail{
     margin: 0.5em;
+}
+
+.record_list_entry{
+    @include entity_list_entry;
 }

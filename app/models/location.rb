@@ -2,9 +2,6 @@ class Location < ActiveRecord::Base
   acts_as_dag
   acts_as_relatable :encounter, :voyage
 
-  scope :search, lambda {|query| where('LOWER(name) LIKE ?', "%#{query.downcase}%") if query }
-  scope :default_order, order(:name)
-
   geocoded_by :name
   after_validation :geocode
   
@@ -18,4 +15,11 @@ class Location < ActiveRecord::Base
     relationships = ActsAsRelatable::Relationship.where(:relator_id => descendants.collect(&:id), :relator_type => 'Location', :related_type => klass)
     klass.constantize.where(:id => relationships.collect(&:related_id))
   end
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains'
+
+  has_facet :name
 end

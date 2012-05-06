@@ -1,12 +1,22 @@
 @import 'mixins';
 
 $sidebar-link-color: #333;
+
+#page.with_sidebar{
+    #content{
+        margin-right: $sidebar-width + 5px;
+    }
+    .menu_bar.site_menu{
+        padding-right: $sidebar-width + 5px;
+    }
+}
+
 #sidebar{
     overflow: auto;
     position: fixed;
     top: 0;
     right: 0;
-    width: 400px;
+    width: $sidebar-width;
     height: 100%;
     background: #EEE;
     border: 1px solid #E0E0E0;

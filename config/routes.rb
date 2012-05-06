@@ -12,7 +12,9 @@ KIWA::Application.routes.draw do
     get :autocomplete, :on => :collection
   end
 
-  resources :expeditions
+  resources :expeditions do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :people do 
     get :autocomplete, :on => :collection
@@ -20,11 +22,15 @@ KIWA::Application.routes.draw do
 
   resources :events
 
-  resources :cards
+  resources :cards do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :researchers
 
-  resources :labels
+  resources :labels do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :media_items
 
@@ -34,7 +40,9 @@ KIWA::Application.routes.draw do
 
   resources :artefacts
 
-  resources :inventories
+  resources :inventories do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :institutions
   
@@ -47,7 +55,9 @@ KIWA::Application.routes.draw do
 
   resources :relations
   
-  resources :locations
+  resources :locations do 
+    get :autocomplete, :on => :collection
+  end
       
   # The priority is based upon order of creation:
   # first created -> highest priority.

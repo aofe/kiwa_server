@@ -2,4 +2,4 @@
 <% content_for :page_menu, people_menu %>
 <% content_for :pagination, paginate(@people) %>
 
-<%= render @people %>
+<div class='people'><%= record_list @people %></div>

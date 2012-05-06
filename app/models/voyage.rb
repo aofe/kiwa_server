@@ -8,8 +8,6 @@ class Voyage < ActiveRecord::Base
 
   acts_as_relatable :encounter
 
-  scope :default_order, order(:ship_name)
-
   after_save :geocode_locations
   
   def display_name

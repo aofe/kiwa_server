@@ -1,5 +1,5 @@
 <% content_for :page_title, "Expeditions" %>
-<% content_for :search, record_search(Expedition) %>
+<% content_for :page_menu, expedition_menu %>
 <% content_for :pagination, paginate(@expeditions) %>
 
-<%= render @expeditions %>
+<%= record_list @expeditions %>

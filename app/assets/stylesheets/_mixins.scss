@@ -1,11 +1,11 @@
 
 $site-menu-height: 30px;
-
+$sidebar-width: 400px;
 $sidebar-z-index: 5;
 $site-menu-z-index: 4;
 
-@mixin columns{
-    -moz-column-width: 300px;
-    -webkit-column-width: 300px;
-    column-width: 300px;	
+@mixin columns($width: 300px){
+    -moz-column-width: $width;
+    -webkit-column-width: $width;
+    column-width: $width;
 }

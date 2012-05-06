@@ -1,4 +1,9 @@
 module LayoutHelper
+
+	def page_class
+		"with_sidebar" if content_for?(:sidebar)
+	end
+
 	def site_menu
 		MenuBar.new(self, :theme => 'site_menu') do |mb|
 			mb.menu_bar_item link_to('Home', root_path)
