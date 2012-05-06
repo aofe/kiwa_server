@@ -23,13 +23,15 @@ GIT
       sunspot (= 2.0.0.pre.120417)
     sunspot_solr (2.0.0.pre.120417)
 
-PATH
-  remote: ~/rrn/easy_menu
+GIT
+  remote: git@github.com:culturecode/easy_menu.git
+  revision: 6437f28e938696df2dbfdaf23e9fd6825f3425d4
   specs:
     easy_menu (0.1.0)
 
-PATH
-  remote: ~/rrn/glint
+GIT
+  remote: git@github.com:culturecode/glint.git
+  revision: c16f0cf52ae70925f19375ba366f387298f95fb8
   specs:
     glint (0.0.1)
       rails (~> 3.1)

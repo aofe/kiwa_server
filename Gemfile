@@ -7,10 +7,10 @@ gem 'kaminari'
 gem 'jquery-rails'
 gem "geocoder"
 gem "acts_as_dag", :git => 'git://github.com/rrn/acts_as_dag.git'
-gem "easy_menu", :path => '~/rrn/easy_menu'#, :git => 'git@github.com:culturecode/easy_menu.git'
+gem "easy_menu", :git => 'git@github.com:culturecode/easy_menu.git'
 gem 'devise'
 
-gem 'glint', :path => '~/rrn/glint'#, :git => 'git@github.com:culturecode/glint.git'
+gem 'glint', :git => 'git@github.com:culturecode/glint.git'
 gem 'sunspot_rails', :git => 'git://github.com/sunspot/sunspot.git'
 gem 'sunspot_solr', :git => 'git://github.com/sunspot/sunspot.git'
 
