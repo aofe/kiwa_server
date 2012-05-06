@@ -2,7 +2,7 @@
   <%= link_to 'Back', people_path %>
 <% end %>
 
-<% content_for :page_title, "#{link_to 'People', people_path} / #{@person.display_name}".html_safe %>
+<% content_for :page_title, page_title(@person) %>
 
 <%= list_attributes(@person, :birth_date, :death_date, :network) %>
 <h3>Background</h3>

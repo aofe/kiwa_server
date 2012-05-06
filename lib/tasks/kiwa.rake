@@ -3,7 +3,7 @@ namespace :kiwa do
     puts "Updating relationships from relations table"
     Relation.find_each(&:relate_endpoints)
   end  
-  
+
   task :geocode_locations => :environment do
     puts "Destroying Locations"
     Location.destroy_all

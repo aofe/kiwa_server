@@ -1,6 +1,10 @@
 module RecordHelper
   def list_attributes(record, *attributes)
     options = attributes.last.is_a?(Hash) ? attributes.pop : {}
+
+    if attributes.blank?
+      attributes = record.class.content_columns.collect(&:name) - ['created_at', 'updated_at']
+    end
     
     content_tag :ul, :class => 'attribute_list' do
       attributes.collect do |attribute|
@@ -53,13 +57,13 @@ module RecordHelper
       association_name = association_name.titleize
     end
     
-    sidebar.menu pluralize(related_records.count, association_name), :wrapper_options => {:class => 'sidebar_submenu inactive'} do |menu|
+    sidebar.menu pluralize(related_records.count, association_name), :menu_bar_content => {:class => ('inactive' if related_records.empty?)} do |menu|
       for record in related_records
         text = ''.html_safe
-        text << media_thumbnail(record.primary_media_item, :size => 28, :link_to => nil) if record.respond_to? :primary_media_item
+        text << media_thumbnail(record.primary_media_item, :size => 28, :link_to => nil) + " " if record.respond_to? :primary_media_item
         text << record.display_name
         
-        menu.menu_item(link_to(text, record), :html_options =>{:class => 'sidebar_suboption'})
+        menu.menu_item link_to(text, record)
       end
     end    
   end  

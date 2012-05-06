@@ -24,7 +24,7 @@ module LocationHelper
   end  
   
   def location_sidebar(location)
-    MenuBar.new(self, :class => "sidebar_menu") do |menu|
+    MenuBar.new(self, :theme => "sidebar_menu") do |menu|
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Map')
         group.menu_bar_content(content_tag :div, location_map(location, :class => 'media_thumbnail'), :id => 'record_media')

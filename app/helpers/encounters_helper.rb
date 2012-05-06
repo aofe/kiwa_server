@@ -1,4 +1,11 @@
 module EncountersHelper
+
+  def encounters_menu
+    MenuBar.new(self) do |mb|
+      menu_bar_search(mb, url_for, :autocomplete_url => autocomplete_encounters_path, :form_params => {:type => params[:type]})
+    end
+  end
+
   def encounter_show_menu_bar
     MenuBar.new(self, :toggle => true) do |menu|
       menu.group do |group|
@@ -10,7 +17,7 @@ module EncountersHelper
   end
 
   def encounter_sidebar(encounter)
-    MenuBar.new(self, :class => "sidebar_menu") do |menu|
+    MenuBar.new(self, :theme => "sidebar_menu") do |menu|
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Media')
         group.menu_bar_content(record_media(encounter.media_items))
@@ -35,10 +42,6 @@ module EncountersHelper
     encounter_type.model_name.human.pluralize
   end
 
-  def encounter_page_title(encounter)
-    link_to(encounter.class.model_name.human.pluralize, encounter.class) + " / #{@encounter.display_name}"
-  end
-  
   def encounter_type
     case params[:type].to_s
     when 'Source'

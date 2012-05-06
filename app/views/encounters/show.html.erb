@@ -1,7 +1,7 @@
 <% content_for :nav do %>
-  <%= link_to 'Back', encounters_path %>
+  <%= link_to 'Back', encounters_path, :class => 'button' %>
 <% end %>
-<% content_for :page_title, encounter_page_title(@encounter)%>
+<% content_for :page_title, page_title(@encounter)%>
 <h2><%= encounter_source_name(@encounter) %></h2>
 <%= list_attributes(@encounter, :accession_number, :part_count, :indigenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>

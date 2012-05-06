@@ -8,7 +8,6 @@ class Voyage < ActiveRecord::Base
 
   acts_as_relatable :encounter
 
-  scope :search, lambda {|query| where('LOWER(ship_name) LIKE ?', "%#{query.downcase}%") if query }
   scope :default_order, order(:ship_name)
 
   after_save :geocode_locations
@@ -23,4 +22,16 @@ class Voyage < ActiveRecord::Base
     geocode_field(:place_departed)
     geocode_field(:place_returned)
   end  
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:ship_name => 2}
+
+  has_facet :ship_name
+  has_facet :ship_other_name
+  has_facet :start_date, :attribute_type => :date
+  has_facet :end_date, :attribute_type => :date
+  has_facet :place_departed
+  has_facet :place_returned
 end

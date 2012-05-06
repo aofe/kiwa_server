@@ -10,14 +10,41 @@ class Person < ActiveRecord::Base
   has_many :voyages, :through => :crew_list_entries
   has_many :expeditions, :through => :voyages
   
-  scope :search, lambda {|query| where('LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") if query }
-  scope :default_order, order(:first_name, :last_name)
+  scope :default_order, order(:last_name, :first_name)
   
-  def display_name
+  def name
     output = []
     output << first_name
     output << "(#{other_name})" if other_name.present?
     output << last_name
     output.join(' ').strip # strip because some people have leading whitespace in their names
   end
+
+  def sort_name
+    output = []
+    output << last_name
+    output << ", " if first_name.present? || other_name.present?
+    output << first_name
+    output << "(#{other_name})" if other_name.present?
+    output.join(' ').strip # strip because some people have leading whitespace in their names
+  end
+  alias :display_name :sort_name
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:sort_name => 2}
+
+  has_facet :name, :attribute_type => :string
+  has_facet :sort_name, :attribute_type => :string, :param => 'name'
+  has_facet :first_name
+  has_facet :last_name
+  has_facet :other_name
+  has_facet :birth_date, :attribute_type => :date
+  has_facet :death_date, :attribute_type => :date
+  has_facet :background
+  has_facet :education
+  has_facet :character_reference
+  has_facet :career
+  has_facet :network
 end

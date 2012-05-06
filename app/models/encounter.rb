@@ -11,7 +11,6 @@ class Encounter < ActiveRecord::Base
   
 #  validates_presence_of :accession_number, :encounter_type
   
-  scope :search, lambda {|query| where('LOWER(name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(accession_number) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%") if query }
   scope :with_images, joins(:media_items).where(:media_items => {:display_order => 1})
   scope :default_order, order(:name)
   scope :type, lambda {|type| where(:type => "#{type}_encounter".classify)}
@@ -42,4 +41,17 @@ class Encounter < ActiveRecord::Base
   def geocode_locations
     geocode_field(:place_of_origin)
   end
+
+  # GLINT
+  acts_as_searchable :default => :full_text
+
+  has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:name => 2}, :boost => {:description => 0.6}
+
+  has_facet :accession_number
+  has_facet :name
+  has_facet :type
+  has_facet :place_of_origin, :param => :origin
+  has_facet :indigenous_name
+  has_facet :material
+  has_facet :description  
 end

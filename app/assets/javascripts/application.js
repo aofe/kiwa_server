@@ -6,4 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require modernizr
+//= require easy_menu_jquery
+//= require glint_autocomplete
 //= require_tree .

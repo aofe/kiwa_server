@@ -1,0 +1,5 @@
+@import 'entity_mixin';
+
+.person{
+	@include entity_list;
+}

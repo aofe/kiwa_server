@@ -1,0 +1,9 @@
+@import 'mixins';
+@import 'entity_mixin';
+
+.voyage{
+	@include entity_list;
+}
+.voyage_crew_list{
+	@include columns;
+}

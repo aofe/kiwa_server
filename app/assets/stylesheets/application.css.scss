@@ -2,19 +2,23 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require easy_menu 
+ *= require glint_autocomplete
  *= require_self
- *= require_tree . 
+ *= require_tree .
 */
+@import 'mixins';
 
 html{
     font-family: Helvetica, Arial, 'sans serif';
-    height: 100%; /* Make the scrollbar start to the left of the sidebar */
+   height: 100%; /* Make the scrollbar start to the left of the sidebar */
     
 }
 body{
     margin: 0;
     padding: 0;
-    height: 100%; /* Make the scrollbar start to the left of the sidebar */
+   height: 100%; /* Make the scrollbar start to the left of the sidebar */
+    font-size: 14px;
 }
 p{
     font-family: 'Times New Roman', Times, 'serif';
@@ -60,16 +64,20 @@ hr{
 }        
 
 /* LAYOUT */
-
 $sidebar-width: 400px;
+header{
+    position: absolute;
+    width: 100%;
+    z-index: $site-menu-z-index;    
+}
 #page{
     position: relative;
     height: 100%; /* Make the scrollbar start to the left of the sidebar */
 }
 #content{
     margin-right: $sidebar-width + 5px;
-    padding: 1em;
-    /* Make the scrollbar start to the left of the sidebar */
+    padding: $site-menu_height 1em 1em;
+    // /* Make the scrollbar start to the left of the sidebar */
     overflow: auto;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -87,9 +95,7 @@ $sidebar-width: 400px;
     text-align: center;
 }
 
-// Put menus in the header on the right
-h1{
-    .menu_bar{
-        float: right;        
-    }
+.menu_bar.default_theme{
+    margin: 1em 0;
+    z-index: 1; // Place above item slides
 }

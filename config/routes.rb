@@ -8,11 +8,15 @@ KIWA::Application.routes.draw do
     
   resources :crew_list_entries
 
-  resources :voyages
+  resources :voyages do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :expeditions
 
-  resources :people
+  resources :people do 
+    get :autocomplete, :on => :collection
+  end
 
   resources :events
 
@@ -34,7 +38,10 @@ KIWA::Application.routes.draw do
 
   resources :institutions
   
-  resources :encounters
+  resources :encounters do
+    get :autocomplete, :on => :collection
+  end
+  
   resources :source_encounters, :controller => :encounters, :defaults => {:type => 'Source'}
   resources :aofe_encounters, :controller => :encounters, :defaults => {:type => 'AOFE'}
 

@@ -1,5 +1,5 @@
 <% content_for :page_title, encounters_page_title %>
-<% content_for :search, record_search(encounter_type) %>
+<% content_for :page_menu, encounters_menu %>
 <% content_for :pagination, paginate(@encounters) %>
 
-<%= render @encounters.includes(:primary_media_item) %>
+<%= render @encounters %>

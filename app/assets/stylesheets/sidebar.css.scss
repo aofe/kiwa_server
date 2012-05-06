@@ -1,3 +1,5 @@
+@import 'mixins';
+
 $sidebar-link-color: #333;
 #sidebar{
     overflow: auto;
@@ -10,6 +12,7 @@ $sidebar-link-color: #333;
     border: 1px solid #E0E0E0;
     font-weight: bold;
     box-shadow: 0px 0 4px rgba(0,0,0,0.2);
+    z-index: $sidebar-z-index; // Place above site menu
     
     a:link, a:visited{
         color: $sidebar-link-color;
@@ -39,42 +42,42 @@ $sidebar-link-color: #333;
     &:first-child{
         border-top:none;
     }
-    
+}
+@mixin sidebar-hoverable-list-item{
+    @include sidebar-list-item;
     &:hover, &.selected{
         background: white;
-    }
-    &.inactive{
-        color: #AAA;
-        cursor: default;
-        background: transparent;    
-    }
-}
-.sidebar_option{
-    @include sidebar-list-item;
+    }    
 }
 
-.sidebar_submenu{
-    @include sidebar-list-item;
-    padding: 0;
-    > div{
-        padding: .5em 1em;
+.menu_bar.sidebar_menu{
+    list-style: none;
+    padding-left: 0;
+
+    .menu_bar_group{
+        padding-left: inherit;
     }
-    > ul{
+    .menu_bar_content.with_menu{
+        @include sidebar-list-item;
+        &.inactive{
+            color: #AAA;
+            cursor: default;
+            background: transparent;    
+        }    
+    }
+    .menu{
         list-style: none;
-        padding: 0;
+        padding-left: 0;
     }
-}
-.sidebar_suboption a{
-    @include sidebar-list-item;
-    line-height: 1em;
-    padding: 0.5em 1em 0.5em 2em;
-    border-top: none;
-    
-    .media_thumbnail{
-        float: right;
-        margin-top: -0.5em;
-        padding: 2px;
-        max-width: 28px;
-        max-height: 28px;
+    .menu_content{
+        list-style: inherit;        
+    }
+    .menu_item{
+        margin: 0 -1em;
+    }
+    .menu_item a{
+        @include sidebar-hoverable-list-item;
+        padding-left:  (1em/0.8);
+        font-size: 0.8em;
     }
 }
