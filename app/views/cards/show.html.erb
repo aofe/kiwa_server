@@ -7,3 +7,4 @@
 <%= render @card.media_items %>
 
 <%= list_attributes(@card, {'Institution' => card_source_name(@card)}, :id_tag, :inscription, :location) %>
+<%= render 'comments/commentable_comments', :commentable => @card %>

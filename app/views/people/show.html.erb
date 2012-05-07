@@ -1,3 +1,6 @@
+<% content_for :sidebar do %>
+<span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
+<% end %>
 <% content_for :nav do %>
   <%= link_to 'Back', people_path %>
 <% end %>
@@ -21,6 +24,4 @@
   <% t.column :rank %>
 <% end %>
 
-<% content_for :sidebar do %>
-<span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
-<% end %>
+<%= render 'comments/commentable_comments', :commentable => @person %>

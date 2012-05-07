@@ -3,7 +3,8 @@ class Card < ActiveRecord::Base
 
   has_many :media_items
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
-
+  has_many :comments, :as => :commentable
+  
   acts_as_relatable :artefact  
 
   # FIXME: Has many through isn't working through related_artefacts so do it manually

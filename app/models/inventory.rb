@@ -1,5 +1,6 @@
 class Inventory < ActiveRecord::Base
   has_many :inventory_list_entries, :order => 'list_order ASC'
+  has_many :comments, :as => :commentable
   
   def display_name
     self.short_title

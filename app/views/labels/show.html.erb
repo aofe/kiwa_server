@@ -1,3 +1,4 @@
+<% content_for :sidebar, label_sidebar(@label) %>
 <% content_for :nav do %>
   <%= link_to 'Back', labels_path %>
 <% end %>
@@ -6,4 +7,4 @@
 
 <%= list_attributes(@label, {'Institution' => label_source_name(@label)}, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
 
-<% content_for :sidebar, label_sidebar(@label) %>
+<%= render 'comments/commentable_comments', :commentable => @label %>

@@ -30,3 +30,8 @@
 .record_list_entry{
     @include entity_list_entry;
 }
+.record_source_label{
+    font-weight: normal;
+    font-size: 12px;
+    display: block;
+}

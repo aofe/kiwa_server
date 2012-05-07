@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   has_many :crew_list_entries
   has_many :voyages, :through => :crew_list_entries
   has_many :expeditions, :through => :voyages
+  has_many :comments, :as => :commentable
   
   def name
     output = []

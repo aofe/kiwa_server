@@ -34,10 +34,6 @@ module EncountersHelper
     end
   end
 
-  def encounter_source_name(encounter)
-    encounter.institution.try(:long_name)
-  end
-
   def encounters_page_title
     encounter_type.model_name.human.pluralize
   end

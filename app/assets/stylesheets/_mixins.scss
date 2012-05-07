@@ -4,8 +4,16 @@ $sidebar-width: 400px;
 $sidebar-z-index: 5;
 $site-menu-z-index: 4;
 
+$line-height: 1.5em;
+
 @mixin columns($width: 300px){
     -moz-column-width: $width;
     -webkit-column-width: $width;
     column-width: $width;
+}
+
+@mixin border-box{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117175640) do
+ActiveRecord::Schema.define(:version => 20120507204550) do
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(:version => 20111117175640) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "crew_list_entries", :force => true do |t|
@@ -229,8 +238,11 @@ ActiveRecord::Schema.define(:version => 20111117175640) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "remember_created_at"
+    t.string   "name"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 

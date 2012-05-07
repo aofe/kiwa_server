@@ -1,0 +1,12 @@
+@import 'easy_menu_mixins';
+
+form{
+	textarea{
+		resize: vertical;
+	}
+	input[type='submit']{
+		@include menu-bar-item;
+		line-height: 3em;
+		height: 3em;
+	}
+}

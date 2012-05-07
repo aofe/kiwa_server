@@ -1,3 +1,4 @@
+<% content_for :sidebar, voyage_sidebar(@voyage) %>
 <% content_for :nav do %>
   <%= link_to 'Back', voyages_path %>
 <% end %>
@@ -9,4 +10,4 @@
 <h2>Crew</h2>
 <div class='crew_list'><%= record_list @voyage.people.sort_by(&:sort_name), :name => :sort_name %></div>
 
-<% content_for :sidebar, voyage_sidebar(@voyage) %>
+<%= render 'comments/commentable_comments', :commentable => @voyage %>

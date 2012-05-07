@@ -3,10 +3,10 @@ class Expedition < ActiveRecord::Base
   
   has_one :person_expedition
   has_one :principle_explorer, :through => :person_expedition, :class_name => 'Person', :source => 'person'
-
   has_many :voyages  
   has_many :crew_list_entries, :through => :voyages
   has_many :people, :through => :crew_list_entries
+  has_many :comments, :as => :commentable
   
   def name
     self.title

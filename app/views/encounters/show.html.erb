@@ -1,13 +1,13 @@
+<% content_for :sidebar, encounter_sidebar(@encounter) %>
 <% content_for :nav do %>
-  <%= link_to 'Back', encounters_path, :class => 'button' %>
+  <%= link_to 'Back', aofe_encounters_path, :class => 'button' %>
 <% end %>
 <% content_for :page_title, page_title(@encounter)%>
-<h2><%= encounter_source_name(@encounter) %></h2>
-<%= list_attributes(@encounter, :accession_number, :part_count, :indigenous_name, :place_of_origin, :dimensions, :material) %>
+<%= list_attributes(@encounter, :institution, :accession_number, :part_count, :indigenous_name, :place_of_origin, :dimensions, :material) %>
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
 
 <h3>Artefact History</h3>
 <%= render @encounter.events.includes(:person) %>
 
-<% content_for :sidebar, encounter_sidebar(@encounter) %>
+<%= render 'comments/commentable_comments', :commentable => @encounter %>
