@@ -1,3 +1,4 @@
+<% content_for :sidebar, inventory_list_entry_sidebar(@inventory_list_entry) %>
 <% content_for :nav do %>
   <%= link_to 'Back', @inventory_list_entry.inventory %>
 <% end %>
@@ -5,4 +6,4 @@
 
 <%= list_attributes(@inventory_list_entry, :id_tag, :item_count, :page, :description, :list_order)%>
 
-<% content_for :sidebar, inventory_list_entry_sidebar(@inventory_list_entry) %>
+<%= render 'comments/commentable_comments', :commentable => @inventory_list_entry %>
