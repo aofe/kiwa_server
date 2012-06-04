@@ -1,4 +1,6 @@
 class GlintSearchController < ApplicationController  
+  caches_action :autocomplete, :cache_path => :autocomplete_cache
+
   def index
   	instance_variable_set "@#{klass.name.underscore.pluralize}", collection.results(search_options)
   end
@@ -14,7 +16,7 @@ class GlintSearchController < ApplicationController
   protected
 
   def collection
-    klass.search_class.new(params[:q])
+    @collection ||= klass.search_class.new(params[:q])
   end
 
   def klass
@@ -31,5 +33,9 @@ class GlintSearchController < ApplicationController
 
   def order
     nil
+  end
+
+  def autocomplete_cache_url
+    "autocomplete/#{@collection.cache_key}"
   end
 end

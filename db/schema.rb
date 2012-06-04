@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507204550) do
+ActiveRecord::Schema.define(:version => 20120603235526) do
+
+  create_table "archives", :force => true do |t|
+    t.integer  "institution_id"
+    t.string   "id_num"
+    t.string   "archive_type"
+    t.string   "sub_type"
+    t.string   "author"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.text     "title_long"
+    t.string   "title_short"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "artefacts", :force => true do |t|
     t.integer  "institution_id"
@@ -190,6 +204,45 @@ ActiveRecord::Schema.define(:version => 20120507204550) do
     t.integer  "expedition_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "reference_digital", :force => true do |t|
+    t.string   "format"
+    t.integer  "institution_id"
+    t.string   "host_name"
+    t.string   "author_name"
+    t.text     "title"
+    t.date     "source_date"
+    t.boolean  "online_status"
+    t.string   "url"
+    t.text     "copyright"
+    t.text     "research_notes"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "reference_text", :force => true do |t|
+    t.string   "source_type"
+    t.string   "author_name"
+    t.string   "author_initial"
+    t.text     "title"
+    t.date     "source_date"
+    t.string   "city"
+    t.string   "publisher"
+    t.string   "book_editor"
+    t.string   "book_title"
+    t.string   "journal_title"
+    t.string   "volume"
+    t.string   "number"
+    t.string   "pages"
+    t.string   "first_edition"
+    t.string   "other_edition"
+    t.string   "institution"
+    t.string   "department"
+    t.string   "qualification"
+    t.text     "notes"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "relations", :force => true do |t|

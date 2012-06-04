@@ -10,4 +10,7 @@
 <h3>Artefact History</h3>
 <%= render @encounter.events.includes(:person) %>
 
+<h3>Researcher Notes</h3>
+<%= render @encounter.notes %>
+
 <%= render 'comments/commentable_comments', :commentable => @encounter %>

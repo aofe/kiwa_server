@@ -8,7 +8,9 @@
 </head>
 <body>
   <div id='page' class='<%= page_class %>'>
+    <% if user_signed_in? %>
     <header><%= site_menu %></header>
+    <% end %>
     <%= content_tag :div, content_for(:sidebar), :id => 'sidebar' if content_for?(:sidebar) %>
     <div id='content'>
       <h1><%= content_for :page_title %></h1>
