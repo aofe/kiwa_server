@@ -1,12 +1,17 @@
 module ReferencesHelper
+	def format_with_references(string)
+		simple_format process_references(string)
+	end
+
 	def process_references(string)
+		string = string.to_s
 		string.gsub! /\{.+\}/ do |match|
 			space = " ".html_safe
 			begin
 				case match.gsub(/[ {}]/,'') #remove whitespace, and the enclosing braces
 				# Book
 				when /B:(\d+):(.+)/
-					space + "Book!!" + text_reference(TextReference.find($1), $2)
+					space + text_reference(TextReference.find($1), $2)
 				# Archival Source
 				when /A:(\d+)(?::(.+))?/
 					space + archival_reference(Archive.find($1), $2)

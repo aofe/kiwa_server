@@ -9,13 +9,13 @@
 
 <%= list_attributes(@person, :birth_date, :death_date, :network) %>
 <h3>Background</h3>
-<%= simple_format @person.background %>
+<%= format_with_references @person.background %>
 <h3>Education</h3>
-<%= simple_format @person.education %>
+<%= format_with_references @person.education %>
 <h3>Character Reference</h3>
-<%= simple_format @person.character_reference %>
+<%= format_with_references @person.character_reference %>
 <h3>Career</h3>
-<%= simple_format @person.career %>
+<%= format_with_references @person.career %>
 
 <%= table_for @person.crew_list_entries.includes(:expedition) do |t| %>
   <% t.column :title => "Expedition Name" do |crew_list_entries| %>

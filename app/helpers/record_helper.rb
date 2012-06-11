@@ -16,7 +16,7 @@ module RecordHelper
           value = Array(record.send(attribute)).collect(&:display_name).join(', ')
           attribute_name = record.class.human_attribute_name(attribute)
         else
-          value = record.send(attribute)
+          value = process_references record.send(attribute)
           attribute_name = record.class.human_attribute_name(attribute)
         end
 
