@@ -9,4 +9,5 @@
 //= require modernizr
 //= require easy_menu_jquery
 //= require glint_autocomplete
+//= require popup_gallery
 //= require_tree .

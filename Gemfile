@@ -11,6 +11,7 @@ gem "easy_menu", :git => 'git@github.com:culturecode/easy_menu.git'
 gem 'simple_form'
 gem 'devise'
 gem 'inherited_resources'
+gem "popup_gallery", :git => 'git@github.com:culturecode/popup_gallery.git'
 
 gem 'glint', :git => 'git@github.com:culturecode/glint.git'
 gem 'sunspot_rails', :git => 'git://github.com/sunspot/sunspot.git'
@@ -23,4 +24,5 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem 'jquery-ui-rails'
 end
