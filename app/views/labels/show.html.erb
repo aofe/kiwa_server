@@ -8,3 +8,5 @@
 <%= list_attributes(@label, {'Institution' => label_source_name(@label)}, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
 
 <%= render 'comments/commentable_comments', :commentable => @label %>
+
+<%= javascript_tag "PopupGallery('#record_media .media_thumbnail')" %>
