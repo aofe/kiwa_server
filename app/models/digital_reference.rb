@@ -1,5 +1,5 @@
 class DigitalReference < ActiveRecord::Base
-  # attr_accessible :title, :body
+  include UncertainDate
 
   self.table_name = 'reference_digital'
 end

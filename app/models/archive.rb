@@ -1,5 +1,5 @@
 class Archive < ActiveRecord::Base
-  # attr_accessible :title, :body
+  include UncertainDate
 
   belongs_to :institution
 end

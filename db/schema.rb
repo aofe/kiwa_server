@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120603235526) do
+ActiveRecord::Schema.define(:version => 20120724062934) do
 
   create_table "archives", :force => true do |t|
     t.integer  "institution_id"
@@ -19,12 +19,16 @@ ActiveRecord::Schema.define(:version => 20120603235526) do
     t.string   "archive_type"
     t.string   "sub_type"
     t.string   "author"
-    t.date     "start_date"
-    t.date     "end_date"
     t.text     "title_long"
     t.string   "title_short"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "start_year"
+    t.integer  "start_month"
+    t.integer  "start_day"
+    t.integer  "end_year"
+    t.integer  "end_month"
+    t.integer  "end_day"
   end
 
   create_table "artefacts", :force => true do |t|
@@ -168,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20120603235526) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_scaleable"
   end
 
   create_table "notes", :force => true do |t|
@@ -212,13 +217,15 @@ ActiveRecord::Schema.define(:version => 20120603235526) do
     t.string   "host_name"
     t.string   "author_name"
     t.text     "title"
-    t.date     "source_date"
     t.boolean  "online_status"
     t.string   "url"
     t.text     "copyright"
     t.text     "research_notes"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "source_year"
+    t.integer  "source_month"
+    t.integer  "source_day"
   end
 
   create_table "reference_text", :force => true do |t|
@@ -226,7 +233,6 @@ ActiveRecord::Schema.define(:version => 20120603235526) do
     t.string   "author_name"
     t.string   "author_initial"
     t.text     "title"
-    t.date     "source_date"
     t.string   "city"
     t.string   "publisher"
     t.string   "book_editor"
@@ -243,6 +249,9 @@ ActiveRecord::Schema.define(:version => 20120603235526) do
     t.text     "notes"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "source_year"
+    t.integer  "source_month"
+    t.integer  "source_day"
   end
 
   create_table "relations", :force => true do |t|
