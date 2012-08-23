@@ -6,3 +6,4 @@ database.yml
 .sass-cache/
 .DS_Store
 solr/
+config/sunspot.yml
