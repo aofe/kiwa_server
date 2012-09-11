@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :authenticate_user!
 
+  class AccessDenied < StandardError; end
+
 # HACK: Ensure the Voyage and Encounter searches classe have been dynamically created in development mode
   Voyage
   Encounter

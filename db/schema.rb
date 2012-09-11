@@ -11,24 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724062934) do
+ActiveRecord::Schema.define(:version => 20120824142546) do
 
   create_table "archives", :force => true do |t|
-    t.integer  "institution_id"
-    t.string   "id_num"
-    t.string   "archive_type"
-    t.string   "sub_type"
-    t.string   "author"
-    t.text     "title_long"
-    t.string   "title_short"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "start_year"
-    t.integer  "start_month"
-    t.integer  "start_day"
-    t.integer  "end_year"
-    t.integer  "end_month"
-    t.integer  "end_day"
+    t.integer  "institution_id",                 :null => false
+    t.string   "id_num",         :limit => 150,  :null => false
+    t.string   "archive_type",   :limit => 25,   :null => false
+    t.string   "sub_type",       :limit => 25,   :null => false
+    t.string   "author",                         :null => false
+    t.integer  "start_year",                     :null => false
+    t.integer  "start_month",                    :null => false
+    t.integer  "start_day",                      :null => false
+    t.integer  "end_year",                       :null => false
+    t.integer  "end_month",                      :null => false
+    t.integer  "end_day",                        :null => false
+    t.string   "title_long",     :limit => 1000, :null => false
+    t.string   "title_short",    :limit => 150,  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "artefacts", :force => true do |t|
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
     t.string   "material"
     t.text     "description"
     t.string   "dimensions"
-    t.string   "notes"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -165,15 +165,21 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
   end
 
   create_table "media_items", :force => true do |t|
-    t.integer  "attachable_id"
-    t.string   "attachable_type"
-    t.integer  "display_order"
-    t.string   "source_url"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_scaleable"
+    t.integer  "attachable_id",                                :null => false
+    t.string   "attachable_type",              :default => "", :null => false
+    t.integer  "display_order",                                :null => false
+    t.string   "source_url",                   :default => "", :null => false
+    t.text     "description",                                  :null => false
+    t.string   "is_scaleable",    :limit => 3,                 :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
+
+# Could not dump table "media_update_view1" because of following ActiveRecord::StatementInvalid
+#   Mysql2::Error: SHOW VIEW command denied to user 'aofe_kiwa'@'localhost' for table 'media_update_view1': SHOW CREATE TABLE `media_update_view1`
+
+# Could not dump table "media_update_view2" because of following ActiveRecord::StatementInvalid
+#   Mysql2::Error: SHOW VIEW command denied to user 'aofe_kiwa'@'localhost' for table 'media_update_view2': SHOW CREATE TABLE `media_update_view2`
 
   create_table "notes", :force => true do |t|
     t.string   "notable_type"
@@ -212,46 +218,46 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
   end
 
   create_table "reference_digital", :force => true do |t|
-    t.string   "format"
-    t.integer  "institution_id"
-    t.string   "host_name"
-    t.string   "author_name"
-    t.text     "title"
-    t.boolean  "online_status"
-    t.string   "url"
-    t.text     "copyright"
-    t.text     "research_notes"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "source_year"
-    t.integer  "source_month"
-    t.integer  "source_day"
+    t.string   "format",         :limit => 50,  :null => false
+    t.integer  "institution_id",                :null => false
+    t.string   "host_name",                     :null => false
+    t.string   "author_name",    :limit => 150, :null => false
+    t.string   "title",          :limit => 150, :null => false
+    t.integer  "source_year",                   :null => false
+    t.integer  "source_month",                  :null => false
+    t.integer  "source_day",                    :null => false
+    t.integer  "online_status",  :limit => 1,   :null => false
+    t.string   "url",            :limit => 150, :null => false
+    t.string   "copyright",                     :null => false
+    t.text     "research_notes",                :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "reference_text", :force => true do |t|
-    t.string   "source_type"
-    t.string   "author_name"
-    t.string   "author_initial"
-    t.text     "title"
-    t.string   "city"
-    t.string   "publisher"
-    t.string   "book_editor"
-    t.string   "book_title"
-    t.string   "journal_title"
-    t.string   "volume"
-    t.string   "number"
-    t.string   "pages"
-    t.string   "first_edition"
-    t.string   "other_edition"
-    t.string   "institution"
-    t.string   "department"
-    t.string   "qualification"
-    t.text     "notes"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "source_year"
-    t.integer  "source_month"
-    t.integer  "source_day"
+    t.string   "source_type",    :limit => 10,   :null => false
+    t.string   "author_name",                    :null => false
+    t.string   "author_initial",                 :null => false
+    t.integer  "source_year",                    :null => false
+    t.integer  "source_month",                   :null => false
+    t.integer  "source_day",                     :null => false
+    t.string   "title",          :limit => 1000, :null => false
+    t.string   "city",                           :null => false
+    t.string   "publisher",                      :null => false
+    t.string   "book_editor",    :limit => 150,  :null => false
+    t.string   "book_title",                     :null => false
+    t.string   "journal_title",                  :null => false
+    t.string   "volume",         :limit => 10,   :null => false
+    t.string   "number",         :limit => 10,   :null => false
+    t.string   "pages",          :limit => 100,  :null => false
+    t.string   "first_edition",  :limit => 10,   :null => false
+    t.string   "other_edition",  :limit => 10,   :null => false
+    t.string   "institution",                    :null => false
+    t.string   "department",                     :null => false
+    t.string   "qualification",                  :null => false
+    t.text     "notes",                          :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "relations", :force => true do |t|
@@ -260,6 +266,7 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
     t.integer  "source_id"
     t.string   "source_type"
     t.string   "rating"
+    t.string   "reference"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -288,11 +295,11 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                                :default => "", :null => false
+    t.string   "encrypted_password",                   :default => ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",                        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -300,11 +307,15 @@ ActiveRecord::Schema.define(:version => 20120724062934) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "remember_created_at"
     t.string   "name"
+    t.string   "invitation_token",       :limit => 60
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 

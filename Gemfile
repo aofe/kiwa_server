@@ -10,6 +10,7 @@ gem "acts_as_dag", :git => 'git://github.com/rrn/acts_as_dag.git'
 gem "easy_menu", :git => 'git@github.com:culturecode/easy_menu.git'
 gem 'simple_form'
 gem 'devise'
+gem 'devise_invitable'
 gem 'inherited_resources'
 gem "popup_gallery", :git => 'git@github.com:culturecode/popup_gallery.git'
 

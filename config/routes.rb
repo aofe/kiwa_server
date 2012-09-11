@@ -1,7 +1,9 @@
 KIWA::Application.routes.draw do
   resources :comments
 
-  devise_for :users
+  devise_for :users, :controllers => { :invitations => 'invitations' }
+
+  resources :accept_user_invitation
 
   root :to => "pages#home"
   

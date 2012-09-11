@@ -11,5 +11,9 @@ namespace :kiwa do
     Encounter.find_each(&:geocode_locations)
     puts "Geocoding Voyages"
     Voyage.find_each(&:geocode_locations)
-  end  
+  end
+
+  task :create_user_invite, [:email, :username] => :environment do |t, args|
+    User.invite!(:email => args.email, :name => args.username)
+  end 
 end

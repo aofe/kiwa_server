@@ -53,3 +53,5 @@ module KIWA
     Geocoder::Configuration.cache = {}
   end
 end
+
+INVITATION_SECRET = "3Mq6brpe8FRke3b9aop2rYbip03Ir8y093rU0Nyq9rBuep"
