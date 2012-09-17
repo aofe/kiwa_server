@@ -1,0 +1,13 @@
+// Place all the styles related to the Projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.record_slide.project_item{
+  .project_item_type{
+    display: block;
+    font-size: 0.8em;
+    font-variant: small-caps;
+    opacity: 0.6;
+  }  
+}

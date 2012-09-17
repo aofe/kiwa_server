@@ -2,4 +2,7 @@
 <% content_for :page_menu, cards_menu %>
 <% content_for :pagination, paginate(@cards) %>
 
-<%= record_slide_table @cards %>
+<%= record_slide_table(@cards).caption do |card| %>
+  <%= card.display_name %>
+  <%= add_to_project_button(card) %>  
+<% end %>

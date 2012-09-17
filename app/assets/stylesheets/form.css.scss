@@ -6,8 +6,7 @@ form{
 	}
 	input[type='submit']{
 		@include menu-bar-item;
-		line-height: 3em;
-		height: 3em;
-    padding: 0 1em;
+    height: 28px;
+    vertical-align: bottom;
 	}
 }

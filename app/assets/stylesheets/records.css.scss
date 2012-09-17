@@ -7,15 +7,49 @@
 .attribute_name{
     font-weight: bold;
 }
+@mixin add-to-project-button{
+    .save_to_project{
+        display: none;
+    }
+    &:hover .save_to_project{
+        display: inline-block;
+    }
+}
 
 .record_slide_table{
     @include columns;
 
-    .record_list_entry{
+    .record_slide{
+        @include entity_list_entry;
+        // Prevent breaking across columns break
+        display: inline-block; 
+        width: 100%;
+        @include border-box;
+        // End
+
         text-align: center;
 
         .thumbnail{
             width: 100%;
+            vertical-align: top;
+            margin: -$entity-padding;
+            padding: $entity-padding;
+        }
+        .caption{
+            background: #EEE;
+            padding: $entity-padding;
+            margin: $entity-padding (-$entity-padding) (-$entity-padding);
+            text-align: left;
+            color: #666;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            word-wrap: break-word;
+        }
+
+        @include add-to-project-button;
+        .save_to_project{
+            float: right;
+            margin: -4px 0;            
         }
     }   
 }
@@ -27,11 +61,30 @@
     margin: 0.5em;
 }
 
+$caption-width: 100px;
 .record_list_entry{
+    @include add-to-project-button;
     @include entity_list_entry;
-}
-.record_source_label{
-    font-weight: normal;
-    font-size: 12px;
-    display: block;
+    padding: 0;
+    
+    .content{
+        display: table-cell;
+        padding: $entity-padding;
+        width: 100%;
+    }
+    .caption{
+        color: #666;
+        background: #EEE;
+        display: table-cell;
+        // min-width: $caption-width;
+        text-align: right;
+        padding: 0 $entity-padding;
+        vertical-align: middle;
+        white-space: nowrap;        
+    }
+    .empty_cell{
+        display: table-cell;
+        overflow: hidden;
+        width: 1px;        
+    }
 }

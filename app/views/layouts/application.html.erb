@@ -15,8 +15,14 @@
     <div id='content'>
       <h1><%= content_for :page_title %></h1>
       <%= content_for :page_menu %>
+      
       <%= yield %>
-      <%= render 'shared/pagination' %>
+
+      <% if content_for? :pagination %>
+      <hr>
+      <%= yield(:pagination) %>
+      <% end %>
+
       <% if content_for? :nav %>
       <hr/>
       <%= content_for :nav %>
@@ -24,5 +30,6 @@
       <footer></footer>
     </div>
   </div>
+  <%= render('projects/add_to_project_modal') if @add_to_project_modal %>
 </body>
 </html>

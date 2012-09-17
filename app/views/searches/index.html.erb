@@ -2,11 +2,11 @@
 <% content_for :page_menu, search_menu %>
 <% if @source_encounters.present? %>
 	<h2><%= SourceEncounter.model_name.human.pluralize %></h2>
-	<%= record_slide_table @source_encounters %>
+	<%= RecordHelper::RecordSlideTable.new self, @source_encounters %>
 <% end %>
 <% if @aofe_encounters.present? %>
 	<h2><%= AOFEEncounter.model_name.human.pluralize %></h2>
-	<%= record_slide_table @aofe_encounters %>
+	<%= RecordHelper::RecordSlideTable.new self, @aofe_encounters %>
 <% end %>
 <% if @voyages.present? %>
 	<h2><%= Voyage.model_name.human.pluralize %></h2>
@@ -30,5 +30,5 @@
 <% end %>
 <% if @inventory_list_entries.present? %>
 	<h2><%= InventoryListEntry.model_name.human.pluralize %></h2>
-	<%= record_slide_table @inventory_list_entries %>
+	<%= RecordHelper::RecordSlideTable.new self, @inventory_list_entries %>
 <% end %>

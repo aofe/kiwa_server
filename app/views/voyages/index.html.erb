@@ -2,4 +2,6 @@
 <% content_for :page_menu, voyages_menu %>
 <% content_for :pagination, paginate(@voyages) %>
 
-<%= record_list @voyages %>
+<%= record_list(@voyages).caption do |voyage| %>
+  <%= add_to_project_button(voyage) %>
+<% end %>

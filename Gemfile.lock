@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: git@github.com:culturecode/easy_menu.git
-  revision: 7d79de797689e564f994075fd810fe655017dc98
+  revision: 0ab6781f8fdfb3de6d5736401bb0361e69f089a6
   specs:
     easy_menu (0.1.0)
 

@@ -1,4 +1,8 @@
 KIWA::Application.routes.draw do
+  resources :projects
+
+  resources :project_items
+
   resources :comments
 
   devise_for :users, :controllers => { :invitations => 'invitations' }

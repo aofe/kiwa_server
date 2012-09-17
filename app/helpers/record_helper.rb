@@ -29,51 +29,156 @@ module RecordHelper
     end
   end
 
-  def record_list(records, options = {}, &block)
-    ''.html_safe.tap do |output|
-      records.each do |record|
-        output << record_list_entry(record, options, &block)
-      end
-    end
+  def record_list(records, options = {})
+    RecordList.new(self, records, options)
   end
 
-  def record_list_entry(record, options = {}, &block)
-    if block_given?
-      link_to record, :id => dom_id(record), :class => "record_list_entry #{record.class.model_name.underscore}" do
-        yield record
-      end
-    else
-      options.reverse_merge! :name => :display_name
-      link_to record, :id => dom_id(record), :class => "record_list_entry #{record.class.model_name.underscore}"  do
-        content_tag(:span, record.send(options[:name]), :class => 'name')
-      end
+  class RecordList
+    def initialize(template, records, options = {})
+      @template = template
+      @entries = records.collect{|record| RecordListEntry.new(@template, record, options)}
+      @options = options      
     end
+
+    def to_s
+      @template.content_tag :div, @entries.collect(&:to_s).join.html_safe, :class => "record_list"
+    end
+
+    def content(text = nil,  &block)
+      send_to_each(:content, text, &block)
+    end
+
+    def caption(text = nil, &block)
+      send_to_each(:caption, text, &block)
+    end
+
+    private
+
+    def send_to_each(method, *args, &block)
+      @entries.each do |entry|
+        entry.send method, *args, &block
+      end
+
+      return self            
+    end    
   end
 
-  def record_slide_table(records, options = {})
-    content_tag :div, :class => 'record_slide_table' do
-      ''.html_safe.tap do |output|
-        records.each do |record|
-          output << record_slide(record, options)
+  class RecordListEntry
+    def initialize(template, record, options = {})
+      @template = template
+      @record = record
+      @options = options.reverse_merge :link_to => record
+    end    
+
+    def to_s
+      if @content
+        output = @content
+      else
+        output = @template.content_tag(:span, @record.display_name, :class => :name)
+        output << @template.content_tag(:span, @record.description, :class => :description) if @record['description'].present?
+      end
+
+      if @options[:link_to]
+        content = @template.link_to output, @options[:link_to], :class => :content
+      else
+        content = @template.content_tag :span, output, :class => :content
+      end
+
+      empty_cell = @template.content_tag :span, '', :class => :empty_cell
+
+      return @template.content_tag :div, "#{content}#{empty_cell}#{@caption}".html_safe, :class => "record_list_entry #{@record.class.name.underscore}"
+    end
+
+
+    def content(text = nil, &block)
+      @content = @template.content_tag(:div) do
+        if block_given?   
+          yield @record
+        else
+          text
         end
       end
+
+      return self
     end
-  end
-  
-  def record_slide(record, options = {})
-    record_list_entry record, options do |record|
-      if record.respond_to?(:primary_media_item) && record.primary_media_item
-        image_tag record.primary_media_item.thumbnail_url(300), :class => 'thumbnail', :title => record.display_name
-      else
-        record.display_name
+
+    def caption(text = nil, &block)
+      @caption = @template.content_tag(:div, :class => 'caption') do
+        if block_given?        
+          yield @record
+        else
+          @caption = text
+        end
       end
+
+      return self
+    end    
+  end
+
+
+  def record_slide_table(records, options = {})
+    RecordSlideTable.new(self, records, options)
+  end
+
+  class RecordSlideTable
+    def initialize(template, records, options = {})
+      @template = template
+      @entries = records.collect{|record| RecordSlide.new(@template, record, options)}
+      @options = options
+    end
+
+    def to_s
+      @template.content_tag :div, @entries.collect(&:to_s).join.html_safe, :class => 'record_slide_table'
+    end
+
+    def caption(&block)
+      @entries.each do |entry|
+        entry.caption &block
+      end
+
+      return self      
     end
   end
+
+  class RecordSlide
+    def initialize(template, record, options = {})
+      @template = template
+      @record = record
+      @options = options.reverse_merge :link_to => record
+    end
+
+    def to_s
+      if @record.respond_to?(:primary_media_item) && @record.primary_media_item
+        image = @template.image_tag(@record.primary_media_item.thumbnail_url(300), :class => 'thumbnail', :title => @record.display_name)
+      else
+        image = @template.content_tag(:div, 'No Image', :class => 'thumbnail')
+      end
+
+      if @options[:link_to]
+        image = @template.link_to image, @options[:link_to]
+      end
+
+      return @template.content_tag :div, "#{image}#{@caption}".html_safe, :class => "record_slide #{@record.class.name.underscore}"
+    end
+
+    def caption(text = nil, &block)
+      if block_given?
+        @caption = @template.content_tag(:div, :class => 'caption') do
+          yield @record
+        end
+      else
+        @caption = text
+      end
+
+      return self
+    end
+  end
+
     
   def record_media(media_items)
     output = media_items.collect{|media_item| media_thumbnail(media_item)}
     content_tag :div, output.join.html_safe, :id => 'record_media'
-  end  
+  end
   
   # Creates entries for the sidebar using a the MenuBar class
   def sidebar_record_relation(sidebar, association_name, related_records)
@@ -94,4 +199,9 @@ module RecordHelper
       end
     end    
   end  
+
+  def add_to_project_button(record)
+    @add_to_project_modal = true
+    link_to('Save', {:anchor => 'add_to_project_modal'}, :role => 'button', :data => {:toggle => 'modal', :item_type => record.class.name, :item_id => record.id}, :class => 'save_to_project btn primary')
+  end
 end

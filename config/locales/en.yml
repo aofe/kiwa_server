@@ -7,3 +7,9 @@ en:
       source_encounter: 'Collection Record'
       aofe_encounter: 'Encounter'
       card: 'Catalogue Card'
+      project: 'List'
+
+  simple_form:
+    labels:
+      project:
+        public: "Visible to other researchers"

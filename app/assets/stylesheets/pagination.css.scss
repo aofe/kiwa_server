@@ -1,0 +1,38 @@
+.pagination {
+  height: 36px;
+  margin: 1em auto;
+  border-radius: 3px 3px 3px 3px;
+  vertical-align: middle;
+
+  span{
+    float: left;
+    border-color: #DDDDDD;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+  }
+
+  span:first-child{
+    border-left-width: 1px;
+    border-radius: 3px 0 0 3px;
+  }
+  span:last-child{
+    border-radius: 0 3px 3px 0;
+  }
+
+  a, .gap, .current{
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    text-decoration: none;    
+    padding: 0 14px;
+  }
+
+  span:hover, span.current{
+    background: #F5F5F5;
+  }
+
+  input {
+    padding: 0.5em;
+    width: auto;
+  }
+}

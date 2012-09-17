@@ -2,4 +2,6 @@
 <% content_for :page_menu, expedition_menu %>
 <% content_for :pagination, paginate(@expeditions) %>
 
-<%= record_list @expeditions %>
+<%= record_list(@expeditions).caption do |expedition| %>
+  <%= add_to_project_button(expedition) %>  
+<% end %>

@@ -1,0 +1,7 @@
+<%= simple_form_for project do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :public %>
+  <%= f.submit :class => 'primary' %>
+  <%= link_to 'Cancel', :back, :class => 'btn' %>
+<% end %>

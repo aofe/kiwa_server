@@ -2,4 +2,8 @@
 <% content_for :page_menu, people_menu %>
 <% content_for :pagination, paginate(@people) %>
 
-<div class='people'><%= record_list @people %></div>
+<div class='people'>
+  <%= record_list(@people).caption do |person| %>
+    <%= add_to_project_button(person) %>
+  <% end %>
+</div>

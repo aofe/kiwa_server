@@ -4,25 +4,18 @@ $sidebar-link-color: #333;
 
 #page.with_sidebar{
     #content{
-        margin-right: $sidebar-width + 5px;
-    }
-    .menu_bar.site_menu{
-        padding-right: $sidebar-width + 5px;
+        margin-right: $sidebar-width;
     }
 }
 
 #sidebar{
     overflow: auto;
-    position: fixed;
-    top: 0;
+    position: absolute;
     right: 0;
     width: $sidebar-width;
-    height: 100%;
-    background: #EEE;
-    border: 1px solid #E0E0E0;
     font-weight: bold;
-    box-shadow: 0px 0 4px rgba(0,0,0,0.2);
-    z-index: $sidebar-z-index; // Place above site menu
+    z-index: $sidebar-z-index;
+    @include border-box;
     
     a:link, a:visited{
         color: $sidebar-link-color;
@@ -30,7 +23,7 @@ $sidebar-link-color: #333;
     
     h2{
         color: #888;
-        margin-left: 1em;
+        margin-left: 1rem;
     }
     hr{
         height: 0px;
@@ -39,6 +32,9 @@ $sidebar-link-color: #333;
         border-bottom: 1px solid white;
         border-top: 1px solid #DDD;
         margin: 0;
+    }
+    form{
+        margin: 0 1em;
     }    
 }
 

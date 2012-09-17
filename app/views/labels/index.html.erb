@@ -2,4 +2,7 @@
 <% content_for :page_menu, labels_menu %>
 <% content_for :pagination, paginate(@labels) %>
 
-<%= record_slide_table @labels %>
+<%= record_slide_table(@labels).caption do |label| %>
+  <%= label.display_name %>
+  <%= add_to_project_button(label) %>  
+<% end %>

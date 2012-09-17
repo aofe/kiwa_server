@@ -74,6 +74,9 @@ $text-input-background: #F7FAF9;
     .input:last-child, .grouped_inputs:last-child{
         margin-bottom: 0;
     }
+    .input.hidden{
+        display: none;
+    }
 
     // INPUTS
     textarea {

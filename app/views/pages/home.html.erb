@@ -1,2 +1,13 @@
-<% content_for :page_title, 'Search Everything' %>
+<% content_for :page_title, 'Dashboard' %>
 <% content_for :page_menu, search_menu %>
+
+<h2>My <%= Project.model_name.human.pluralize %></h2>
+<%= record_list(current_user.projects).caption do |project| %>
+  <%= content_tag :span, pluralize(project.size, 'item'), :class => :metadata %>
+<% end %>
+<%= link_to '+ New', new_project_path, :class => 'btn primary' %>
+
+<h2>Other researchers' <%= Project.model_name.human.pluralize %></h2>
+<%= record_list(Project.public.where('user_id <> ?', current_user.id)).caption do |project| %>
+  <%= content_tag :span, project.user.display_name, :class => :metadata %>
+<% end %>

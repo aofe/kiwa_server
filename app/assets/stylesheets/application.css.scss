@@ -5,6 +5,7 @@
  *= require easy_menu 
  *= require glint_autocomplete
  *= require popup_gallery
+ *= require bootstrap
  *= require_self
  *= require_tree .
 */
@@ -12,24 +13,21 @@
 
 /* LAYOUT */
 header{
-    position: absolute;
-    top: 0;
     width: 100%;
+    position: relative;
     z-index: $site-menu-z-index;    
 }
 #page{
     position: relative;
-    height: 100%; /* Make the scrollbar start to the left of the sidebar */
-    padding-top: $site-menu_height;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    height: 100%;
 }
 #content{
-    padding: 0 2em;
-    // /* Make the scrollbar start to the left of the sidebar */
-    overflow: auto;
-    height: 100%;    
+    padding: 1px 2em;
+    background: white url(image_path('bg.png'));    
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 0 4px rgba(0,0,0,0.2);    
+    position: relative;
+    z-index: $content-z-index;
 }
 #sign_out{
     float: right;

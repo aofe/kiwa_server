@@ -1,0 +1,33 @@
+.modal{
+  [data-state]{
+    display: none;
+  }
+}
+.modal[data-state]{
+  .btn{
+    display: none;
+  }
+}
+.modal[data-state=submitting]{
+  [data-state=submitting]{
+    display: inline;
+  }
+}
+.modal[data-state=success]{
+  [data-state=success]{
+    display: inline;
+  }
+  .modal-footer{
+    background-color: #a5dFa5;
+  }
+}
+
+.modal[data-state=error]{
+  [data-state=error]{
+    display: inline;
+  }
+  .modal-footer{
+    color: white;
+    background-color: #cF3535;
+  }
+}

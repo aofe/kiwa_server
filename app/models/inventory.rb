@@ -6,8 +6,8 @@ class Inventory < ActiveRecord::Base
     self.short_title
   end
 
-  def length
-  	inventory_list_entries.count
+  def size
+  	inventory_list_entries.size
   end
 
   # GLINT

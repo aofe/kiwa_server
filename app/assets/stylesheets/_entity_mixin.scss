@@ -1,6 +1,7 @@
+$entity-padding: 1em;
 @mixin entity_list_entry{
 	border: 1px solid #E0E0E0;
-	padding: 1em;
+	padding: $entity-padding;
 	margin-bottom: 5px;
 	display: block;
 	border-radius: 2px;

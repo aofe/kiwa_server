@@ -1,0 +1,19 @@
+<div class="modal hide fade" id="add_to_project_modal">
+  <div class="modal-header">
+    <h3>Save it to which <%= Project.model_name.human %>?</h3>
+  </div>
+  <%= simple_form_for ProjectItem.new(:project => Project.new), :remote => true, :html => {:id => 'add_to_project_form'} do |f| %>
+  <div class="modal-body">
+    <%= f.input :item_type, :as => :hidden, :input_html => {:class => 'item_type'} %>
+    <%= f.input :item_id, :as => :hidden, :input_html => {:class => 'item_id'} %>
+    <%= f.association :project, :collection => current_user.projects, :label => false, :prompt => 'Choose one...' %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+    <button class="btn primary" type="submit">Save</button>
+    <span data-state='error'>Error</span>
+    <span data-state='saving'>Saving</span>
+    <span data-state='success'>Success</span>
+  </div>
+  <% end %>
+</div>
