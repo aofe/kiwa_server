@@ -4,7 +4,7 @@
 
 @import 'mixins';
 
-body.projects.show{
+body#projects_show{
   .record_slide_table{
     @include columns(270px);
   }
