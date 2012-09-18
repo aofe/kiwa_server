@@ -6,7 +6,7 @@ module RecordHelper
       attributes = record.class.content_columns.collect(&:name) - ['created_at', 'updated_at']
     end
     
-    content_tag :ul, :class => 'attribute_list' do
+    content_tag :dl, :class => 'dl-horizontal' do
       attributes.collect do |attribute|
         if attribute.is_a? Hash
           value = attribute.values.first
@@ -20,11 +20,7 @@ module RecordHelper
           attribute_name = record.class.human_attribute_name(attribute)
         end
 
-        unless options[:hide_blank] && value.blank?
-          content_tag :li do
-            content_tag(:span, "#{attribute_name}:", :class => 'attribute_name') + " " + content_tag(:span, value, :class => 'value')
-          end
-        end
+        content_tag(:dt, "#{attribute_name}:", :class => 'attribute_name') + " " + content_tag(:dd, value, :class => 'value') unless value.blank?
       end.join.html_safe
     end
   end
@@ -37,7 +33,7 @@ module RecordHelper
     def initialize(template, records, options = {})
       @template = template
       @entries = records.collect{|record| RecordListEntry.new(@template, record, options)}
-      @options = options      
+      @options = options
     end
 
     def to_s
@@ -86,7 +82,7 @@ module RecordHelper
 
       empty_cell = @template.content_tag :span, '', :class => :empty_cell
 
-      return @template.content_tag :div, "#{content}#{empty_cell}#{@caption}".html_safe, :class => "record_list_entry #{@record.class.name.underscore}"
+      return @template.content_tag :div, "#{content}#{empty_cell}#{@caption}".html_safe, :class => "record_list_entry #{@record.class.name.underscore}_entry"
     end
 
 
@@ -149,16 +145,16 @@ module RecordHelper
 
     def to_s
       if @record.respond_to?(:primary_media_item) && @record.primary_media_item
-        image = @template.image_tag(@record.primary_media_item.thumbnail_url(300), :class => 'thumbnail', :title => @record.display_name)
+        image = @template.image_tag(@record.primary_media_item.thumbnail_url(300), :class => 'image', :title => @record.display_name)
       else
-        image = @template.content_tag(:div, 'No Image', :class => 'thumbnail')
+        image = @template.content_tag(:div, 'No Image', :class => 'image')
       end
 
       if @options[:link_to]
         image = @template.link_to image, @options[:link_to]
       end
 
-      return @template.content_tag :div, "#{image}#{@caption}".html_safe, :class => "record_slide #{@record.class.name.underscore}"
+      return @template.content_tag :div, "#{image}#{@caption}".html_safe, :class => "record_slide #{@record.class.name.underscore}_slide"
     end
 
     def caption(text = nil, &block)
@@ -199,9 +195,4 @@ module RecordHelper
       end
     end    
   end  
-
-  def add_to_project_button(record)
-    @add_to_project_modal = true
-    link_to('Save', {:anchor => 'add_to_project_modal'}, :role => 'button', :data => {:toggle => 'modal', :item_type => record.class.name, :item_id => record.id}, :class => 'save_to_project btn primary')
-  end
 end

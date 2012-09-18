@@ -1,0 +1,19 @@
+<%= MenuBar.new(self, :theme => false, :class => 'nav') do |mb|
+  section_link(mb, SourceEncounter, params[:controller] == 'encounters' && params[:type].to_s == 'Source')
+  section_link(mb, AOFEEncounter, params[:controller] == 'encounters' && params[:type].to_s == 'AOFE')
+  section_link(mb, Voyage, params[:controller] == 'voyages')
+  section_link(mb, Person, params[:controller] == 'people')
+  section_link(mb, Label, params[:controller] == 'labels')
+  section_link(mb, Card, params[:controller] == 'cards')
+  section_link(mb, Inventory, params[:controller] == 'inventories')
+  section_link(mb, Expedition, params[:controller] == 'expeditions')
+  # section_link(mb, Location, params[:controller] == 'locations')
+end %>
+
+<%= form_tag(searches_path, :method => :get, :class => 'navbar-search pull-left') do %>
+  <%= text_field_tag :q, params[:q], :class => "search-query", :placeholder => "Search" %>
+<% end %>
+
+<%= MenuBar.new(self, :theme => false, :class => 'nav pull-right') do |mb|
+  mb.menu_bar_content link_to('Sign Out', destroy_user_session_path, :method => :delete, :id => 'sign_out') if user_signed_in?
+end %>

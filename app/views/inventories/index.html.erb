@@ -6,5 +6,5 @@
   <%= content_tag :span, inventory.display_name, :class => :name %>
   <%= content_tag :span, pluralize(inventory.size, 'entry'), :class => :metadata %>
 <% end.caption do |inventory| %>
-  <%= add_to_project_button(inventory) %>  
+  <%= collect_button(inventory) %>  
 <% end %>

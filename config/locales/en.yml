@@ -4,10 +4,10 @@
 en:
   activerecord:
     models:
-      source_encounter: 'Collection Record'
+      source_encounter: 'Records'
       aofe_encounter: 'Encounter'
       card: 'Catalogue Card'
-      project: 'List'
+      project: 'Collection'
 
   simple_form:
     labels:

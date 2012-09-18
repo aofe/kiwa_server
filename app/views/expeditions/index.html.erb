@@ -3,5 +3,5 @@
 <% content_for :pagination, paginate(@expeditions) %>
 
 <%= record_list(@expeditions).caption do |expedition| %>
-  <%= add_to_project_button(expedition) %>  
+  <%= collect_button(expedition) %>  
 <% end %>

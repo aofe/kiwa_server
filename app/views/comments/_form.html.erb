@@ -1,6 +1,6 @@
 <%= simple_form_for comment do |f| %>
 	<%= f.input :commentable_type, :as => :hidden %>
 	<%= f.input :commentable_id, :as => :hidden %>
-	<%= f.input :body, :label => false %>
-	<%= f.submit %>
+	<%= f.input :body, :label => false, :input_html => {:rows => 4} %>
+  <%= submit_button('Post Comment') %>
 <% end %>

@@ -1,12 +1,13 @@
-<% content_for :sidebar, label_sidebar(@label) %>
-<% content_for :nav do %>
-  <%= link_to 'Back', labels_path %>
+<% content_for :page_title, @label.display_name %>
+<% content_for :page_menu, collect_button(@label) %>
+<% content_for :sidebar do %> 
+  <%= label_sidebar(@label) %>
+  <%= render 'comments/commentable_comments', :commentable => @label %>
 <% end %>
+<% content_for :nav, back_button(labels_path) %>
 
-<% content_for :page_title, "#{link_to 'Labels', labels_path} / #{@label.display_name}".html_safe %>
 
 <%= list_attributes(@label, {'Institution' => label_source_name(@label)}, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
-
-<%= render 'comments/commentable_comments', :commentable => @label %>
+<%= record_media(@label.media_items) %>
 
 <%= javascript_tag "PopupGallery('#record_media .media_thumbnail')" %>

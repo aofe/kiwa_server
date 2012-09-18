@@ -1,9 +1,10 @@
 module VoyagesHelper
 
   def voyages_menu
-    MenuBar.new(self) do |mb|
-      menu_bar_search(mb, url_for, :autocomplete_url => autocomplete_voyages_path)
-    end
+  end
+
+  def voyage_menu(voyage)
+    collect_button(voyage)
   end
 
   def voyage_sidebar(voyage)

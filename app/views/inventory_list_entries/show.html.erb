@@ -1,9 +1,8 @@
-<% content_for :sidebar, inventory_list_entry_sidebar(@inventory_list_entry) %>
-<% content_for :nav do %>
-  <%= link_to 'Back', @inventory_list_entry.inventory %>
+<% content_for :page_title, @inventory_list_entry.display_name %>
+<% content_for :sidebar do %>
+  <%= inventory_list_entry_sidebar(@inventory_list_entry) %>
+  <%= render 'comments/commentable_comments', :commentable => @inventory_list_entry %>
 <% end %>
-<% content_for :page_title, "#{link_to @inventory_list_entry.inventory.display_name, inventory_path(@inventory_list_entry.inventory)} / #{@inventory_list_entry.display_name}".html_safe %>
+<% content_for :nav, back_button(@inventory_list_entry.inventory) %>
 
 <%= list_attributes(@inventory_list_entry, :id_tag, :item_count, :page, :description, :list_order)%>
-
-<%= render 'comments/commentable_comments', :commentable => @inventory_list_entry %>

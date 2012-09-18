@@ -1,7 +1,0 @@
-.autotest
-.rspec
-.bundle
-Gemfile.lock
-table_for_collection-*.gem
-doc
-doc/**/*

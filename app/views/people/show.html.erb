@@ -1,27 +1,35 @@
-<% content_for :sidebar do %>
-<span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
-<% end %>
-<% content_for :nav do %>
-  <%= link_to 'Back', people_path %>
-<% end %>
-
 <% content_for :page_title, page_title(@person) %>
+<% content_for :page_menu, person_menu(@person) %>
+<% content_for :sidebar do %>
+  <span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
+  <%= render 'comments/commentable_comments', :commentable => @person %>
+<% end %>
+<% content_for :nav, back_button(people_path) %>
 
 <%= list_attributes(@person, :birth_date, :death_date, :network) %>
-<h3>Background</h3>
-<%= format_with_references @person.background %>
-<h3>Education</h3>
-<%= format_with_references @person.education %>
-<h3>Character Reference</h3>
-<%= format_with_references @person.character_reference %>
-<h3>Career</h3>
-<%= format_with_references @person.career %>
-
-<%= table_for @person.crew_list_entries.includes(:expedition) do |t| %>
-  <% t.column :title => "Expedition Name" do |crew_list_entries| %>
-    <% crew_list_entries.expedition.name %>
-  <% end %>
-  <% t.column :rank %>
+<% if @person.background.present? %>
+  <h3>Background</h3>
+  <%= format_with_references @person.background %>
 <% end %>
 
-<%= render 'comments/commentable_comments', :commentable => @person %>
+<% if @person.education.present? %>
+<h3>Education</h3>
+<%= format_with_references @person.education %>
+<% end %>
+
+<% if @person.character_reference.present? %>
+<h3>Character Reference</h3>
+<%= format_with_references @person.character_reference %>
+<% end %>
+
+<% if @person.career.present? %>
+<h3>Career</h3>
+<%= format_with_references @person.career %>
+<% end %>
+
+<%= table_for @person.crew_list_entries.includes(:expedition), :html => {:class => 'table'} do |t| %>
+  <% t.data do %>
+    <% t.cell(:expedition_name, :heading => 'Expedition Name') {|crew_list_entry| crew_list_entry.expedition.name} %>
+    <% t.cell(:rank) %>
+  <% end %>
+<% end %>

@@ -1,6 +1,6 @@
 module ReferencesHelper
 	def format_with_references(string)
-		simple_format process_references(string)
+		process_references(simple_format string)
 	end
 
 	def process_references(string)
@@ -34,6 +34,8 @@ module ReferencesHelper
 	end
 
 	def text_reference(reference, page_numbers)
+		raise "Reference #{reference.id} is missing a source year" unless reference.source_date
+
 		text = "(#{reference.author_name} #{reference.source_date.year} : [#{page_numbers}])"
 
 		case reference.source_type

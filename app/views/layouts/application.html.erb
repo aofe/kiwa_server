@@ -6,28 +6,43 @@
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tag %>
 </head>
-<body>
-  <div id='page' class='<%= page_class %>'>
+<body class="<%= params[:controller] %> <%= params[:action] %>">
     <% if user_signed_in? %>
-    <header><%= site_menu %></header>
+    <div class="navbar navbar-static-top" id="site_menu">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">A of E</a>
+          <div class="nav-collapse collapse">
+            <%= render 'shared/site_menu' %>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
     <% end %>
-    <%= content_tag :div, content_for(:sidebar), :id => 'sidebar' if content_for?(:sidebar) %>
+  <div id='page' class='<%= page_class %>'>
+    <h1 id='page_header' class='page-header'>
+      <%= content_for :page_title %>
+      <%= content_tag :span, content_for(:page_menu), :id => 'page_menu' if content_for?(:page_menu) %>
+    </h1>    
     <div id='content'>
-      <h1><%= content_for :page_title %></h1>
-      <%= content_for :page_menu %>
+      <%= content_tag :div, content_for(:sidebar), :id => 'sidebar' if content_for?(:sidebar) %>
       
       <%= yield %>
 
       <% if content_for? :pagination %>
-      <hr>
-      <%= yield(:pagination) %>
+        <hr>
+        <%= yield(:pagination) %>
       <% end %>
 
       <% if content_for? :nav %>
-      <hr/>
-      <%= content_for :nav %>
+        <hr/>
+        <%= content_for :nav %>
       <% end %>
-      <footer></footer>
     </div>
   </div>
   <%= render('projects/add_to_project_modal') if @add_to_project_modal %>

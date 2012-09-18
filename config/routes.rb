@@ -1,5 +1,5 @@
 KIWA::Application.routes.draw do
-  resources :projects
+  resources :projects, :path => "collections" # Alias projects as collections
 
   resources :project_items
 

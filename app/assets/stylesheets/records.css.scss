@@ -3,6 +3,7 @@
 
 .attribute_list{
     list-style: none;
+    padding: 0;
 }
 .attribute_name{
     font-weight: bold;
@@ -21,21 +22,16 @@
 
     .record_slide{
         @include entity_list_entry;
-        // Prevent breaking across columns break
-        display: inline-block; 
-        width: 100%;
-        @include border-box;
-        // End
-
         text-align: center;
 
-        .thumbnail{
+        .image{
             width: 100%;
             vertical-align: top;
             margin: -$entity-padding;
             padding: $entity-padding;
         }
         .caption{
+            position: relative; // Contain add-to-project button
             background: #EEE;
             padding: $entity-padding;
             margin: $entity-padding (-$entity-padding) (-$entity-padding);
@@ -48,14 +44,14 @@
 
         @include add-to-project-button;
         .save_to_project{
-            float: right;
-            margin: -4px 0;            
+            position: absolute;
+            right: 1em;
+            top: 0.5em;         
         }
     }   
 }
-
 #record_media{
-    text-align: center;
+    margin: -0.5em;
 }
 #record_media .media_thumbnail{
     margin: 0.5em;

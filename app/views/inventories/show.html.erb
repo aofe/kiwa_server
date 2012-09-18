@@ -1,16 +1,13 @@
-<% content_for :nav do %>
-  <%= link_to 'Back', inventories_path %>
+<% content_for :page_title, @inventory.display_name %>
+<% content_for :page_menu, collect_button(@inventory) %>
+<% content_for :sidebar do %>
+  <%= render 'comments/commentable_comments', :commentable => @inventory %>
 <% end %>
-
-<% content_for :page_title, "#{link_to 'Inventories', inventories_path} / #{@inventory.display_name}".html_safe %>
+<% content_for :nav, back_button(inventories_path) %>
 <%= list_attributes(@inventory, :long_title, :source_reference, :description)%>
 
 <h2>Entries</h2>
-<%= table_for @inventory.inventory_list_entries do |t| %>
-  <% t.column :title => 'ID Tag' do |entry| %>
-    <% link_to entry.id_tag.presence || '<em>blank</em>'.html_safe, entry %>
-  <% end %>
-  <% t.columns :page, :item_count, :description %>
+<%= table_for @inventory.inventory_list_entries, :html => {:class => 'table'} do |t| %>
+  <% t.data :list_order, :id_tag, :description, :page, :actions => :show %>
 <% end %>
 
-<%= render 'comments/commentable_comments', :commentable => @inventory %>

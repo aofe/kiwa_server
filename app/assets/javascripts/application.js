@@ -7,10 +7,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require modernizr
+//= require bootstrap
 //= require easy_menu_jquery
 //= require glint_autocomplete
 //= require popup_gallery
-//= require bootstrap
 //= require_tree .
 
 

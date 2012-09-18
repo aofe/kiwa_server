@@ -2,6 +2,10 @@
   [data-state]{
     display: none;
   }
+
+  form{
+    margin: 0;
+  }
 }
 .modal[data-state]{
   .btn{

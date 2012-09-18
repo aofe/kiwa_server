@@ -1,9 +1,6 @@
 module EncountersHelper
 
   def encounters_menu
-    MenuBar.new(self) do |mb|
-      menu_bar_search(mb, url_for, :autocomplete_url => autocomplete_encounters_path, :form_params => {:type => params[:type]})
-    end
   end
 
   def encounter_show_menu_bar
@@ -18,10 +15,6 @@ module EncountersHelper
 
   def encounter_sidebar(encounter)
     MenuBar.new(self, :theme => "sidebar_menu") do |menu|
-      menu.group do |group|
-        group.menu_bar_content(content_tag :h2, 'Media')
-        group.menu_bar_content(record_media(encounter.media_items))
-      end
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')
         sidebar_record_relation(group, 'Expedition', encounter.related_expeditions)

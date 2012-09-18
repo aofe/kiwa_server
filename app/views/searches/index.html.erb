@@ -1,5 +1,4 @@
-<% content_for :page_title, "Search" %>
-<% content_for :page_menu, search_menu %>
+<% content_for :page_title, "Search Results" %>
 <% if @source_encounters.present? %>
 	<h2><%= SourceEncounter.model_name.human.pluralize %></h2>
 	<%= RecordHelper::RecordSlideTable.new self, @source_encounters %>

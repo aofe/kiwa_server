@@ -1,13 +1,14 @@
-<% content_for :sidebar, voyage_sidebar(@voyage) %>
-<% content_for :nav do %>
-  <%= link_to 'Back', voyages_path %>
-<% end %>
-
 <% content_for :page_title, page_title(@voyage) %>
+<% content_for :page_menu, voyage_menu(@voyage) %>
+<% content_for :sidebar do %>
+  <%= voyage_sidebar(@voyage) %>
+  <%= render 'comments/commentable_comments', :commentable => @voyage %>
+<% end %>
+<% content_for :nav, back_button(voyages_path) %>
 
 <%= list_attributes(@voyage, :ship_name, :ship_other_name, :place_departed, :place_returned, :ship_tonnage, :ship_length, :ship_beam, :ship_type, :ship_cargo, :start_date, :end_date) %>
 
+<% if @voyage.people.any? %>
 <h2>Crew</h2>
 <div class='crew_list'><%= record_list @voyage.people.sort_by(&:sort_name), :name => :sort_name %></div>
-
-<%= render 'comments/commentable_comments', :commentable => @voyage %>
+<% end %>

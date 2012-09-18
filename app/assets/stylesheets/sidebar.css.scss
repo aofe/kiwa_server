@@ -4,17 +4,14 @@ $sidebar-link-color: #333;
 
 #page.with_sidebar{
     #content{
-        margin-right: $sidebar-width;
+        margin-right: $sidebar-width + $sidebar-padding;
     }
 }
 
 #sidebar{
-    overflow: auto;
     position: absolute;
-    right: 0;
+    right: -$sidebar-width - $sidebar-padding;
     width: $sidebar-width;
-    font-weight: bold;
-    z-index: $sidebar-z-index;
     @include border-box;
     
     a:link, a:visited{
@@ -23,26 +20,28 @@ $sidebar-link-color: #333;
     
     h2{
         color: #888;
-        margin-left: 1rem;
     }
     hr{
         height: 0px;
-        width: 100%;
         border-width: 1px 0;
         border-bottom: 1px solid white;
         border-top: 1px solid #DDD;
         margin: 0;
     }
-    form{
-        margin: 0 1em;
-    }    
+}
+
+#sidebar .menu_bar_group{
+    background: rgba(235, 235, 235, 0.4);
+    border: 1px solid #F5F5F5;
+    border-radius: 15px 15px 15px 15px;
+    margin: 1em -2em;
+    padding: 1em 2em;
 }
 
 @mixin sidebar-list-item{
     line-height: 2em;
     display: block;
-    padding: .5em 1em;
-    cursor: pointer;
+    padding: 0.5em 1rem;
     border-top: 1px solid #E0E0E0;
     
     &:first-child{
@@ -52,17 +51,24 @@ $sidebar-link-color: #333;
 @mixin sidebar-hoverable-list-item{
     @include sidebar-list-item;
     &:hover, &.selected{
-        background: white;
+        // background: #F0F0F0;
     }    
+}
+
+#sidebar{
+    li {
+        list-style: none;
+    }
+    ul {
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .menu_bar.sidebar_menu{
     list-style: none;
     padding-left: 0;
 
-    .menu_bar_group{
-        padding-left: inherit;
-    }
     .menu_bar_content.with_menu{
         @include sidebar-list-item;
         &.inactive{
@@ -71,19 +77,10 @@ $sidebar-link-color: #333;
             background: transparent;    
         }    
     }
-    .menu{
-        list-style: none;
-        padding-left: 0;
-    }
-    .menu_content{
-        list-style: inherit;        
-    }
-    .menu_item{
-        margin: 0 -1em;
-    }
     .menu_item a{
         @include sidebar-hoverable-list-item;
-        padding-left:  (1em/0.8);
         font-size: 0.8em;
+        margin: 0 -1rem;
+        // text-decoration: none;
     }
 }

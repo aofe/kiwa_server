@@ -12,7 +12,7 @@
     <hr/>
     <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
       <%= f.submit :style => 'display: none' %>
-      <%= f.input :note, :label => false, :input_html => {:placeholder => 'Notes...'} %>
+      <%= f.input_field :note, :label => false, :input_html => {:placeholder => 'Notes...'} %>
     <% end %>
   <% end %>
 

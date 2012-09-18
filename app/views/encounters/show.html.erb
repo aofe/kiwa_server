@@ -1,19 +1,27 @@
-<% content_for :sidebar, encounter_sidebar(@encounter) %>
-<% content_for :nav do %>
-  <%= link_to 'Back', aofe_encounters_path, :class => 'button' %>
-<% end %>
 <% content_for :page_title, page_title(@encounter)%>
+
+<% content_for :sidebar do %>
+  <%= encounter_sidebar(@encounter) %>
+  <%= render 'comments/commentable_comments', :commentable => @encounter %>
+<% end %>
+
+<% content_for :nav do %>
+  <%= back_button aofe_encounters_path %>
+<% end %>
+
 <%= list_attributes(@encounter, :institution, :accession_number, :part_count, :indigenous_name, :place_of_origin, :dimensions, :material) %>
+<%= record_media(@encounter.media_items) %>
 <h3>Description</h3>
 <%= content_tag :p, @encounter.description %>
 
+<% if @encounter.events.any? %>
 <h3>Artefact History</h3>
 <%= render @encounter.events.includes(:person) %>
+<% end %>
 
+<% if @encounter.notes.any? %>
 <h3>Researcher Notes</h3>
 <%= render @encounter.notes %>
-
-<hr/>
-<%= render 'comments/commentable_comments', :commentable => @encounter %>
+<% end %>
 
 <%= javascript_tag "PopupGallery('#record_media .media_thumbnail')" %>

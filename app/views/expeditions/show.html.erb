@@ -1,16 +1,19 @@
-<% content_for :sidebar, expedition_sidebar(@expedition) %>
-<% content_for :nav do %>
-  <%= link_to 'Back', expeditions_path %>
-<% end %>
-
 <% content_for :page_title, page_title(@expedition) %>
+<% content_for :page_menu, collect_button(@expedition) %>
+<% content_for :sidebar do %>
+  <%= expedition_sidebar(@expedition) %>
+  <%= render 'comments/commentable_comments', :commentable => @expedition %>
+<% end %>
+<% content_for :nav, back_button(expeditions_path) %>
 
 <%= list_attributes(@expedition, :principle_explorer, :commissioned) %>
 
+<% if @expedition.voyages.any? %>
 <h2>Voyages</h2>
 <%= record_list @expedition.voyages.sort_by(&:display_name) %>
+<% end %>
 
+<% if @expedition.people.any? %>
 <h2>Crew</h2>
 <div class='crew_list'><%= record_list @expedition.people.sort_by(&:display_name) %></div>
-
-<%= render 'comments/commentable_comments', :commentable => @expedition %>
+<% end %>
