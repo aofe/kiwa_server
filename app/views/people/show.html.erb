@@ -27,9 +27,11 @@
 <%= format_with_references @person.career %>
 <% end %>
 
+<% if @person.crew_list_entries.any? %>
 <%= table_for @person.crew_list_entries.includes(:expedition), :html => {:class => 'table'} do |t| %>
   <% t.data do %>
     <% t.cell(:expedition_name, :heading => 'Expedition Name') {|crew_list_entry| crew_list_entry.expedition.name} %>
     <% t.cell(:rank) %>
   <% end %>
+<% end %>
 <% end %>

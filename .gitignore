@@ -7,3 +7,4 @@ database.yml
 .DS_Store
 solr/
 config/sunspot.yml
+public/assets
