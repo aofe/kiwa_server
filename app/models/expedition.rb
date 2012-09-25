@@ -17,10 +17,15 @@ class Expedition < ActiveRecord::Base
   end
 
   # GLINT
+
+  def principle_explorer_name
+    principle_explorer.try(:display_name)
+  end
   acts_as_searchable :default => :full_text
 
   has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:title => 2}
 
   has_facet :title
   has_facet :commissioned
+  has_facet :principle_explorer_name, :attribute_type => :string, :param => 'principle explorer'
 end

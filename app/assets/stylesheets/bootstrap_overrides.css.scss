@@ -1,0 +1,35 @@
+.navbar-static-top{
+  width: auto; // Fix navbar getting a space on the right when the screen is shrunk 
+}
+
+
+// 
+
+@media (max-width: 979px) {
+  #page.with_page_menu{
+    #page_header{
+      margin-right: 0;
+    }
+    #page_menu{
+      border: none;
+      line-height: normal;
+      padding: 0;
+      position: static;
+      width: auto;
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #page{
+    padding-right: 20px;
+    padding-left: 20px;
+  }    
+}
+@media (max-width: 768px) {
+  #page{
+    padding-right: 0;
+    padding-left: 0;
+  }  
+}
