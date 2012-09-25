@@ -8,7 +8,10 @@
   <% if preferences[:view] == 'list' %>
 
     <%= record_list(@project_items).caption do |project_item| %>
-      <%= collect_button(project_item) %>
+      <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
+        <%= f.submit :style => 'display: none' %>
+        <%= f.input_field :note, :as => :string, :placeholder => 'Notes...' %>
+      <% end %>
     <% end %>
 
   <% else %>
@@ -19,7 +22,7 @@
       <hr/>
       <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
         <%= f.submit :style => 'display: none' %>
-        <%= f.input_field :note, :label => false, :input_html => {:placeholder => 'Notes...'} %>
+        <%= f.input_field :note, :placeholder => 'Notes...' %>
       <% end %>
     <% end %>
 
@@ -31,6 +34,7 @@
 
     <%= record_list(@project_items).caption do |project_item| %>
       <%= collect_button(project_item) %>
+      <%= simple_format project_item.note %>
     <% end %>
 
   <% else %>

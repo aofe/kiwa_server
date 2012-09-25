@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = resource
-    @project_items = ProjectItemSearch.new(@project.id, params[:q]).results(:page => params[:page])
+    @project_items = ProjectItemSearch.new(@project.id, params[:q]).results(:page => params[:page], :order => (params[:q].present? ? nil : :primary_key))
   end
 
   private

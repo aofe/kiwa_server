@@ -10,6 +10,7 @@
 }
 @mixin add-to-project-button{
     .save_to_project{
+        vertical-align: middle;
         display: none;
     }
     &:hover .save_to_project{
@@ -76,7 +77,13 @@ $caption-width: 100px;
         text-align: right;
         padding: 0 $entity-padding;
         vertical-align: middle;
-        white-space: nowrap;        
+        white-space: nowrap; 
+
+        form, p, textarea, input[type=text] {
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
     .empty_cell{
         display: table-cell;
