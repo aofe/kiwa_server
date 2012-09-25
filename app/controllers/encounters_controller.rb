@@ -1,10 +1,9 @@
 class EncountersController < GlintSearchController
-  include EncountersHelper # So we can access encounter_type method
 
   protected
 
   def collection
-    EncounterSearch.new(encounter_type, params[:q])
+    EncounterSearch.new(params[:encounter_type], params[:q])
   end
 
   def klass

@@ -15,7 +15,7 @@ class EncounterSearch < Glint::Search
 	private
 
 	def scope_results(solr)
-	    solr.with(registered_facet(:type).solr_search_indices.values.first, @type.to_s.downcase) if @type	    # Scope to the given encounter type
-	    super
+    solr.with(registered_facet(:type).solr_search_indices.values.first, @type.to_s.downcase) if @type	    # Scope to the given encounter type
+    super
 	end
 end

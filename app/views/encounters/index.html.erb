@@ -2,7 +2,13 @@
 <% content_for :page_menu, encounters_menu %>
 <% content_for :pagination, paginate(@encounters) %>
 
-<%= record_slide_table(@encounters).caption do |encounter| %>
-  <%= encounter.display_name %>
-  <%= collect_button(encounter) %>
+<% if preferences[:view] == 'list' %>
+  <%= record_list(@encounters).caption do |encounter| %>
+    <%= collect_button(encounter) %>
+  <% end %>
+<% else %>
+  <%= record_slide_table(@encounters).caption do |encounter| %>
+    <%= encounter.display_name %>
+    <%= collect_button(encounter) %>
+  <% end %>
 <% end %>

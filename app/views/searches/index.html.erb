@@ -1,33 +1,11 @@
-<% content_for :page_title, "Search Results" %>
-<% if @source_encounters.present? %>
-	<h2><%= SourceEncounter.model_name.human.pluralize %></h2>
-	<%= RecordHelper::RecordSlideTable.new self, @source_encounters %>
+<% content_for :page_title, "Searched for \"#{params[:q]}\" and found:" %>
+
+<table class='table'>
+<% @searches.each do |klass, search| %>
+	<tr>
+		<td style='white-space: nowrap'><%= klass.model_name.human.pluralize %></td>
+		<td><%= search.result_count %></td>
+		<td style='width: 100%'><%= link_to 'View matches', polymorphic_path(klass, :q => params[:q]) %></td>
+	</tr>
 <% end %>
-<% if @aofe_encounters.present? %>
-	<h2><%= AOFEEncounter.model_name.human.pluralize %></h2>
-	<%= RecordHelper::RecordSlideTable.new self, @aofe_encounters %>
-<% end %>
-<% if @voyages.present? %>
-	<h2><%= Voyage.model_name.human.pluralize %></h2>
-	<%= record_list @voyages %>
-<% end %>
-<% if @people.present? %>
-	<h2><%= Person.model_name.human.pluralize %></h2>
-	<div class='people'><%= record_list @people %></div>
-<% end %>
-<% if @labels.present? %>
-	<h2><%= Label.model_name.human.pluralize %></h2>
-	<%= record_list @labels %>
-<% end %>
-<% if @cards.present? %>
-	<h2><%= Card.model_name.human.pluralize %></h2>
-	<%= record_list @cards %>
-<% end %>
-<% if @inventories.present? %>
-	<h2><%= Inventory.model_name.human.pluralize %></h2>
-	<%= record_list @inventories %>
-<% end %>
-<% if @inventory_list_entries.present? %>
-	<h2><%= InventoryListEntry.model_name.human.pluralize %></h2>
-	<%= RecordHelper::RecordSlideTable.new self, @inventory_list_entries %>
-<% end %>
+</table>

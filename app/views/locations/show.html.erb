@@ -1,6 +1,4 @@
-<% content_for :nav do %>
-  <%= link_to 'Back', locations_path %>
-<% end %>
+<% content_for :nav, back_button(locations_path) %>
 <% content_for :page_title, location_nav_links(@location) %>
 <%= record_list @locations, :name => :local_name %>
 

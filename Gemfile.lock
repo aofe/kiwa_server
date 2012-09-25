@@ -12,18 +12,6 @@ GIT
     acts_as_dag (1.0.3)
 
 GIT
-  remote: git://github.com/sunspot/sunspot.git
-  revision: f8d901958835ae484be47d0c761f5a48b428089d
-  specs:
-    sunspot (2.0.0.pre.120417)
-      pr_geohash (~> 1.0)
-      rsolr (~> 1.0.7)
-    sunspot_rails (2.0.0.pre.120417)
-      nokogiri
-      sunspot (= 2.0.0.pre.120417)
-    sunspot_solr (2.0.0.pre.120417)
-
-GIT
   remote: git@github.com:culturecode/easy_menu.git
   revision: 0ab6781f8fdfb3de6d5736401bb0361e69f089a6
   specs:
@@ -31,10 +19,11 @@ GIT
 
 GIT
   remote: git@github.com:culturecode/glint.git
-  revision: 5057e1ec0f1fb0fc4c3f5f8dae97899738675108
+  revision: e5c2e1a70438f7ba5e9b4f4f7d771e8975873b70
   specs:
     glint (0.0.1)
       rails (~> 3.1)
+      sunspot_rails (= 2.0.0.pre.120720)
 
 GIT
   remote: git@github.com:culturecode/popup_gallery.git
@@ -48,36 +37,36 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    actionmailer (3.2.6)
-      actionpack (= 3.2.6)
+    actionmailer (3.2.8)
+      actionpack (= 3.2.8)
       mail (~> 2.4.4)
-    actionpack (3.2.6)
-      activemodel (= 3.2.6)
-      activesupport (= 3.2.6)
+    actionpack (3.2.8)
+      activemodel (= 3.2.8)
+      activesupport (= 3.2.8)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
-      journey (~> 1.0.1)
+      journey (~> 1.0.4)
       rack (~> 1.4.0)
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.3)
-    activemodel (3.2.6)
-      activesupport (= 3.2.6)
+    activemodel (3.2.8)
+      activesupport (= 3.2.8)
       builder (~> 3.0.0)
-    activerecord (3.2.6)
-      activemodel (= 3.2.6)
-      activesupport (= 3.2.6)
+    activerecord (3.2.8)
+      activemodel (= 3.2.8)
+      activesupport (= 3.2.8)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.6)
-      activemodel (= 3.2.6)
-      activesupport (= 3.2.6)
-    activesupport (3.2.6)
+    activeresource (3.2.8)
+      activemodel (= 3.2.8)
+      activesupport (= 3.2.8)
+    activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    builder (3.0.0)
+    builder (3.0.3)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -100,7 +89,7 @@ GEM
     geocoder (1.1.2)
     has_scope (0.5.1)
     hike (1.2.1)
-    i18n (0.6.0)
+    i18n (0.6.1)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
@@ -135,17 +124,17 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.2.6)
-      actionmailer (= 3.2.6)
-      actionpack (= 3.2.6)
-      activerecord (= 3.2.6)
-      activeresource (= 3.2.6)
-      activesupport (= 3.2.6)
+    rails (3.2.8)
+      actionmailer (= 3.2.8)
+      actionpack (= 3.2.8)
+      activerecord (= 3.2.8)
+      activeresource (= 3.2.8)
+      activesupport (= 3.2.8)
       bundler (~> 1.0)
-      railties (= 3.2.6)
-    railties (3.2.6)
-      actionpack (= 3.2.6)
-      activesupport (= 3.2.6)
+      railties (= 3.2.8)
+    railties (3.2.8)
+      actionpack (= 3.2.8)
+      activesupport (= 3.2.8)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -169,6 +158,12 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sunspot (2.0.0.pre.120720)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.0.0.pre.120720)
+      nokogiri
+      sunspot (= 2.0.0.pre.120720)
     tabletastic (0.2.3)
       activesupport (~> 3.0)
     therubyracer (0.10.1)
@@ -206,8 +201,6 @@ DEPENDENCIES
   rails (~> 3.2.3)
   sass-rails
   simple_form
-  sunspot_rails!
-  sunspot_solr!
   tabletastic
   therubyracer
   uglifier

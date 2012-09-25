@@ -20,4 +20,8 @@ class ProjectItemsController < ApplicationController
   def show
     redirect_to resource.item
   end
+
+  def autocomplete
+    render :json => ProjectItemSearch.new(params[:project_id], params[:q]).autocomplete_tags(:limit => 10)
+  end
 end

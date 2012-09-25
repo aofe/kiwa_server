@@ -1,6 +1,7 @@
 module VoyagesHelper
 
   def voyages_menu
+    search_field(Voyage)
   end
 
   def voyage_menu(voyage)

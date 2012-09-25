@@ -20,12 +20,12 @@ class Person < ActiveRecord::Base
   end
 
   def sort_name
-    output = []
+    output = ""
     output << last_name
     output << ", " if first_name.present? || other_name.present?
     output << first_name
-    output << "(#{other_name})" if other_name.present?
-    output.join(' ').strip # strip because some people have leading whitespace in their names
+    output << " (#{other_name})" if other_name.present?
+    output.gsub(/\s+/, ' ').strip # strip because some people have leading whitespace in their names
   end
   alias :display_name :sort_name
 
@@ -35,7 +35,7 @@ class Person < ActiveRecord::Base
   has_facet :full_text, :type => :full_text, :param => 'contains', :phrases => {:sort_name => 2}
 
   has_facet :name, :attribute_type => :string
-  has_facet :sort_name, :attribute_type => :string, :param => 'name'
+  has_facet :sort_name, :attribute_type => :string
   has_facet :first_name
   has_facet :last_name
   has_facet :other_name

@@ -11,24 +11,21 @@ module LocationHelper
         al.ancestor.local_name
       end
     end
-    sorted_links.unshift link_to('Locations', locations_path)
+    # sorted_links.unshift link_to('Locations', locations_path)
     
     return sorted_links.join(' / ').html_safe
   end
   
-  def location_map(location, html_options = {})
+  def location_map(location, size = '250x250', html_options = {})
     marker = "&markers=size:mid"
     marker << "|#{location.name}"
     
-    image_tag("http://maps.google.com/maps/api/staticmap?size=250x250&maptype=hybrid#{marker}&sensor=false", html_options)
+    image_tag("http://maps.google.com/maps/api/staticmap?size=#{size}&maptype=hybrid#{marker}&sensor=false", html_options)
   end  
   
   def location_sidebar(location)
     MenuBar.new(self, :theme => "sidebar_menu") do |menu|
-      menu.group do |group|
-        group.menu_bar_content(content_tag :h2, 'Map')
-        group.menu_bar_content(content_tag :div, location_map(location, :class => 'media_thumbnail'), :id => 'record_media')
-      end
+      menu.menu_bar_content(content_tag :div, location_map(location, '390x250', :class => 'media_thumbnail'), :id => 'record_media')
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')
         sidebar_record_relation(group, 'Encounter', location.related_with_descendants(:encounter).includes(:primary_media_item))
@@ -38,9 +35,7 @@ module LocationHelper
   end
 
   def locations_menu
-    MenuBar.new(self) do |mb|
-      menu_bar_search(mb, url_for, :autocomplete_url => autocomplete_locations_path)
-    end
+    search_field(Location)
   end  
 end
 

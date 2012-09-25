@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
     redirect_to project
   end
 
+  def show
+    @project = resource
+    @project_items = ProjectItemSearch.new(@project.id, params[:q]).results(:page => params[:page])
+  end
+
   private
 
   def authorize_owner!

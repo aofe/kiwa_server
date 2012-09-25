@@ -2,7 +2,13 @@
 <% content_for :page_menu, labels_menu %>
 <% content_for :pagination, paginate(@labels) %>
 
-<%= record_slide_table(@labels).caption do |label| %>
-  <%= label.display_name %>
-  <%= collect_button(label) %>  
+<% if preferences[:view] == 'list' %>
+  <%= record_list(@labels).caption do |label| %>
+    <%= collect_button(label) %>
+  <% end %>
+<% else %>
+  <%= record_slide_table(@labels).caption do |label| %>
+    <%= label.display_name %>
+    <%= collect_button(label) %>  
+  <% end %>
 <% end %>

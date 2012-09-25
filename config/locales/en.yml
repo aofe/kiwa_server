@@ -7,7 +7,7 @@ en:
       source_encounter: 'Records'
       aofe_encounter: 'Encounter'
       card: 'Catalogue Card'
-      project: 'Collection'
+      project: 'List'
 
   simple_form:
     labels:

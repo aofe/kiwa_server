@@ -1,5 +1,5 @@
 <% content_for :page_title, page_title(@encounter)%>
-
+<% content_for :page_menu, encounter_menu(@encounter) %>
 <% content_for :sidebar do %>
   <%= encounter_sidebar(@encounter) %>
   <%= render 'comments/commentable_comments', :commentable => @encounter %>

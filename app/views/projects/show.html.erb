@@ -5,29 +5,46 @@
 <% end %>
 
 <% if @project.user == current_user %>
+  <% if preferences[:view] == 'list' %>
 
-  <%= record_slide_table(@project.project_items).caption do |project_item| %>
-    <%= project_item.item.display_name %>
-    <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
-    <hr/>
-    <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
-      <%= f.submit :style => 'display: none' %>
-      <%= f.input_field :note, :label => false, :input_html => {:placeholder => 'Notes...'} %>
+    <%= record_list(@project_items).caption do |project_item| %>
+      <%= collect_button(project_item) %>
     <% end %>
-  <% end %>
 
+  <% else %>
+
+    <%= record_slide_table(@project_items).caption do |project_item| %>
+      <%= project_item.item.display_name %>
+      <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
+      <hr/>
+      <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
+        <%= f.submit :style => 'display: none' %>
+        <%= f.input_field :note, :label => false, :input_html => {:placeholder => 'Notes...'} %>
+      <% end %>
+    <% end %>
+
+  <% end %>
   <%= content_tag :p, "This #{Project.model_name.human} is empty. You can add items to it by clicking the 'Save' button on any of the various items around the site." if @project.empty? %>
 
 <% else %>
+  <% if preferences[:view] == 'list' %>
 
-  <%= record_slide_table(@project.project_items).caption do |project_item| %>
-    <%= project_item.item.display_name %>
-    <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
-    <% if project_item.note.present? %>
-      <hr/>
-      <%= simple_format project_item.note %>
+    <%= record_list(@project_items).caption do |project_item| %>
+      <%= collect_button(project_item) %>
     <% end %>
-  <% end %>
 
+  <% else %>
+
+    <%= record_slide_table(@project_items).caption do |project_item| %>
+      <%= project_item.item.display_name %>
+      <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
+      <% if project_item.note.present? %>
+        <hr/>
+        <%= simple_format project_item.note %>
+      <% end %>
+    <% end %>
+
+  <% end %>
 <% end %>
 
+<%= paginate @project_items %>

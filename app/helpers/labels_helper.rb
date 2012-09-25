@@ -1,5 +1,6 @@
 module LabelsHelper
   def labels_menu
+    view_toggles + ' ' + search_field(Label)
   end
 
   def label_sidebar(label)

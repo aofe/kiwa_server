@@ -5,7 +5,7 @@ module ReferencesHelper
 
 	def process_references(string)
 		string = string.to_s
-		string.gsub! /\{.+\}/ do |match|
+		string.gsub! /\{[^}]+\}/ do |match|
 			space = " ".html_safe
 			begin
 				case match.gsub(/[ {}]/,'') #remove whitespace, and the enclosing braces
@@ -17,16 +17,16 @@ module ReferencesHelper
 					space + archival_reference(Archive.find($1), $2)
 				# Digital Source
 				when /D:(\d+):(.+)/
-					space + "DigitalReference!!" + digital_reference(DigitalReference.find($1))
+					space + digital_reference(DigitalReference.find($1), $2)
 				# Inventory Source
 				when /I:(\d+)/
-					space + "Inventory!!" + inventory_reference(InventoryListEntry.find($1))
+					space + inventory_reference(InventoryListEntry.find($1))
 				# Researchers
 				when /R:(\d+):(.+)/
 					space + researcher_reference(Researcher.find($1))
 				end
 			rescue => e
-				content_tag(:span, " [Reference Error: #{e.message}]", :style => 'color: red')
+				content_tag(:span, match, :title => "[Reference Error: #{e.message}]", :class => 'reference_error')
 			end
 		end
 
@@ -69,7 +69,7 @@ module ReferencesHelper
 
 		case reference.format
 		when 'database'
-			tooltip = "#{reference.institution_long}. Database: #{reference.title}."
+			tooltip = "#{reference.institution.long_name}. Database: #{reference.title}."
 		when 'website'
 			tooltip = reference.author_name.present? ? "#{reference.author_name}. #{reference.title}" : "#{reference.host_name}. #{reference.title}"
 		when 'pdf'

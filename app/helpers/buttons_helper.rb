@@ -68,4 +68,16 @@ module ButtonsHelper
   def button_separator
     "&nbsp;&nbsp;".html_safe
   end
+
+    # TODO: Make MenuBar work with bootstrap button styling so we don't need to create our own
+  def view_toggles
+    output =  link_to('<i class="icon-th-large"></i>'.html_safe, params.merge(:view => 'slides'), :class => [:btn, ('active' unless preferences[:view] == 'list')]) 
+    output << link_to('<i class="icon-align-justify"></i>'.html_safe, params.merge(:view => 'list'), :class => [:btn, ('active' if preferences[:view] == 'list')])
+    content_tag :div, output, :class => 'btn-group'    
+  end
+
+  def search_field(klass, options = {})
+    options.reverse_merge! :autocomplete_url => url_for([:autocomplete, klass]), :clear_html => {:class => 'btn btn-danger'}
+    glint_search_fields(url_for, options)
+  end
 end

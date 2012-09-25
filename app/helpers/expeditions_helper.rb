@@ -9,5 +9,6 @@ module ExpeditionsHelper
   end
 
   def expedition_menu
+    search_field(Expedition)
   end
 end

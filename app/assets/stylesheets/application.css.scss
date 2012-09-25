@@ -3,7 +3,6 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap
- *= require easy_menu 
  *= require glint_autocomplete
  *= require popup_gallery
  *= require_self
@@ -46,6 +45,12 @@ html, body{
   margin: 0;
   padding-bottom: 9px;
   font-weight: normal;
+  z-index: 1;
+
+  .btn-group, .glint_search{
+    display: inline-block;
+    float: none;
+  }
 }
 .clear_search{
     font-size: 14px;

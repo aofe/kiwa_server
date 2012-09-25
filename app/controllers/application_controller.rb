@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
+  include UserPreferences
+  
   protect_from_forgery
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :update_preferences_from_params
 
   class AccessDenied < StandardError; end
 

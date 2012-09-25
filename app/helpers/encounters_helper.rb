@@ -1,21 +1,16 @@
 module EncountersHelper
 
   def encounters_menu
+    view_toggles + " " + search_field(encounter_type)
   end
 
-  def encounter_show_menu_bar
-    MenuBar.new(self, :toggle => true) do |menu|
-      menu.group do |group|
-        for encounter in @encounter.artefact.encounters
-          group.menu_bar_item(link_to encounter.encounter_type.titleize, encounter, :title => "View the #{encounter.encounter_type.titleize} Encounter").selected(@encounter == encounter)
-        end        
-      end
-    end
+  def encounter_menu(encounter)
+    collect_button(encounter)
   end
 
   def encounter_sidebar(encounter)
-    MenuBar.new(self, :theme => "sidebar_menu") do |menu|
-      menu.group do |group|
+    MenuBar.new(self, :theme => "sidebar_menu") do |mb|
+      mb.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')
         sidebar_record_relation(group, 'Expedition', encounter.related_expeditions)
         sidebar_record_relation(group, 'Voyage', encounter.related_voyages)
