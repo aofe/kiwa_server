@@ -16,6 +16,7 @@ gem 'popup_gallery', :git => 'git@github.com:culturecode/popup_gallery.git'
 gem 'tabletastic'
 
 gem 'glint', :git => 'git@github.com:culturecode/glint.git'
+gem 'sunspot_solr', :git => 'git://github.com/sunspot/sunspot.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

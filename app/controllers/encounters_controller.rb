@@ -1,13 +1,14 @@
 class EncountersController < GlintSearchController
+  include EncountersHelper
 
   protected
 
-  def collection
-    EncounterSearch.new(params[:encounter_type], params[:q])
+  def resource_name
+    'encounter'
   end
 
   def klass
-    Encounter
+    encounter_type
   end
 
   def order

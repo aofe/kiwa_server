@@ -27,7 +27,7 @@ module EncountersHelper
   end
 
   def encounter_type
-    case params[:type].to_s
+    case params[:encounter_type].to_s
     when 'Source'
       SourceEncounter
     when 'AOFE'

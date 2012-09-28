@@ -2,11 +2,11 @@ class GlintSearchController < ApplicationController
   caches_action :autocomplete, :cache_path => :autocomplete_cache
 
   def index
-  	instance_variable_set "@#{klass.name.underscore.pluralize}", collection.results(search_options)
+  	instance_variable_set "@#{resource_name.pluralize}", collection.results(search_options)
   end
   
   def show
-  	instance_variable_set "@#{klass.name.underscore}", klass.find(params[:id])
+  	instance_variable_set "@#{resource_name}", klass.find(params[:id])
   end  
 
   def autocomplete
@@ -17,6 +17,10 @@ class GlintSearchController < ApplicationController
 
   def collection
     @collection ||= klass.search_class.new(params[:q])
+  end
+
+  def resource_name
+    klass.name.underscore
   end
 
   def klass

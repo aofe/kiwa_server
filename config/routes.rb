@@ -59,10 +59,10 @@ KIWA::Application.routes.draw do
 
   resources :institutions
   
-  resources :source_encounters, :controller => :encounters, :defaults => {:type => 'Source'} do
+  resources :source_encounters, :controller => :encounters, :defaults => {:encounter_type => 'Source'} do
     get :autocomplete, :on => :collection
   end
-  resources :aofe_encounters, :controller => :encounters, :defaults => {:type => 'AOFE'} do
+  resources :aofe_encounters, :controller => :encounters, :defaults => {:encounter_type => 'AOFE'} do
     get :autocomplete, :on => :collection
   end
 

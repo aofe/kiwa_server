@@ -24,8 +24,8 @@ class SearchesController < ApplicationController
 
   def searches
     {
-      SourceEncounter => EncounterSearch.new(SourceEncounter, params[:q]),
-      AOFEEncounter   => EncounterSearch.new(AOFEEncounter, params[:q]),
+      SourceEncounter => SourceEncounterSearch.new(params[:q]),
+      AOFEEncounter   => AOFEEncounterSearch.new(params[:q]),
       Voyage          => VoyageSearch.new(params[:q]),
       Person          => PersonSearch.new(params[:q]),
       Label           => LabelSearch.new(params[:q]),
