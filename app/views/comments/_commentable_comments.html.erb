@@ -1,3 +1,3 @@
 <h2>Discussion</h2>
-<%= render commentable.comments %>
+<%= render commentable.comments.includes(:user) %>
 <%= render 'comments/form', :comment => commentable.comments.build %>
