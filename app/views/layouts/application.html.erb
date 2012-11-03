@@ -28,7 +28,7 @@
   <div id='page' class='<%= page_class %>'>
     <h1 id='page_header' class='page-header'>
       <%= content_for :page_title %>
-      <%= content_tag :span, content_for(:page_menu), :id => 'page_menu' if content_for?(:page_menu) %>
+      <%= content_tag :span, content_for(:page_menu), :id => 'page_menu', :class => 'btn-toolbar' if content_for?(:page_menu) %>
     </h1>    
     <div id='content'>
       <%= content_tag :div, content_for(:sidebar), :id => 'sidebar' if content_for?(:sidebar) %>

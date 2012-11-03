@@ -1,7 +1,7 @@
 module VoyagesHelper
 
   def voyages_menu
-    search_field(Voyage)
+    sort_menu(:ship_name, :start_date) + search_field(Voyage)
   end
 
   def voyage_menu(voyage)

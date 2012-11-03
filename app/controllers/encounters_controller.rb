@@ -11,11 +11,11 @@ class EncountersController < GlintSearchController
     encounter_type
   end
 
-  def order
-    :name
-  end
-
   def autocomplete_options
     super.merge(:except => :type)
+  end
+
+  def default_order
+    :accession_number
   end
 end

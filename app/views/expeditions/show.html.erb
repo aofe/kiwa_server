@@ -6,7 +6,7 @@
 <% end %>
 <% content_for :nav, back_button(expeditions_path) %>
 
-<%= list_attributes(@expedition, :principle_explorer, :commissioned) %>
+<%= list_attributes(@expedition, :principal_explorer, :commissioned) %>
 
 <% if @expedition.voyages.any? %>
 <h2>Voyages</h2>

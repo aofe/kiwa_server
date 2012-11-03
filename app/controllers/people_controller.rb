@@ -6,6 +6,10 @@ class PeopleController <  GlintSearchController
   end
 
   def search_options
-  	super.merge(:order => :sort_name, :per_page => 36)
+  	super.merge(:per_page => 36)
+  end
+
+  def default_order
+    :sort_name
   end
 end

@@ -1,6 +1,6 @@
 module PeopleHelper
 	def people_menu
-    search_field(Person)
+    sort_menu(:sort_name, :first_name) + search_field(Person)
 	end
 
   def person_menu(person)

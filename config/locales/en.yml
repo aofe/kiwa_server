@@ -13,3 +13,9 @@ en:
     labels:
       project:
         public: "Visible to other researchers"
+
+  glint:
+    facets:
+      score: 'Search Relevance'
+      sort_name: 'Name'
+      short_title: 'Title'

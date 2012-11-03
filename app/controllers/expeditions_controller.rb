@@ -5,7 +5,7 @@ class ExpeditionsController <  GlintSearchController
     Expedition
   end
 
-  def order
+  def default_order
     :title
   end
 end

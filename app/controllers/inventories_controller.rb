@@ -5,7 +5,7 @@ class InventoriesController < GlintSearchController
 		Inventory
 	end
 
-	def order
+	def default_order
 		:short_title
 	end
 end

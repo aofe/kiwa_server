@@ -24,18 +24,13 @@ html, body{
 }
 #page_header{
   position: relative;
-
-}
-.with_page_menu #page_header{
-  margin-right: $sidebar-width + $sidebar-padding;
 }
 
 #page_menu{
   position: absolute;
-  right: -$sidebar-width - $sidebar-padding;
-  width: $sidebar-width;
+  right: 0;
   bottom: 0;
-  line-height: 40px;
+  line-height: normal;
   border-bottom: 1px solid #EEEEEE;
   margin: 0;
   padding-bottom: 9px;

@@ -4,4 +4,8 @@ class LabelsController <  GlintSearchController
   def klass
     Label
   end
+
+  def default_order
+    :id_tag
+  end
 end

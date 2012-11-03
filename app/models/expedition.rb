@@ -2,7 +2,7 @@ class Expedition < ActiveRecord::Base
   acts_as_relatable :encounter
   
   has_one :person_expedition
-  has_one :principle_explorer, :through => :person_expedition, :class_name => 'Person', :source => 'person'
+  has_one :principal_explorer, :through => :person_expedition, :class_name => 'Person', :source => 'person'
   has_many :voyages  
   has_many :crew_list_entries, :through => :voyages
   has_many :people, :through => :crew_list_entries
@@ -18,8 +18,8 @@ class Expedition < ActiveRecord::Base
 
   # GLINT
 
-  def principle_explorer_name
-    principle_explorer.try(:display_name)
+  def principal_explorer_name
+    principal_explorer.try(:display_name)
   end
   acts_as_searchable :default => :full_text
 
@@ -27,5 +27,5 @@ class Expedition < ActiveRecord::Base
 
   has_facet :title
   has_facet :commissioned
-  has_facet :principle_explorer_name, :attribute_type => :string, :param => 'principle explorer'
+  has_facet :principal_explorer_name, :attribute_type => :string, :param => 'principal explorer'
 end

@@ -35,7 +35,7 @@ module LocationHelper
   end
 
   def locations_menu
-    search_field(Location)
+    sort_menu(:name) + search_field(Location)
   end  
 end
 

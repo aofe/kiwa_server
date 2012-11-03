@@ -9,6 +9,6 @@ module ExpeditionsHelper
   end
 
   def expedition_menu
-    search_field(Expedition)
+    sort_menu(:title) + search_field(Expedition)
   end
 end

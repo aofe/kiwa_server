@@ -1,7 +1,7 @@
 module EncountersHelper
 
   def encounters_menu
-    view_toggles + " " + search_field(encounter_type)
+    sort_menu(:accession_number, :name, :institution) + view_toggles + search_field(encounter_type)
   end
 
   def encounter_menu(encounter)

@@ -1,5 +1,6 @@
-class GlintSearchController < ApplicationController  
+class GlintSearchController < ApplicationController
   caches_action :autocomplete, :cache_path => :autocomplete_cache
+  helper_method :order, :default_order
 
   def index
   	instance_variable_set "@#{resource_name.pluralize}", collection.results(search_options)
@@ -28,7 +29,7 @@ class GlintSearchController < ApplicationController
   end
 
   def search_options
-  	{:page => params[:page], :per_page => 12, :order => order}
+  	{:page => params[:page], :per_page => 12, :order => {order => preferences[:direction]}}
   end
 
   def autocomplete_options
@@ -36,7 +37,16 @@ class GlintSearchController < ApplicationController
   end
 
   def order
-    nil
+    desired_order = preferences[:order][resource_name.pluralize].to_s
+    if desired_order == 'score' || desired_order == 'primary_key' || klass.search_class.facet?(desired_order)
+      desired_order
+    else
+      default_order
+    end
+  end
+
+  def default_order
+    :primary_key
   end
 
   def autocomplete_cache_url

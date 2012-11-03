@@ -76,8 +76,20 @@ module ButtonsHelper
     content_tag :div, output, :class => 'btn-group'    
   end
 
-  def search_field(klass, options = {})
-    options.reverse_merge! :autocomplete_url => url_for([:autocomplete, klass]), :clear_html => {:class => 'btn btn-danger'}
-    glint_search_fields(url_for, options)
+  def sort_menu(*facets)
+    if preferences[:direction].to_s == 'desc'
+      arrow = link_to(content_tag(:i, '', :class => 'icon-chevron-down'), params.merge(:direction => :asc), :class => "btn dropdown-toggle", :title => 'Sorting Descending')
+    else
+      arrow = link_to(content_tag(:i, '', :class => 'icon-chevron-up'), params.merge(:direction => :desc), :class => "btn dropdown-toggle", :title => 'Sorting Ascending')
+    end
+
+    content_tag :div, :class => "btn-group" do
+      button_tag("Sorting by " + I18n.t(order, :scope => [:glint, :facets], :default => order.to_s).titleize, :class => 'btn', :class => 'btn', 'data-toggle' => 'dropdown') + arrow +
+      content_tag(:ul, :class => 'dropdown-menu') do
+        facets.collect do |facet|
+          link_to I18n.t("glint.facets.#{facet}", :default => facet.to_s).titleize, params.merge(:order => facet)
+        end.join.html_safe
+      end      
+    end
   end
 end

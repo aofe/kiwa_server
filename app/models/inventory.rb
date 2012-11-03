@@ -20,4 +20,5 @@ class Inventory < ActiveRecord::Base
   has_facet :description
   has_facet :source_reference
   has_facet :inventory_list_entries, :accessor_method => :description
+  has_facet :size, :attribute_type => :integer
 end

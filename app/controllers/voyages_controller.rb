@@ -5,7 +5,7 @@ class VoyagesController <  GlintSearchController
     Voyage
   end
 
-  def order
+  def default_order
     :ship_name
   end
 end
