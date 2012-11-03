@@ -12,7 +12,8 @@ module EncounterSearchExtensions
       has_facet :place_of_origin, :param => :origin
       has_facet :indigenous_name
       has_facet :material
-      has_facet :description   
+      has_facet :description
+      has_facet :institution, :accessor_method => :long_name
     end
   end
 end
