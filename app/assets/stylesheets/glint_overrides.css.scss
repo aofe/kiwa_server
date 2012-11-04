@@ -15,6 +15,10 @@
   // Search field
   .main_form_input{
     margin: 0;
+    width: 200px;
+    -moz-transition: width .25s;
+  }
+  .main_form_input:focus{
     width: 300px;
   }
   .main_form_input:focus ~ .autocomplete_choices_container {

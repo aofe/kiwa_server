@@ -116,6 +116,10 @@ module RecordHelper
     RecordSlideTable.new(self, records, options)
   end
 
+  def record_slide(record, options = {})
+    RecordSlide.new(self, record, options)
+  end
+
   class RecordSlideTable
     def initialize(template, records, options = {})
       @template = template
@@ -124,7 +128,7 @@ module RecordHelper
     end
 
     def to_s
-      @template.content_tag :div, @entries.collect(&:to_s).join.html_safe, :class => 'record_slide_table'
+      @template.content_tag :div, @entries.collect(&:to_s).join.html_safe, :class => [@options[:class], 'record_slide_table'].compact.join(' ')
     end
 
     def caption(&block)

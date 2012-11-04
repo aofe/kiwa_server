@@ -1,4 +1,5 @@
 <%= MenuBar.new(self, :theme => false, :class => 'nav') do |mb|
+  # mb.menu_bar_content('', :class => "divider-vertical")
   section_link(mb, SourceEncounter, params[:controller] == 'encounters' && encounter_type == SourceEncounter)
   section_link(mb, AOFEEncounter, params[:controller] == 'encounters' && encounter_type == AOFEEncounter)
   section_link(mb, Voyage, params[:controller] == 'voyages')
@@ -9,8 +10,9 @@
   section_link(mb, Expedition, params[:controller] == 'expeditions')
   section_link(mb, Location, params[:controller] == 'locations')
 end %>
-
-<%#= glint_search_fields(searches_path, :autocomplete_url => autocomplete_searches_path) %>
+<%= form_tag searches_path, :class => 'navbar-search', :id => 'site_search', :method => :get do %>
+  <%= text_field_tag :q, '', :placeholder => 'Search...' %>
+<% end %>
 
 <%= MenuBar.new(self, :theme => false, :class => 'nav pull-right') do |mb|
   mb.menu_bar_content link_to('Sign Out', destroy_user_session_path, :method => :delete, :id => 'sign_out') if user_signed_in?

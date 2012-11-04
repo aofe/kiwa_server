@@ -1,11 +1,18 @@
 <% content_for :page_title, "Searched for \"#{params[:q]}\" and found:" %>
 
 <table class='table'>
+  <thead>
+    <th>Type</th>
+    <th>Top 10 Results</th>
+  </thead>
 <% @searches.each do |klass, search| %>
 	<tr>
 		<td style='white-space: nowrap'><%= klass.model_name.human.pluralize %></td>
-		<td><%= search.result_count %></td>
-		<td style='width: 100%'><%= link_to 'View matches', polymorphic_path(klass, :q => params[:q]) %></td>
+    <td style='width: 100%; overflow: hidden'>
+      <%= record_slide_table search.results(:per_page => 10), :class => 'horizontal' %>
+    </td>
+		<td style='white-space: nowrap'><%= link_to 'View all', polymorphic_path(klass, :q => params[:q]) %></td>
+    <td>(<%= search.result_count %>)</td>
 	</tr>
 <% end %>
 </table>

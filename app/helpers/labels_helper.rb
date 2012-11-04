@@ -1,6 +1,6 @@
 module LabelsHelper
   def labels_menu
-    sort_menu(:id_tag) + view_toggles + search_field(Label)
+    view_toggles + sort_menu(:id_tag) + search_field(Label)
   end
 
   def label_sidebar(label)
