@@ -1,8 +1,15 @@
 module SearchHelper
   def search_field(klass, options = {})
-    url = polymorphic_path(klass)
-    options.reverse_merge! :form_params => {:order => :score, :direction => :desc} # When we search, apply a sort order of relevance descending
-    options.reverse_merge! :clear_url => params.merge(:q => nil, :order => default_order, :direction => :asc) # When we clear the search, go back to sorting by the default order    
+    url = options.delete(:url) || polymorphic_path(klass)
+
+    if respond_to?(:default_order)
+      order = default_order 
+      options.reverse_merge! :form_params => {:order => :score, :direction => :desc} # When we search, apply a sort order of relevance descending
+      options.reverse_merge! :clear_url => params.merge(:q => nil, :order => order, :direction => :asc) # When we clear the search, go back to sorting by the default order    
+    else
+      options.reverse_merge! :clear_url => params.merge(:q => nil)
+    end
+
     options.reverse_merge! :autocomplete_url => url_for([:autocomplete, klass]),
       :query_param         => :q,
       :input_html          => {:placeholder => "Filter..."},
