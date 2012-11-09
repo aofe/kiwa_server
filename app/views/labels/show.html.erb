@@ -10,4 +10,12 @@
 <%= list_attributes(@label, {'Institution' => label_source_name(@label)}, :id_tag, :inscription, :dimensions, :attachment_method, :attachment_location) %>
 <%= record_media(@label.media_items) %>
 
+<h3>Description</h3>
+<%= content_tag :p, @label.description %>
+
+<% if @label.notes.any? %>
+<h3>Researcher Notes</h3>
+<%= render @label.notes %>
+<% end %>
+
 <%= javascript_tag "PopupGallery('#record_media .media_thumbnail')" %>

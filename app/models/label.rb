@@ -4,6 +4,7 @@ class Label < ActiveRecord::Base
   has_many :media_items, :as => :attachable
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
   has_many :comments, :as => :commentable
+  has_many :notes, :as => :notable
   
   acts_as_relatable :artefact
     
@@ -24,6 +25,7 @@ class Label < ActiveRecord::Base
   has_facet :id_tag
   has_facet :institution, :accessor_method => :long_name
   has_facet :inscription
+  has_facet :description
   has_facet :attachment_method
   has_facet :attachment_location
   has_facet :related_encounters, :accessor_method => :display_name, :multiple => true, :attribute_type => :string, :param => :encounter

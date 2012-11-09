@@ -16,6 +16,6 @@ class EncountersController < GlintSearchController
   end
 
   def default_order
-    :accession_number
+    :name
   end
 end
