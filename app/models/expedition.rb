@@ -12,14 +12,14 @@ class Expedition < ActiveRecord::Base
     self.title
   end
   
-  def display_name
+  def to_s
     name
   end
 
   # GLINT
 
   def principal_explorer_name
-    principal_explorer.try(:display_name)
+    principal_explorer.try(:to_s)
   end
   acts_as_searchable :default => :full_text
 

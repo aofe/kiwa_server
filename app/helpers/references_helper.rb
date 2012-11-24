@@ -86,6 +86,6 @@ module ReferencesHelper
 	end
 
 	def researcher_reference(reference)
-		content_tag :span, "(#{reference.display_name})", :class => 'reference'
+		content_tag :span, "(#{reference.to_s})", :class => 'reference'
 	end
 end

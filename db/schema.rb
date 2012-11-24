@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109130651) do
+ActiveRecord::Schema.define(:version => 20121124224729) do
 
   create_table "archives", :force => true do |t|
     t.integer  "institution_id"
@@ -29,24 +29,6 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.integer  "end_year"
     t.integer  "end_month"
     t.integer  "end_day"
-  end
-
-  create_table "archives_old", :force => true do |t|
-    t.integer  "institution_id",                 :null => false
-    t.string   "id_num",         :limit => 150,  :null => false
-    t.string   "archive_type",   :limit => 25,   :null => false
-    t.string   "sub_type",       :limit => 25,   :null => false
-    t.string   "author",                         :null => false
-    t.integer  "start_year",                     :null => false
-    t.integer  "start_month",                    :null => false
-    t.integer  "start_day",                      :null => false
-    t.integer  "end_year",                       :null => false
-    t.integer  "end_month",                      :null => false
-    t.integer  "end_day",                        :null => false
-    t.string   "title_long",     :limit => 1000, :null => false
-    t.string   "title_short",    :limit => 150,  :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
   end
 
   create_table "artefacts", :force => true do |t|
@@ -81,6 +63,29 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.datetime "updated_at"
   end
 
+  create_table "crier_listenings", :force => true do |t|
+    t.integer "notification_id"
+    t.integer "user_id"
+  end
+
+  add_index "crier_listenings", ["notification_id"], :name => "index_crier_listenings_on_notification_id"
+  add_index "crier_listenings", ["user_id"], :name => "index_crier_listenings_on_user_id"
+
+  create_table "crier_notifications", :force => true do |t|
+    t.string   "scope"
+    t.text     "message"
+    t.integer  "crier_id"
+    t.string   "subject_type"
+    t.integer  "subject_id"
+    t.string   "action"
+    t.text     "metadata"
+    t.boolean  "private",      :default => false, :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "crier_notifications", ["scope"], :name => "index_crier_notifications_on_scope"
+
   create_table "encounters", :force => true do |t|
     t.integer  "artefact_id"
     t.string   "type"
@@ -93,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.string   "material"
     t.text     "description"
     t.string   "dimensions"
-    t.text     "notes"
+    t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -184,14 +189,14 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
   end
 
   create_table "media_items", :force => true do |t|
-    t.integer  "attachable_id",                                :null => false
-    t.string   "attachable_type",              :default => "", :null => false
-    t.integer  "display_order",                                :null => false
-    t.string   "source_url",                   :default => "", :null => false
-    t.text     "description",                                  :null => false
-    t.string   "is_scaleable",    :limit => 3,                 :null => false
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "display_order"
+    t.string   "source_url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_scaleable"
   end
 
   create_table "notes", :force => true do |t|
@@ -232,12 +237,11 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
 
   create_table "project_items", :force => true do |t|
     t.integer  "item_id"
-    t.integer  "old_item_id"
     t.string   "item_type"
     t.integer  "project_id"
     t.text     "note"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -266,23 +270,6 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.integer  "source_day"
   end
 
-  create_table "reference_digital_old", :force => true do |t|
-    t.string   "format",         :limit => 50,  :null => false
-    t.integer  "institution_id",                :null => false
-    t.string   "host_name",                     :null => false
-    t.string   "author_name",    :limit => 150, :null => false
-    t.string   "title",          :limit => 150, :null => false
-    t.integer  "source_year",                   :null => false
-    t.integer  "source_month",                  :null => false
-    t.integer  "source_day",                    :null => false
-    t.integer  "online_status",  :limit => 1,   :null => false
-    t.string   "url",            :limit => 150, :null => false
-    t.string   "copyright",                     :null => false
-    t.text     "research_notes",                :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
   create_table "reference_text", :force => true do |t|
     t.string   "source_type"
     t.string   "author_name"
@@ -309,39 +296,12 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.integer  "source_day"
   end
 
-  create_table "reference_text_old", :force => true do |t|
-    t.string   "source_type",    :limit => 10,   :null => false
-    t.string   "author_name",                    :null => false
-    t.string   "author_initial",                 :null => false
-    t.integer  "source_year",                    :null => false
-    t.integer  "source_month",                   :null => false
-    t.integer  "source_day",                     :null => false
-    t.string   "title",          :limit => 1000, :null => false
-    t.string   "city",                           :null => false
-    t.string   "publisher",                      :null => false
-    t.string   "book_editor",    :limit => 150,  :null => false
-    t.string   "book_title",                     :null => false
-    t.string   "journal_title",                  :null => false
-    t.string   "volume",         :limit => 10,   :null => false
-    t.string   "number",         :limit => 10,   :null => false
-    t.string   "pages",          :limit => 100,  :null => false
-    t.string   "first_edition",  :limit => 10,   :null => false
-    t.string   "other_edition",  :limit => 10,   :null => false
-    t.string   "institution",                    :null => false
-    t.string   "department",                     :null => false
-    t.string   "qualification",                  :null => false
-    t.text     "notes",                          :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
-
   create_table "relations", :force => true do |t|
     t.integer  "target_id"
     t.string   "target_type"
     t.integer  "source_id"
     t.string   "source_type"
     t.string   "rating"
-    t.string   "reference"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -380,48 +340,23 @@ ActiveRecord::Schema.define(:version => 20121109130651) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "remember_created_at"
     t.string   "name"
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
-    t.integer  "invitation_count_old"
-    t.integer  "invitation_limit"
+    t.string   "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.integer  "active_old"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "invitation_count"
     t.integer  "active"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
-
-  create_table "users_copy", :force => true do |t|
-    t.string   "email",                                :default => "", :null => false
-    t.string   "encrypted_password",                   :default => ""
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.integer  "sign_in_count",                        :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "invitation_token",       :limit => 60
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-  end
-
-  add_index "users_copy", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users_copy", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "voyages", :force => true do |t|
     t.integer  "expedition_id"

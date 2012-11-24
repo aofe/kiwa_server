@@ -3,6 +3,6 @@
 <% content_for :pagination, paginate(@cards) %>
 
 <%= record_slide_table(@cards).caption do |card| %>
-  <%= card.display_name %>
+  <%= card.to_s %>
   <%= collect_button(card) %>  
 <% end %>

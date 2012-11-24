@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     create!{ polymorphic_path(@comment.commentable) }
+    current_user.cry("#{current_user} commented on #{@comment.commentable}", :subject => @comment, :action => :commented)
   end
 
   private

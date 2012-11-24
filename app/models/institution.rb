@@ -6,7 +6,7 @@ class Institution < ActiveRecord::Base
   validates_presence_of :long_name, :short_name
   validates_uniqueness_of :long_name
 
-  def display_name
+  def to_s
   	self.long_name
   end
 end

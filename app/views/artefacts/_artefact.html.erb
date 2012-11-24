@@ -1,1 +1,1 @@
-Artefact Encounters: <%= artefact.encounters.collect {|encounter| link_to encounter.display_name, encounter }.join(', ') %>
+Artefact Encounters: <%= artefact.encounters.collect {|encounter| link_to encounter.to_s, encounter }.join(', ') %>

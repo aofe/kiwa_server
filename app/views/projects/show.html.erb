@@ -1,4 +1,4 @@
-<% content_for :page_title, @project.display_name %>
+<% content_for :page_title, @project.to_s %>
 <% content_for :page_menu, project_menu(@project) %>
 <% content_for :sidebar do %>
   <%= render 'comments/commentable_comments', :commentable => @project %>
@@ -8,6 +8,7 @@
   <% if preferences[:view] == 'list' %>
 
     <%= record_list(@project_items).caption do |project_item| %>
+      <%= delete_button(project_item) %>
       <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
         <%= f.submit :style => 'display: none' %>
         <%= f.input_field :note, :as => :string, :placeholder => 'Notes...' %>
@@ -17,7 +18,7 @@
   <% else %>
 
     <%= record_slide_table(@project_items).caption do |project_item| %>
-      <%= project_item.item.display_name %>
+      <%= project_item.item.to_s %><%= delete_button(project_item) %>
       <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
       <hr/>
       <%= simple_form_for project_item, :remote => true, :html => {:class => 'project_item_notes_form'} do |f| %>
@@ -40,7 +41,7 @@
   <% else %>
 
     <%= record_slide_table(@project_items).caption do |project_item| %>
-      <%= project_item.item.display_name %>
+      <%= project_item.item.to_s %>
       <span class='project_item_type'><%= project_item.item.class.model_name.human %></span>
       <% if project_item.note.present? %>
         <hr/>

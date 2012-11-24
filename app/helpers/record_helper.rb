@@ -13,7 +13,7 @@ module RecordHelper
           attribute_name = attribute.keys.first
         elsif reflection = record.class.reflect_on_association(attribute)
           # If the value is actually another record or records, get that record's display name
-          value = Array(record.send(attribute)).collect(&:display_name).join(', ')
+          value = Array(record.send(attribute)).collect(&:to_s).join(', ')
           attribute_name = record.class.human_attribute_name(attribute)
         else
           value = process_references record.send(attribute)
@@ -70,7 +70,7 @@ module RecordHelper
       if @content
         output = @content
       else
-        output = @template.content_tag(:span, @record.display_name, :class => :name)
+        output = @template.content_tag(:span, @record.to_s, :class => :name)
         output << @template.content_tag(:span, @record.description, :class => :description) if @record['description'].present?
       end
 
@@ -149,7 +149,7 @@ module RecordHelper
 
     def to_s
       if @record.respond_to?(:primary_media_item) && @record.primary_media_item
-        image = @template.image_tag(@record.primary_media_item.thumbnail_url(300), :class => 'image', :title => @record.display_name)
+        image = @template.image_tag(@record.primary_media_item.thumbnail_url(300), :class => 'image', :title => @record.to_s)
       else
         image = @template.content_tag(:div, 'No Image', :class => 'image')
       end
@@ -193,7 +193,7 @@ module RecordHelper
       for record in related_records
         text = ''.html_safe
         text << media_thumbnail(record.primary_media_item, :size => 28, :link_to => nil) + " " if record.respond_to? :primary_media_item
-        text << record.display_name
+        text << record.to_s
         
         menu.menu_item link_to(text, record)
       end

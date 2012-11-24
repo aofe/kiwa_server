@@ -8,12 +8,12 @@
 .attribute_name{
     font-weight: bold;
 }
-@mixin add-to-project-button{
-    .save_to_project{
+@mixin hover-button{
+    .btn{
         vertical-align: middle;
         display: none;
     }
-    &:hover .save_to_project{
+    &:hover .btn{
         display: inline-block;
     }
 }
@@ -24,6 +24,7 @@
     .record_slide{
         @include entity_list_entry;
         text-align: center;
+        position: relative; // Contain add-to-project button
 
         .image{
             width: 100%;
@@ -32,7 +33,6 @@
             padding: $entity-padding;
         }
         .caption{
-            position: relative; // Contain add-to-project button
             background: #EEE;
             padding: $entity-padding;
             margin: $entity-padding (-$entity-padding) (-$entity-padding);
@@ -43,10 +43,10 @@
             word-wrap: break-word;
         }
 
-        @include add-to-project-button;
-        .save_to_project{
+        @include hover-button;
+        .btn{
             position: absolute;
-            right: 1em;
+            right: 0.5em;
             top: 0.5em;         
         }
     }
@@ -73,7 +73,7 @@
 
 $caption-width: 100px;
 .record_list_entry{
-    @include add-to-project-button;
+    @include hover-button;
     @include entity_list_entry;
     padding: 0;
     

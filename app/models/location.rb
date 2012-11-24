@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
   geocoded_by :name
   after_validation :geocode
   
-  def display_name
+  def to_s
     self.name
   end
   

@@ -11,7 +11,7 @@ class Voyage < ActiveRecord::Base
 
   after_save :geocode_locations
   
-  def display_name
+  def to_s
     output = self.ship_name.dup
     output << " (#{start_date.to_formatted_s(:long_ordinal)})" if start_date
     return output

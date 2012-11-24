@@ -31,6 +31,7 @@
       <%= content_tag :span, content_for(:page_menu), :id => 'page_menu', :class => 'btn-toolbar' if content_for?(:page_menu) %>
     </h1>    
     <div id='content'>
+      <div id="alerts"><%= flash_messages %></div>
       <%= content_tag :div, content_for(:sidebar), :id => 'sidebar' if content_for?(:sidebar) %>
       
       <%= yield %>

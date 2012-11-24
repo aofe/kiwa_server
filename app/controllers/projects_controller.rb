@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
       project.user = current_user
     end
     redirect_to project
+    current_user.cry("#{current_user} created a new #{Project.model_name.human}", :subject => @project, :action => :new_project)
   end
 
   def show

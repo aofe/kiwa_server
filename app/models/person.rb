@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
     output << " (#{other_name})" if other_name.present?
     output.gsub(/\s+/, ' ').strip # strip because some people have leading whitespace in their names
   end
-  alias :display_name :sort_name
+  alias :to_s :sort_name
 
   # GLINT
   acts_as_searchable :default => :full_text

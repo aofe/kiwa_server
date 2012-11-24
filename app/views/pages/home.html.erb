@@ -8,5 +8,5 @@
 
 <h2>Other researchers' <%= Project.model_name.human.pluralize %></h2>
 <%= record_list(Project.public.where('user_id <> ?', current_user.id)).caption do |project| %>
-  <%= content_tag :span, project.user.display_name, :class => :metadata %>
+  <%= content_tag :span, project.user.to_s, :class => :metadata %>
 <% end %>

@@ -3,7 +3,7 @@
 <% content_for :pagination, paginate(@inventories) %>
 
 <%= RecordHelper::RecordList.new(self, @inventories).content do |inventory| %>
-  <%= content_tag :span, inventory.display_name, :class => :name %>
+  <%= content_tag :span, inventory.to_s, :class => :name %>
   <%= content_tag :span, pluralize(inventory.size, 'entry'), :class => :metadata %>
 <% end.caption do |inventory| %>
   <%= collect_button(inventory) %>  

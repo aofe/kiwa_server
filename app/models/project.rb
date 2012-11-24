@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
     end.flatten
   end
 
-  def display_name
+  def to_s
     self.name
   end
 

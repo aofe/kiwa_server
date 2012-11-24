@@ -1,4 +1,4 @@
-<% content_for :page_title, @inventory.display_name %>
+<% content_for :page_title, @inventory.to_s %>
 <% content_for :page_menu, collect_button(@inventory) %>
 <% content_for :sidebar do %>
   <%= render 'comments/commentable_comments', :commentable => @inventory %>

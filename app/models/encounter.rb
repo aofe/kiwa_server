@@ -30,7 +30,7 @@ class Encounter < ActiveRecord::Base
     other_encounters.type('aofe')
   end
   
-  def display_name
+  def to_s
     "#{self.name} - #{self.accession_number}"
   end
   

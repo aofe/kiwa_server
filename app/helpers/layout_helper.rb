@@ -12,6 +12,6 @@ module LayoutHelper
   end
 
   def page_title(record)
-  	record.display_name
+  	record.to_s
   end
 end

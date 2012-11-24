@@ -8,7 +8,7 @@
   <% end %>
 <% else %>
   <%= record_slide_table(@encounters).caption do |encounter| %>
-    <%= encounter.display_name %>
+    <%= encounter.to_s %>
     <%= collect_button(encounter) %>
   <% end %>
 <% end %>

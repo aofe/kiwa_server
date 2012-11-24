@@ -8,7 +8,7 @@ class Label < ActiveRecord::Base
   
   acts_as_relatable :artefact
     
-  def display_name
+  def to_s
     self.id_tag.presence || self.inscription
   end
   
@@ -28,5 +28,5 @@ class Label < ActiveRecord::Base
   has_facet :description
   has_facet :attachment_method
   has_facet :attachment_location
-  has_facet :related_encounters, :accessor_method => :display_name, :multiple => true, :attribute_type => :string, :param => :encounter
+  has_facet :related_encounters, :accessor_method => :to_s, :multiple => true, :attribute_type => :string, :param => :encounter
 end

@@ -21,5 +21,5 @@ class Card < ActiveRecord::Base
   has_facet :institution, :accessor_method => :long_name
   has_facet :inscription
   has_facet :location
-  has_facet :related_encounters, :accessor_method => :display_name, :multiple => true, :attribute_type => :string, :param => :encounter
+  has_facet :related_encounters, :accessor_method => :to_s, :multiple => true, :attribute_type => :string, :param => :encounter
 end

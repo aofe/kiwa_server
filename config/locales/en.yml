@@ -4,10 +4,11 @@
 en:
   activerecord:
     models:
-      source_encounter: 'Collections Records'
+      source_encounter: 'Collections Record'
       aofe_encounter: 'Encounter'
       card: 'Catalogue Card'
       project: 'Collection'
+      project_item: "Collection Item"
 
   simple_form:
     labels:
@@ -19,3 +20,8 @@ en:
       score: 'Search Relevance'
       sort_name: 'Name'
       short_title: 'Title'
+
+  messages:
+    project_item:
+      destroy_failed: "Couldn't remove #{ProjectItem.model_name}, have you already deleted it?"
+      destroyed: "Removed %{model}"

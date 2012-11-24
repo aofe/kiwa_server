@@ -8,7 +8,7 @@
   <% end %>
 <% else %>
   <%= record_slide_table(@labels).caption do |label| %>
-    <%= label.display_name %>
+    <%= label.to_s %>
     <%= collect_button(label) %>  
   <% end %>
 <% end %>

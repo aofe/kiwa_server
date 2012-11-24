@@ -1,4 +1,4 @@
-<% content_for :page_title, @label.display_name %>
+<% content_for :page_title, @label.to_s %>
 <% content_for :page_menu, collect_button(@label) %>
 <% content_for :sidebar do %> 
   <%= label_sidebar(@label) %>

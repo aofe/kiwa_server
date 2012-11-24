@@ -8,7 +8,7 @@ class InventoryListEntry < ActiveRecord::Base
 
   acts_as_relatable :artefact, :inventory_list_entry
   
-  def display_name
+  def to_s
     self.id_tag.presence || "Unidentified Entry"
   end
   

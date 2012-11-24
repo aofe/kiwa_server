@@ -21,6 +21,15 @@ class ProjectItemsController < ApplicationController
     redirect_to resource.item
   end
 
+  def destroy
+    project_item = ProjectItem.find(params[:id])
+    current_user.projects.find(project_item.project_id)
+    project_item.destroy
+    redirect_to :back, :notice => I18n.t("messages.project_item.destroyed", :model => project_item.item.class.model_name.human)
+  rescue ActiveRecord::RecordNotFound
+    redirect_to :back, :alert => I18n.t("messages.project_item.destroy_failed")
+  end
+
   def autocomplete
     render :json => ProjectItemSearch.new(params[:project_id], params[:q]).autocomplete_tags(:limit => 10)
   end
