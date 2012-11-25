@@ -2,10 +2,10 @@ KIWA::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Do not compress assets
-  config.assets.compress = true
+  config.assets.compress = false
 
   # Do not compress assets
-  config.assets.debug = false
+  config.assets.debug = true
 
 
   # In the development environment your application's code is reloaded on
