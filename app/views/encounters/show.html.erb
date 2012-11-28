@@ -24,4 +24,8 @@
 <%= render @encounter.notes %>
 <% end %>
 
-<%= javascript_tag "PopupGallery('#record_media .media_thumbnail')" %>
+<%= javascript_tag do %>
+  if (!isMobile.any()){
+    PopupGallery('#record_media .media_thumbnail')
+  }
+<% end %>
