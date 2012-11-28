@@ -1,6 +1,7 @@
 @import 'mixins';
 
 $sidebar-link-color: #333;
+$sidebar-border-radius: 15px;
 
 #page.with_sidebar{
     #content{
@@ -10,6 +11,7 @@ $sidebar-link-color: #333;
 
 #sidebar{
     position: absolute;
+    top: 0;
     right: -$sidebar-width - $sidebar-padding;
     width: $sidebar-width;
     @include border-box;
@@ -33,8 +35,8 @@ $sidebar-link-color: #333;
 #sidebar .menu_bar_group{
     background: rgba(235, 235, 235, 0.4);
     border: 1px solid #F5F5F5;
-    border-radius: 15px 15px 15px 15px;
-    margin: 1em -2em;
+    border-radius: $sidebar-border-radius;
+    margin: 0 -2em 1em;
     padding: 1em 2em;
 }
 
@@ -50,9 +52,6 @@ $sidebar-link-color: #333;
 }
 @mixin sidebar-hoverable-list-item{
     @include sidebar-list-item;
-    &:hover, &.selected{
-        // background: #F0F0F0;
-    }    
 }
 
 #sidebar{
@@ -81,6 +80,30 @@ $sidebar-link-color: #333;
         @include sidebar-hoverable-list-item;
         font-size: 0.8em;
         margin: 0 -1rem;
-        // text-decoration: none;
     }
+}
+
+// RESPONSIVE
+
+// Make the related section of the sidebar not spill off the narrower page
+@media (min-width: $responsive-width-small) and (max-width: $responsive-width-medium) {
+  #page.with_sidebar .menu_bar_group{
+    margin: 0 -20px 1em;
+    border-radius: $sidebar-border-radius 0 0 $sidebar-border-radius;
+  }
+}
+
+// Move the sidebar below the content when the page is too small to have multiple columns
+@media (max-width: $responsive-width-small) {
+  #page.with_sidebar #content{
+    margin: 0;
+  }
+  #page.with_sidebar .menu_bar_group{
+    margin: 0 -20px 1em;
+    border-radius: 0;
+  }
+  #sidebar{
+    position: static;
+    width: auto;
+  }  
 }

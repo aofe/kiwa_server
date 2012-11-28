@@ -31,7 +31,6 @@ html, body{
   right: 0;
   bottom: 0;
   line-height: normal;
-  border-bottom: 1px solid #EEEEEE;
   margin: 0;
   padding-bottom: 9px;
   font-weight: normal;
@@ -47,4 +46,22 @@ html, body{
 }
 .pagination{
   text-align: center;
+}
+
+// RESPONSIVE
+
+@media (max-width: $responsive-width-medium) {
+  #page.with_page_menu{
+    #page_header{
+      margin-right: 0;
+    }
+    #page_menu{
+      border: none;
+      line-height: normal;
+      padding: 0;
+      position: static;
+      width: auto;
+      display: block;
+    }
+  }
 }
