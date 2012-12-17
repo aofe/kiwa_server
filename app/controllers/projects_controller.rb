@@ -5,12 +5,14 @@ class ProjectsController < ApplicationController
   before_filter :authorize_owner!, :only => [:edit, :update, :destroy]
 
   def create
-    project = Project.create! do |project| 
-      project.assign_attributes params[:project]
-      project.user = current_user
-    end
-    redirect_to project
+    @project = Project.new(params[:project])
+    @project.user = current_user
+    @project.save!
+
+    redirect_to @project
     current_user.cry("#{current_user} created a new #{Project.model_name.human}", :subject => @project, :action => :new_project)
+  rescue ActiveRecord::RecordInvalid
+    render :new
   end
 
   def show
