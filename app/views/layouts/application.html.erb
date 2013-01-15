@@ -4,6 +4,8 @@
   <title>Encounter</title>
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag :application %>
+  <%= stylesheet_link_tag :offline if offline_mode? %>
+  <%= javascript_include_tag :offline if offline_mode? %>
   <%= csrf_meta_tag %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -16,14 +18,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <% if offline_mode? %>
+          <% if offline_mode? && params[:controller] != 'projects' %>
             <%= link_to 'KIWA Offline', pages_path(:offline_index), :class => 'brand' %>
+            <div class="nav-collapse collapse"><%= render 'shared/site_menu' %></div>
+          <% elsif offline_mode? %>
+            <%= link_to 'KIWA Offline Project', '', :class => 'brand' %>
           <% else %>
             <%= link_to 'KIWA', root_path, :class => 'brand' %>
+            <div class="nav-collapse collapse"><%= render 'shared/site_menu' %></div>
           <% end %>
-          <div class="nav-collapse collapse">
-            <%= render 'shared/site_menu' %>
-          </div>
         </div>
       </div>
     </div>
@@ -39,7 +42,7 @@
 
       <% if content_for? :pagination %>
         <hr>
-        <%= yield(:pagination) %>
+        <%= content_for(:pagination) %>
       <% end %>
 
       <% if content_for? :nav %>
@@ -47,10 +50,11 @@
         <%= content_for :nav %>
       <% end %>
     </div>
+    <footer>
+      <%= content_tag :div, "Downloaded #{Time.now.strftime('%B %e, %Y at %X %Z')}", :id => 'offline_timestamp' if offline_mode? %>
+    </footer>
   </div>
-  <footer>
-    <%= content_tag :div, "Downloaded #{Time.now.strftime('%B %e, %Y at %X %Z')}", :id => 'offline_timestamp' if offline_mode? %>
-  </footer>
   <%= render('projects/add_to_project_modal') if @add_to_project_modal %>
+  <%= content_for(:js) %>
 </body>
 </html>

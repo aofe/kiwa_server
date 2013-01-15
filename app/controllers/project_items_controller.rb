@@ -18,7 +18,7 @@ class ProjectItemsController < ApplicationController
   end
 
   def show
-    redirect_to resource.item
+    redirect_to polymorphic_path(resource.item, :back => url_for(resource.project))
   end
 
   def destroy

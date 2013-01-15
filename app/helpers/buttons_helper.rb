@@ -15,9 +15,11 @@ module ButtonsHelper
     link_to icon + 'Help', "#help-modal", :class => 'btn', :data => {:toggle => 'modal'}
   end
 
+  # Button back to the url
+  # Back url can be overridden by params[:back], allowing secondary parents, like a project, to point leaf pages back to itself
   def back_button(url)
     icon = '<i class="icon-chevron-left"></i> '.html_safe
-    link_to icon + 'Back', url, :class => 'btn'
+    link_to icon + 'Back', params[:back].presence || url, :class => 'btn'
   end
 
   def new_button(url, options = {})

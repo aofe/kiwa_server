@@ -4,7 +4,7 @@
   <%= render 'comments/commentable_comments', :commentable => @project %>
 <% end %>
 
-<% if @project.user == current_user %>
+<% if @project.user == current_user && !offline_mode? %>
   <% if preferences[:view] == 'list' %>
 
     <%= record_list(@project_items).caption do |project_item| %>
