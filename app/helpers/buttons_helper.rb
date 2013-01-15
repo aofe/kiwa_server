@@ -54,12 +54,16 @@ module ButtonsHelper
   end
 
   def export_button(url, options = {})
+    return ''  if offline_mode?
+
     options.reverse_merge! :text => 'Download Report'
     icon = '<i class="icon-download-alt"></i> '.html_safe
     link_to icon + options[:text], url, :class => 'btn'
   end
 
   def collect_button(record, html_options = {})
+    return '' if offline_mode? || !user_signed_in?
+
     @add_to_project_modal = true
     html_options.reverse_merge! :class => 'save_to_project btn btn-primary', :role => 'button', :data => {:toggle => 'modal', :item_type => record.class.name, :item_id => record.id}
     link_to('Collect', {:anchor => 'add_to_project_modal'}, html_options)
@@ -71,12 +75,16 @@ module ButtonsHelper
 
     # TODO: Make MenuBar work with bootstrap button styling so we don't need to create our own
   def view_toggles
+    return ''  if offline_mode?
+
     output =  link_to('<i class="icon-th-large"></i>'.html_safe, params.merge(:view => 'slides'), :class => [:btn, ('active' unless preferences[:view] == 'list')]) 
     output << link_to('<i class="icon-align-justify"></i>'.html_safe, params.merge(:view => 'list'), :class => [:btn, ('active' if preferences[:view] == 'list')])
     content_tag :div, output, :class => 'btn-group'    
   end
 
   def sort_menu(*facets)
+    return '' if offline_mode?
+
     if preferences[:direction].to_s == 'desc'
       arrow = link_to(content_tag(:i, '', :class => 'icon-chevron-down'), params.merge(:direction => :asc), :class => "btn dropdown-toggle", :title => 'Sorting Descending')
     else

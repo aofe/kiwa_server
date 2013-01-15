@@ -1,3 +1,4 @@
 <h2>Discussion</h2>
 <%= render commentable.comments.includes(:user) %>
-<%= render 'comments/form', :comment => commentable.comments.build %>
+<%= content_tag :p, 'No discussion yet' if commentable.comments.empty? %>
+<%= render 'comments/form', :comment => commentable.comments.build unless offline_mode? %>

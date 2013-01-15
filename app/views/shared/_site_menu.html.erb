@@ -10,10 +10,13 @@
   section_link(mb, Expedition, params[:controller] == 'expeditions')
   section_link(mb, Location, params[:controller] == 'locations')
 end %>
-<%= form_tag searches_path, :class => 'navbar-search', :id => 'site_search', :method => :get do %>
-  <%= text_field_tag :q, '', :placeholder => 'Search...' %>
-<% end %>
 
-<%= MenuBar.new(self, :theme => false, :class => 'nav pull-right') do |mb|
-  mb.menu_bar_content link_to('Sign Out', destroy_user_session_path, :method => :delete, :id => 'sign_out') if user_signed_in?
-end %>
+<% unless offline_mode? %>
+  <%= form_tag searches_path, :class => 'navbar-search', :id => 'site_search', :method => :get do %>
+    <%= text_field_tag :q, '', :placeholder => 'Search...' %>
+  <% end %>
+
+  <%= MenuBar.new(self, :theme => false, :class => 'nav pull-right') do |mb|
+    mb.menu_bar_content link_to('Sign Out', destroy_user_session_path, :method => :delete, :id => 'sign_out') if user_signed_in?
+  end %>
+<% end %>

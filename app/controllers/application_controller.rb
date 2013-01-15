@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
   
-  before_filter :authenticate_user!, :update_preferences_from_params
+  before_filter :authenticate_user!, :update_preferences_from_params  
+  skip_before_filter :authenticate_user!, :if => :offline_mode?
 
   class AccessDenied < StandardError; end
 
@@ -16,4 +17,13 @@ class ApplicationController < ActionController::Base
   Inventory
   Label
   Card
+
+  raise "You must set an offline mode secret key. Key is read from the environment variable KIWA_OFFLINE_KEY" if ENV['KIWA_OFFLINE_KEY'].blank?
+  helper_method :offline_mode?
+  def offline_mode?
+    if params[:offline_key] == ENV['KIWA_OFFLINE_KEY'] || session[:offline_key] == ENV['KIWA_OFFLINE_KEY']
+      session[:offline_key] = ENV['KIWA_OFFLINE_KEY']
+      return true
+    end
+  end
 end

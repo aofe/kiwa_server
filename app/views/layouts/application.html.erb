@@ -8,8 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body id="<%= params[:controller] %>_<%= params[:action] %>">
-    <% if user_signed_in? %>
-    <div class="navbar navbar-static-top" id="site_menu">
+    <div class="navbar navbar-static-top <%= 'navbar-inverse' if offline_mode? %>" id="site_menu">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -17,14 +16,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">KIWA</a>
+          <% if offline_mode? %>
+            <%= link_to 'KIWA Offline', pages_path(:offline_index), :class => 'brand' %>
+          <% else %>
+            <%= link_to 'KIWA', root_path, :class => 'brand' %>
+          <% end %>
           <div class="nav-collapse collapse">
             <%= render 'shared/site_menu' %>
           </div>
         </div>
       </div>
     </div>
-    <% end %>
   <div id='page' class='<%= page_class %>'>
     <h1 id='page_header' class='page-header'>
       <%= content_for :page_title %>
@@ -46,6 +48,9 @@
       <% end %>
     </div>
   </div>
+  <footer>
+    <%= content_tag :div, "Downloaded #{Time.now.strftime('%B %e, %Y at %X %Z')}", :id => 'offline_timestamp' if offline_mode? %>
+  </footer>
   <%= render('projects/add_to_project_modal') if @add_to_project_modal %>
 </body>
 </html>

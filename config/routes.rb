@@ -17,7 +17,7 @@ KIWA::Application.routes.draw do
     get :autocomplete, :on => :collection
   end
 
-  match 'pages/:action', :controller => :pages
+  match 'pages/:action', :controller => :pages, :as => :pages
     
   resources :crew_list_entries
 

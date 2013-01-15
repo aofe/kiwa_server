@@ -1,0 +1,9 @@
+<% content_for :page_title, 'Site Index' %>
+<% [SourceEncounter, AOFEEncounter, Voyage, Person, Label, Card, Inventory].each do |klass| %>
+  <h2><%= klass.model_name.human.pluralize %></h2>
+  <ul>
+  <% klass.all.sort_by(&:to_s).each do |record| %>
+    <li><%= link_to record.to_s, record %></li>
+  <% end %>
+  </ul>
+<% end %>

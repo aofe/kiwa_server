@@ -1,5 +1,7 @@
 module SearchHelper
   def search_field(klass, options = {})
+    return '' if offline_mode?
+
     url = options.delete(:url) || polymorphic_path(klass)
 
     if respond_to?(:default_order)
