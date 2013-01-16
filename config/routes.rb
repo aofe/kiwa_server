@@ -1,5 +1,7 @@
 KIWA::Application.routes.draw do
-  resources :projects, :path => "collections" # Alias projects as collections
+  resources :projects, :path => "collections" do # Alias projects as collections
+    get :export, :on => :member
+  end
 
   resources :project_items do
     get :autocomplete, :on => :collection

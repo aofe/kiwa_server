@@ -11,4 +11,10 @@ module MediaItemsHelper
       content_tag :span, image_tag(media_item.thumbnail_url(options[:size])), :class => 'media_thumbnail'
     end
   end  
+
+  def popup_gallery_javascript_init
+    # Only if we're not on a mobile device,
+    # Only links with hrefs (offline mode removes hrefs to prevent linking to full size photos)
+    content_for :js, javascript_tag("if (!isMobile.any()){PopupGallery('#record_media a.media_thumbnail[href]')}")
+  end
 end

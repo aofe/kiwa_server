@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   class AccessDenied < StandardError; end
 
 # HACK: Ensure the Voyage and Encounter searches classe have been dynamically created in development mode
+  ProjectItem
   Voyage
   Encounter
   Person
@@ -21,9 +22,6 @@ class ApplicationController < ActionController::Base
   raise "You must set an offline mode secret key. Key is read from the environment variable KIWA_OFFLINE_KEY" if ENV['KIWA_OFFLINE_KEY'].blank?
   helper_method :offline_mode?
   def offline_mode?
-    if params[:offline_key] == ENV['KIWA_OFFLINE_KEY'] || session[:offline_key] == ENV['KIWA_OFFLINE_KEY']
-      session[:offline_key] = ENV['KIWA_OFFLINE_KEY']
-      return true
-    end
+    session[:offline]
   end
 end

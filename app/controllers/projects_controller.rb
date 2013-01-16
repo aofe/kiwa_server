@@ -20,6 +20,10 @@ class ProjectsController < ApplicationController
     @project_items = ProjectItemSearch.new(@project.id, params[:q]).results(:page => params[:page], :order => (params[:q].present? ? :score : :primary_key))
   end
 
+  def export
+    SiteExporter.export(project_path(params[:id]), :full_size_photos => true, :recursion_depth => 1, :output_path => "../exports/project_#{5}", :online_host => 'aofe.maa.cam.ac.uk:3000')
+  end
+
   private
 
   def authorize_owner!

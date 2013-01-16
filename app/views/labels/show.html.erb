@@ -18,8 +18,4 @@
 <%= render @label.notes %>
 <% end %>
 
-<%= javascript_tag do %>
-  if (!isMobile.any()){
-    PopupGallery('#record_media .media_thumbnail')
-  }
-<% end %>
+<%= popup_gallery_javascript_init %>

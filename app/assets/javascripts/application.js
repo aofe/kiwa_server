@@ -11,7 +11,7 @@
 //= require easy_menu_jquery
 //= require glint_autocomplete
 //= require popup_gallery
-//= require_tree .
+//= require_tree ./shared
 
 
 // Update the state of a modal that is saving via ajax

@@ -1,6 +1,4 @@
 class ProjectItem < ActiveRecord::Base
-  # attr_accessible :title, :body
-
   belongs_to :item, :polymorphic => true
   belongs_to :project
 
@@ -13,9 +11,6 @@ class ProjectItem < ActiveRecord::Base
   end
 
   # GLINT
-  
-  # require 'item'
-  require 'project_item_search'
   acts_as_searchable :default => :full_text
   
   has_facet :full_text, :type => :full_text, :param => 'contains'

@@ -6,7 +6,7 @@
  *= require glint_autocomplete
  *= require popup_gallery
  *= require_self
- *= require_tree .
+ *= require_tree ./shared
 */
 @import 'mixins';
 
