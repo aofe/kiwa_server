@@ -14,3 +14,7 @@ $(document).on('keyup', '.project_item_notes_form textarea, .project_item_notes_
     }, 250)    
   }    
 })
+
+$(document).on('click', '#project_export_button', function(event){
+  $(this).addClass('disabled').html('Preparing Download... Please wait')
+})

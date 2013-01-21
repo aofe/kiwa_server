@@ -19,9 +19,8 @@ class ApplicationController < ActionController::Base
   Label
   Card
 
-  raise "You must set an offline mode secret key. Key is read from the environment variable KIWA_OFFLINE_KEY" if ENV['KIWA_OFFLINE_KEY'].blank?
   helper_method :offline_mode?
   def offline_mode?
-    session[:offline]
+    Rails.env.offline?
   end
 end

@@ -2,13 +2,15 @@
   # mb.menu_bar_content('', :class => "divider-vertical")
   section_link(mb, SourceEncounter, params[:controller] == 'encounters' && encounter_type == SourceEncounter)
   section_link(mb, AOFEEncounter, params[:controller] == 'encounters' && encounter_type == AOFEEncounter)
-  section_link(mb, Voyage, params[:controller] == 'voyages')
-  section_link(mb, Person, params[:controller] == 'people')
   section_link(mb, Label, params[:controller] == 'labels')
-  #section_link(mb, Card, params[:controller] == 'cards')
   section_link(mb, Inventory, params[:controller] == 'inventories')
-  section_link(mb, Expedition, params[:controller] == 'expeditions')
-  section_link(mb, Location, params[:controller] == 'locations')
+  sections_menu(mb, "More") do |entries|
+    entries << link_to(Expedition.model_name.human, Expedition)
+    entries << link_to(Voyage.model_name.human, Voyage)
+    entries << link_to(Location.model_name.human, Location)
+    entries << link_to(Person.model_name.human, Person)
+    entries << link_to(Card.model_name.human, Card)
+  end
 end %>
 
 <% unless offline_mode? %>

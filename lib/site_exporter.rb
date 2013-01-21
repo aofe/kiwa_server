@@ -2,6 +2,7 @@ module SiteExporter
   require 'pathname'
   require 'digest'
   require 'nokogiri'
+  require 'zip/zip'
 
   # Load helpers necessary for generating restful paths (SOURCE: http://stackoverflow.com/questions/4262044/rails-3-how-to-render-erb-template-in-rake-task)
   include Rails.application.routes.url_helpers # brings ActionDispatch::Routing::UrlFor
@@ -24,15 +25,14 @@ module SiteExporter
     # SETUP
 
     options.reverse_merge! :output_path => "../offline"
-    options.reverse_merge! :offline_mode_params => {:offline_key => ENV['KIWA_OFFLINE_MODE']}.to_query, # Params used to put the session into offline mode so we can fetch all pages in their offline form
-                           :recursion_depth => 'inf',
+    options.reverse_merge! :recursion_depth => 'inf',
                            :full_size_photos => false, # Don't download full sized photos 
-                           :host => 'localhost:3000', # Location of the server as viewed by this script
-                           :online_host => 'localhost:3000', # Location of the server as viewed by a user
+                           :default_host => 'localhost:3000', # If we're not running from within a rails server, we need to set the 
+                           :online_host => 'www.mywebsite.com', # Location of the server as viewed by a user
                            :page_path => "#{options[:output_path]}/pages",
                            :image_path => "#{options[:output_path]}/images"
   
-    Rails.application.routes.default_url_options[:host] ||= options[:host] # If we're running this as a rake task there is no server, therefore we need to set the host manually so we can create urls
+    Rails.application.routes.default_url_options[:host] ||= options[:default_host] # If we're running this as a rake task there is no server, therefore we need to set the host manually so we can create urls
     image_manifest_path = "#{options[:image_path]}/image_manifest.txt"
     images_to_fetch = [] # A list of the images used on html pages
 
@@ -44,15 +44,19 @@ module SiteExporter
       FileUtils.rm_rf options[:output_path]
     end
 
+    if File.file?(options[:zipfile])
+      puts "Clearing old zipfile at #{options[:zipfile]}"
+      FileUtils.rm_rf options[:zipfile]
+    end
+
     # -nH to skip creation of host directories, e.g. offline/localhost:3000/ or offline/maa.xyz.com/
-    # -r -l inf to set infinite recursion (we add 1 to this number because the exporter starts on a page that links to the start_url in order to absorb the params that put us into offline mode)
+    # -r -l inf to set infinite recursion
     # -k to convert links for local viewing
     # -E to adjust all extensions so they are HTML files
     # -e to ignore the robots file because we are spidering the site as a user, not as a robot
     # -P to set the output path
     puts "Starting export at #{start_url}"
-    download_start_page = Rails.application.routes.url_helpers.url_for(:controller => 'pages', :action => :go_offline, :start_url => start_url, :offline_key => ENV['KIWA_OFFLINE_KEY'])
-    `wget "#{download_start_page}" -nH -k -E -P #{options[:page_path]} -e robots=off -r -l #{options[:recursion_depth] == 'inf' ? 'inf' : options[:recursion_depth] + 1}`
+    `wget "#{start_url}" -nH -k -E -P #{options[:page_path]} -e robots=off -r -l #{options[:recursion_depth]}`
 
     Dir.glob("#{options[:page_path]}/**/*.html").each do |file_name|
       doc = Nokogiri::HTML(open file_name)
@@ -102,14 +106,14 @@ module SiteExporter
       end
 
       # Convert all remote links to point at the online host instead of the localhost
-      if options[:host] != options[:online_host]
+      if options[:default_host] != options[:online_host]
         print "Redirecting remote links in #{file_name}..."
-        remote_links = doc.css("a[href^='http://#{options[:host]}']")
+        remote_links = doc.css("a[href^='http://#{options[:default_host]}']")
         puts "#{remote_links.count} remote_links found..."
 
         remote_links.each do |link|
           print " - #{link['href']} + => "
-          link.set_attribute('href', link['href'].gsub("http://#{options[:host]}", "http://#{options[:online_host]}"))
+          link.set_attribute('href', link['href'].gsub("http://#{options[:default_host]}", "http://#{options[:online_host]}"))
           puts link['href']
           doc_modified = true
         end
@@ -149,17 +153,24 @@ module SiteExporter
 
     puts "Cleaning up"
 
-    # Delete the go_offline
-    Dir.glob("#{options[:page_path]}/pages/go_offline*.html").each do |file_name|
-      File.delete(file_name)
-    end
-
     # Remove the image_manifest
     File.delete(image_manifest_path)
 
     # Remove all the empty directories from the image hierarchy
     Dir.glob("#{options[:image_path]}/*").sort_by{|dir| -dir.length }.each do |directory|
       FileUtils.rm_rf directory if File.directory?(directory)
+    end
+
+    # ZIP it
+    if options[:zipfile]
+      Zip::ZipFile.open(options[:zipfile], Zip::ZipFile::CREATE) do |zipfile|
+        Dir.glob("#{options[:output_path]}/**/*").each do |file_name|
+          zipfile.add(file_name.gsub("#{options[:output_path]}/", ''), file_name) unless File.directory?(file_name)
+        end
+      end
+
+      # Remove the unzipped files if we're delivering a zipfile
+      FileUtils.rm_rf options[:output_path] if File.directory?(options[:output_path])
     end
 
     puts "Exported in #{Time.now - start} seconds"

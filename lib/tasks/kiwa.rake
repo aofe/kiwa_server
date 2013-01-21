@@ -19,10 +19,10 @@ namespace :kiwa do
 
 
   task :full_site_export => :environment do
-    SiteExporter.export("http://localhost:3000/pages/offline_index", :online_host => 'aofe.maa.cam.ac.uk:3000')
+    SiteExporter.export("http://localhost:3001/pages/offline_index", :online_host => 'aofe.maa.cam.ac.uk:3000')
   end
 
   task :project_export => :environment do
-    SiteExporter.export("http://localhost:3000/collections/5", :full_size_photos => true, :recursion_depth => 1, :output_path => '../project5', :online_host => 'aofe.maa.cam.ac.uk:3000')
+    SiteExporter.export("http://localhost:3001/collections/5", :full_size_photos => true, :recursion_depth => 1, :output_path => '../project5', :online_host => 'aofe.maa.cam.ac.uk:3000')
   end
 end

@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'thin'
 gem 'rails', '~> 3.2.3'
 gem 'mysql2', '>=0.3'
 gem 'acts_as_relatable', :git => 'git://github.com/culturecode/acts_as_relatable.git'
@@ -19,6 +20,7 @@ gem 'glint', :git => 'git@github.com:culturecode/glint.git'
 gem 'sunspot_solr', :git => 'git://github.com/sunspot/sunspot.git'
 
 gem 'crier', :git => 'git@github.com:culturecode/crier.git'
+gem 'rubyzip'
 
 # Gems used only for assets and not required
 # in production environments by default.
