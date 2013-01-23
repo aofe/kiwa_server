@@ -22,7 +22,7 @@
             <%= link_to 'KIWA Offline', pages_path(:offline_index), :class => 'brand' %>
             <div class="nav-collapse collapse"><%= render 'shared/site_menu' %></div>
           <% elsif offline_mode? %>
-            <%= link_to 'KIWA Offline Project', '', :class => 'brand' %>
+            <%= link_to "KIWA Offline #{Project.model_name.human}", '', :class => 'brand' %>
           <% else %>
             <%= link_to 'KIWA', root_path, :class => 'brand' %>
             <div class="nav-collapse collapse"><%= render 'shared/site_menu' %></div>
@@ -51,7 +51,7 @@
       <% end %>
     </div>
     <footer>
-      <%= content_tag :div, "Downloaded #{Time.now.strftime('%B %e, %Y at %X %Z')}", :id => 'offline_timestamp' if offline_mode? %>
+      <%= content_tag :div, "Downloaded #{timestamp(Time.now)}", :id => 'offline_timestamp' if offline_mode? %>
     </footer>
   </div>
   <%= render('projects/add_to_project_modal') if @add_to_project_modal %>

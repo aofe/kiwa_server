@@ -1,5 +1,11 @@
 <% content_for :page_title, 'Site Index' %>
-<% [SourceEncounter, AOFEEncounter, Voyage, Person, Label, Card, Inventory].each do |klass| %>
+<p>You are viewing the offline version of the KIWA website.
+  It was exported on <%= timestamp(Time.now) %>. You can view its
+  contents but you won't be able to make any changes. This page
+  serves as an index of the site contents. Use your web browser's
+  text search function to find thing you're looking for.<p>
+
+<% [SourceEncounter, AOFEEncounter, Label, Inventory, Expedition, Voyage, Location, Person, Card].each do |klass| %>
   <h2><%= klass.model_name.human.pluralize %></h2>
   <ul>
   <% klass.all.sort_by(&:to_s).each do |record| %>

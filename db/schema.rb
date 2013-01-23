@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212151201) do
+ActiveRecord::Schema.define(:version => 20130122173938) do
 
   create_table "_comments", :force => true do |t|
     t.string  "table_name"
@@ -453,7 +453,7 @@ ActiveRecord::Schema.define(:version => 20121212151201) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                :default => "", :null => false
+    t.string   "email",                                :default => "",    :null => false
     t.string   "encrypted_password",                   :default => ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -475,6 +475,7 @@ ActiveRecord::Schema.define(:version => 20121212151201) do
     t.string   "invited_by_type"
     t.integer  "invitation_count"
     t.integer  "active"
+    t.boolean  "can_download",                         :default => false, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

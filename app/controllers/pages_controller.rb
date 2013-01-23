@@ -5,4 +5,10 @@ class PagesController < ApplicationController
   # Used for offline mode searching using the browser's "find" function
   def offline_index
   end
+
+  def export_site
+    render :nothing => true, :status => 403 unless current_user.can_download
+
+    send_file "../exports/full_site.zip"
+  end
 end

@@ -1,5 +1,4 @@
 <%= MenuBar.new(self, :theme => false, :class => 'nav') do |mb|
-  # mb.menu_bar_content('', :class => "divider-vertical")
   section_link(mb, SourceEncounter, params[:controller] == 'encounters' && encounter_type == SourceEncounter)
   section_link(mb, AOFEEncounter, params[:controller] == 'encounters' && encounter_type == AOFEEncounter)
   section_link(mb, Label, params[:controller] == 'labels')

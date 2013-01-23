@@ -7,6 +7,8 @@ class Encounter < ActiveRecord::Base
   has_one :primary_media_item, :as => :attachable, :class_name => 'MediaItem', :conditions => {:display_order => 1}
   has_many :comments, :as => :commentable
   has_many :notes, :as => :notable
+  has_many :project_items, :as => :item
+  has_many :projects, :through => :project_items
 
   acts_as_relatable :voyage, :expedition, :location
   

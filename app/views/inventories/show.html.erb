@@ -1,6 +1,7 @@
 <% content_for :page_title, @inventory.to_s %>
 <% content_for :page_menu, collect_button(@inventory) %>
 <% content_for :sidebar do %>
+  <%= inventory_sidebar(@inventory) %>
   <%= render 'comments/commentable_comments', :commentable => @inventory %>
 <% end %>
 <% content_for :nav, back_button(inventories_path) %>

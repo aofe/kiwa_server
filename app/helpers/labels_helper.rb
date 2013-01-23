@@ -8,6 +8,7 @@ module LabelsHelper
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')        
         sidebar_record_relation(group, 'Encounter', label.related_encounters)
+        sidebar_record_relation(group, Project, label.projects.public)
       end
     end
   end

@@ -19,32 +19,42 @@ module SiteExporter
     end
   end
 
+  def self.squeeze_path(path)
+    path.squeeze!('/')
+    return path
+  end
+
   def self.export(start_url, options = {})
     start = Time.now
 
     # SETUP
 
-    options.reverse_merge! :output_path => "../offline"
+    options.reverse_merge! :output_path => "../exports"
     options.reverse_merge! :recursion_depth => 'inf',
                            :full_size_photos => false, # Don't download full sized photos 
-                           :default_host => 'localhost:3000', # If we're not running from within a rails server, we need to set the 
+                           :offline_host => 'localhost:3001', # Specified so we can change all links to this host so they point at the online host
                            :online_host => 'www.mywebsite.com', # Location of the server as viewed by a user
                            :page_path => "#{options[:output_path]}/pages",
                            :image_path => "#{options[:output_path]}/images"
+
+  # Remove any double slashes in the paths
+    squeeze_path(options[:output_path])
+    squeeze_path(options[:page_path])
+    squeeze_path(options[:image_path])
   
-    Rails.application.routes.default_url_options[:host] ||= options[:default_host] # If we're running this as a rake task there is no server, therefore we need to set the host manually so we can create urls
+    Rails.application.routes.default_url_options[:host] ||= options[:offline_host] # If we're running this as a rake task there is no server, therefore we need to set the host manually so we can create urls
     image_manifest_path = "#{options[:image_path]}/image_manifest.txt"
     images_to_fetch = [] # A list of the images used on html pages
 
     # EXPORT 
     
     # Delete the output directory if it already exists so we can start over
-    if File.directory?(options[:output_path])
+    if options[:output_path]
       puts "Clearing existing files at #{options[:output_path]}"
       FileUtils.rm_rf options[:output_path]
     end
 
-    if File.file?(options[:zipfile])
+    if options[:zipfile]
       puts "Clearing old zipfile at #{options[:zipfile]}"
       FileUtils.rm_rf options[:zipfile]
     end
@@ -106,14 +116,14 @@ module SiteExporter
       end
 
       # Convert all remote links to point at the online host instead of the localhost
-      if options[:default_host] != options[:online_host]
+      if options[:offline_host] != options[:online_host]
         print "Redirecting remote links in #{file_name}..."
-        remote_links = doc.css("a[href^='http://#{options[:default_host]}']")
+        remote_links = doc.css("a[href^='http://#{options[:offline_host]}']")
         puts "#{remote_links.count} remote_links found..."
 
         remote_links.each do |link|
           print " - #{link['href']} + => "
-          link.set_attribute('href', link['href'].gsub("http://#{options[:default_host]}", "http://#{options[:online_host]}"))
+          link.set_attribute('href', link['href'].gsub("http://#{options[:offline_host]}", "http://#{options[:online_host]}"))
           puts link['href']
           doc_modified = true
         end
@@ -123,6 +133,17 @@ module SiteExporter
         File.open(file_name, "w") {|file| file.write doc.to_html}      
       end
     end
+
+    # Move the title page to the root and update the relative links
+    puts "Moving Title Page and updating links"
+    if options[:title_page]
+      File.open("#{options[:output_path]}/start.html", "w") do |file|
+        start_page_path = squeeze_path("./#{options[:page_path].gsub(options[:output_path], '')}/#{options[:title_page]}.html")
+        file.write("<html><head><meta http-equiv='refresh' content=\"0;URL='#{start_page_path}'\"></head></html>")
+      end
+    end
+
+    # DOWNLOAD IMAGES
 
     puts "Fetching #{images_to_fetch.count} images"
     images_to_fetch.uniq!
@@ -147,7 +168,6 @@ module SiteExporter
         puts "Couldn't find #{source_name}"
       end
     end
-
 
     # CLEANUP
 

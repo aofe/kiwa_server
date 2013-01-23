@@ -1,7 +1,7 @@
 <% content_for :page_title, page_title(@person) %>
 <% content_for :page_menu, person_menu(@person) %>
 <% content_for :sidebar do %>
-  <span class='sidebar_option'>Here we could have a list of people related through this person's network</span>
+  <%= person_sidebar(@person) %>
   <%= render 'comments/commentable_comments', :commentable => @person %>
 <% end %>
 <% content_for :nav, back_button(people_path) %>

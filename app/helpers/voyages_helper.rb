@@ -13,6 +13,7 @@ module VoyagesHelper
       menu.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')        
         sidebar_record_relation(group, 'Encounter', voyage.related_encounters)
+        sidebar_record_relation(group, Project, voyage.projects.public)        
       end
     end
   end

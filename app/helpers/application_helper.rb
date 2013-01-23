@@ -12,4 +12,8 @@ module ApplicationHelper
   def close_link
     '<a class="close" data-dismiss="alert" href="#">&times;</a>'.html_safe
   end  
+
+  def timestamp(time)
+    time.strftime('%B %e, %Y at %X %Z')
+  end
 end

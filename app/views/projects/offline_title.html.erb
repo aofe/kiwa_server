@@ -1,0 +1,6 @@
+<% content_for :page_title, "Offline #{Project.model_name.human}" %>
+<p>You are about to view the offline version of "<%= @project.to_s %>".
+  It was exported on <%= timestamp(Time.now) %>. You can view its
+  contents but you won't be able to make any changes.<p>
+
+<strong><%= link_to "View #{Project.model_name.human} Offline", @project %></strong>

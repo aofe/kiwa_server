@@ -7,6 +7,8 @@ class Expedition < ActiveRecord::Base
   has_many :crew_list_entries, :through => :voyages
   has_many :people, :through => :crew_list_entries
   has_many :comments, :as => :commentable
+  has_many :project_items, :as => :item
+  has_many :projects, :through => :project_items
   
   def name
     self.title

@@ -6,6 +6,8 @@ class Voyage < ActiveRecord::Base
   has_many :crew_list_entries
   has_many :people, :through => :crew_list_entries
   has_many :comments, :as => :commentable
+  has_many :project_items, :as => :item
+  has_many :projects, :through => :project_items
 
   acts_as_relatable :encounter
 

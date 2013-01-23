@@ -3,6 +3,9 @@
 <% end %>
 
 <% content_for :page_title, "#{link_to 'Catalogue Cards', cards_path} / #{@card.to_s}".html_safe %>
+<% content_for :sidebar do %>
+  <%= card_sidebar(@card) %>
+<% end %>
 
 <%= render @card.media_items %>
 

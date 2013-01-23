@@ -25,13 +25,24 @@ class ProjectsController < ApplicationController
   end
 
   def export
-    SiteExporter.export(project_url(params[:id], :port => 3001),
+    render :nothing => true, :status => 403 unless current_user.can_download
+
+    SiteExporter.export(offline_title_project_url(params[:id], :port => ENV['KIWA_OFFLINE_SERVER_PORT']),
       :full_size_photos => true,
-      :recursion_depth => 1,
+      :recursion_depth => 2,
+      :online_host => "localhost:#{ENV['KIWA_OFFLINE_SERVER_PORT']}",
       :online_host => 'aofe.maa.cam.ac.uk:3000',
       :output_path => "../exports/project_#{params[:id]}",
+      :title_page => offline_title_project_path(params[:id]),
       :zipfile => "../exports/project_#{params[:id]}.zip")
-    send_file "../exports/project_#{params[:id]}.zip"
+
+    # Stream the file immediately so we can delete it after
+    send_data File.open("../exports/project_#{params[:id]}.zip").read, :type => 'application/zip', :filename => "project_#{params[:id]}.zip"
+    File.delete("../exports/project_#{params[:id]}.zip")
+  end
+
+  def offline_title
+    @project = resource
   end
 
   private

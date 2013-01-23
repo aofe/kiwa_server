@@ -12,12 +12,13 @@ module EncountersHelper
     MenuBar.new(self, :theme => "sidebar_menu") do |mb|
       mb.group do |group|
         group.menu_bar_content(content_tag :h2, 'Related')
-        sidebar_record_relation(group, 'Expedition', encounter.related_expeditions)
-        sidebar_record_relation(group, 'Voyage', encounter.related_voyages)
+        sidebar_record_relation(group, Expedition, encounter.related_expeditions)
+        sidebar_record_relation(group, Voyage, encounter.related_voyages)
         sidebar_record_relation(group, SourceEncounter, encounter.other_source_encounters.includes(:primary_media_item))
         sidebar_record_relation(group, AOFEEncounter, encounter.other_aofe_encounters.includes(:primary_media_item))
-        sidebar_record_relation(group, 'Label', encounter.artefact.related_labels.includes(:primary_media_item))
-        sidebar_record_relation(group, 'Location', encounter.related_locations)
+        sidebar_record_relation(group, Label, encounter.artefact.related_labels.includes(:primary_media_item))
+        sidebar_record_relation(group, Location, encounter.related_locations)
+        sidebar_record_relation(group, Project, encounter.projects.public)
       end
     end
   end

@@ -1,5 +1,6 @@
 KIWA::Application.routes.draw do
   resources :projects, :path => "collections" do # Alias projects as collections
+    get :offline_title, :on => :member
     get :export, :on => :member
   end
 
