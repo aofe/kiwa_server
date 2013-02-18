@@ -20,7 +20,7 @@ namespace :kiwa do
 
   task :full_site_export => :environment do
     raise "Must set ENV['KIWA_OFFLINE_SERVER_PORT']" if ENV['KIWA_OFFLINE_SERVER_PORT'].blank?
-    SiteExporter.export("http://localhost:3001/pages/offline_index",
+    SiteExporter.export("http://localhost:#{ENV['KIWA_OFFLINE_SERVER_PORT']}/pages/offline_index",
       :offline_host => "localhost:#{ENV['KIWA_OFFLINE_SERVER_PORT']}",
       :online_host => 'aofe.maa.cam.ac.uk:3000',
       :output_path => '../exports/full_site',
