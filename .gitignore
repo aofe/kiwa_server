@@ -8,3 +8,4 @@ database.yml
 solr/
 config/sunspot.yml
 public/assets
+*.pid

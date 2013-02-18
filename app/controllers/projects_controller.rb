@@ -27,10 +27,10 @@ class ProjectsController < ApplicationController
   def export
     render :nothing => true, :status => 403 unless current_user.can_download
 
-    SiteExporter.export(offline_title_project_url(params[:id], :port => ENV['KIWA_OFFLINE_SERVER_PORT']),
+    SiteExporter.export(offline_title_project_url(params[:id], :host => "localhost", :port => ENV['KIWA_OFFLINE_SERVER_PORT']),
       :full_size_photos => true,
       :recursion_depth => 2,
-      :online_host => "localhost:#{ENV['KIWA_OFFLINE_SERVER_PORT']}",
+      :offline_host => "localhost:#{ENV['KIWA_OFFLINE_SERVER_PORT']}",
       :online_host => 'aofe.maa.cam.ac.uk:3000',
       :output_path => "../exports/project_#{params[:id]}",
       :title_page => offline_title_project_path(params[:id]),
