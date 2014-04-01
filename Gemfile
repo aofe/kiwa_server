@@ -17,7 +17,7 @@ gem 'popup_gallery', :git => 'git@github.com:culturecode/popup_gallery.git'
 gem 'tabletastic'
 
 gem 'glint', :git => 'git@github.com:culturecode/glint.git'
-gem 'sunspot_solr', :git => 'git://github.com/sunspot/sunspot.git'
+gem 'sunspot_solr', '2.0.0'
 
 gem 'crier', :git => 'git@github.com:culturecode/crier.git'
 gem 'rubyzip'
